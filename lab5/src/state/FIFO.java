@@ -22,9 +22,9 @@ import state.SalongState;
  * */
 public class FIFO extends Observable{
 	SalongState s = new SalongState();
-	private Customer customer;
-
+	
 	public FIFO(){
+
 	}
 	
 	//necessary variables
@@ -33,14 +33,17 @@ public class FIFO extends Observable{
 	private static final int maxWait = 10;
 	private int totalVisitors = 0; //total visitors of the day
 	
-	public void add(){
+	public void add(Object customer){
 		if(SEATS == 0 && !checkFull()){ //if seats are 
 			queue.add(customer);
 			totalVisitors += 1;
+			setChanged();
+			notifyObservers();
 		}
 		else if(isEmpty() && SEATS != 0){//om väntrummet är tomt
 			System.out.println("Customer gets seated!");
 			SEATS -= 1;
+			
 		}
 		else if(checkFull()){
 			System.out.println("customer leaves, waiting room full!");
@@ -52,7 +55,7 @@ public class FIFO extends Observable{
 			return true;
 		}return false;
 	} 
-	public void returnCust(){
+	public void returnCust(Object customer){
 		if(isEmpty()){
 			System.out.println("Queue is empty, gets seated directly.");
 		}else if(checkFull()){

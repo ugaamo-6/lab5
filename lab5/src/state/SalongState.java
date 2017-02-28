@@ -8,7 +8,11 @@ import simulator.EventStore;
 public class SalongState implements Observer{
 	FIFO f = new FIFO();
 	EventStore e = new EventStore();
-	 public int freeChairs = 5;
+	public static final int hMax = 4;
+	public static final int hMin = 2;
+	public int freeChairs = 5;
+	
+	
 	
 	public SalongState(){
 		
@@ -22,12 +26,12 @@ public class SalongState implements Observer{
 	public int currentTime(){
 		return e.currentTime;
 	}
-	public int haircitTime(){
-		return 1;
+	public int haircutTime(){
+		return 1; //(h_max + h_min)/2
 	}
 	
 	@Override
-	public void update(Observable FIFO, Object arg1) {
+	public void update(Observable FIFI, Object arg1) {
 		// TODO Auto-generated method stub
 		
 	}
