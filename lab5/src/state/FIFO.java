@@ -1,7 +1,8 @@
-package lab5;
+package state;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Observable;
 /**
  * 
  * A queue that represents the waiting room for a hairdresser
@@ -16,13 +17,12 @@ import java.util.Collections;
  * @param getFirst picks the first customer in the queue
  * @param totalVisitors counts the total customers who have gotten a haircut
  * 
- * **/
-public class FIFO {
+ * */
+public class FIFO extends Observable{
 
 	private Customer customer;
 
-	public FIFO(Customer customer){
-		this.customer  = customer;
+	public FIFO(){
 	}
 	
 	//necessary variables
