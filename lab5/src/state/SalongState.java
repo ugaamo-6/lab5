@@ -27,7 +27,7 @@ public class SalongState implements Observer{
 		return e.currentTime;
 	}
 	public int haircutTime(){
-		return 1; //(h_max + h_min)/2
+		return (hMax+hMin)/2;
 	}
 	
 	@Override
