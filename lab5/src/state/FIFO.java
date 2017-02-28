@@ -3,11 +3,14 @@ package state;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Observable;
+
+import simulator.State;
 /**
  * 
  * A queue that represents the waiting room for a hairdresser
  * 
  * @author Gustav Mattsson (ugaamo-6)
+ * 
  * @param add the add method adds to the queue unless the queue is full or empty
  * @param checkFull checks if the queue is full or not
  * @param returnCust a returning customer takes first place in queue and the last customer has to leave
@@ -20,6 +23,8 @@ import java.util.Observable;
  * */
 public class FIFO extends Observable{
 
+	State s;
+	
 	private Customer customer;
 
 	public FIFO(){
@@ -38,7 +43,7 @@ public class FIFO extends Observable{
 	}
 	
 	public void add(Customer C){//Lägg till input i form av kund
-		if(checkFull()){
+		if(checkFull() && s.opened()){
 			messageString("The queue is full, customer leaves");
 		}
 		else if(isEmpty()){
@@ -82,5 +87,6 @@ public class FIFO extends Observable{
 	public int getTotalVisitors(){
 		return totalVisitors;
 	}
+
 }
 

@@ -6,9 +6,12 @@ public class EventStore {
 	
 	//This array-list keep track of the queue of Events
 	ArrayList<Event> queue = new ArrayList<Event>();
-	int currentTime = 0 ;
+	private static double currentTime = 0;
+	
+	public static double getTime() { return currentTime; }
+	
+	public void setTime(double time) { currentTime = time; }
 
-	//hej
 	public void addEvent(Event addEvent){
 		if (queue.size() == 0) {
 			queue.add(addEvent);

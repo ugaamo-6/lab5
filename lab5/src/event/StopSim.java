@@ -1,19 +1,20 @@
 package event;
 
 import simulator.Event;
+import simulator.State;
 
 public class StopSim extends Event {
-
+	State s;
 	@Override
 	public void execute() {
-		// TODO Auto-generated method stub
+		s.stop();
 		
 	}
 
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+//	public String toString() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }

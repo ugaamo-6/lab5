@@ -11,7 +11,6 @@ public class CustArrives extends Event {
 	public void execute() {
 		Customer kund = new Customer();
 		f.add(kund);
-		
 	}
 
 //	@Override
