@@ -8,7 +8,6 @@ package state;
  * 
  * */
 public class Customer {
-	//Din mamma
 	int id_counter = 0;
 	
 	private int id;
