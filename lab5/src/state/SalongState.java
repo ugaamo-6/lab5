@@ -26,6 +26,10 @@ public class SalongState implements Observer{
 	
 	FIFO f = new FIFO();
 	EventStore e = new EventStore();
+	public static final int hMax = 4;
+	public static final int hMin = 2;
+	public int freeChairs = 5;
+	
 	
 	
 	public SalongState(){
@@ -43,7 +47,7 @@ public class SalongState implements Observer{
 	public double currentTime(){
 		return e.getTime();
 	}
-	
+
 	public double haircutTime(){
 		uniRand = new UniformRandomStream(haircutMinTime, haircutMaxTime);
 		double rand = uniRand.next();
@@ -62,8 +66,10 @@ public class SalongState implements Observer{
 		return rand;
 	}
 	
+	
+	
 	@Override
-	public void update(Observable FIFO, Object arg1) {
+	public void update(Observable FIFI, Object arg1) {
 		// TODO Auto-generated method stub
 	}
 

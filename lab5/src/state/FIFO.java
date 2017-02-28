@@ -3,8 +3,13 @@ package state;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Observable;
+<<<<<<< HEAD
 
 import simulator.State;
+=======
+import state.SalongState;
+
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 /**
  * 
  * A queue that represents the waiting room for a hairdresser
@@ -23,42 +28,64 @@ import simulator.State;
  * */
 public class FIFO extends Observable{
 
-	State s;
-	
-	private Customer customer;
 
+	State s;
+	private Customer customer;
+	SalongState ss = new SalongState();
+	
 	public FIFO(){
+
 	}
 	
-	//necessary variables
+	private int SEATS = s.freeChairs; //The number of seats available
+	private static final int maxWait = 10;
 	private static ArrayList<Object> queue =  new ArrayList<Object>(); //The queue for the salon
-	private int SEATS = 0; //The number of seats available
 	private int totalVisitors = 0; //total visitors of the day
 	String message;
 	
 	public void messageString(String s){
 		message = s;
-		setChanged();
-		notifyObservers(Object o);
+//		setChanged();
+//		notifyObservers(Object o);
 	}
-	
+
+	public void add(Object customer){
+		if(SEATS == 0 && !checkFull()){ //if seats are 
+			queue.add(customer);
+			totalVisitors += 1;
+			setChanged();
+			notifyObservers();}
+			}
+
+	public void add(){
+=======
 	public void add(Customer C){//Lägg till input i form av kund
 		if(checkFull() && s.opened()){
 			messageString("The queue is full, customer leaves");
+
 		}
+		else if(isEmpty() && SEATS != 0){//om väntrummet är tomt
+			System.out.println("Customer gets seated!");
+			SEATS -= 1;
+			
+		}
+		else if(checkFull()){
+			System.out.println("customer leaves, waiting room full!");}
+
 		else if(isEmpty()){
 			messageString("Customer sits direct in seat.");
 		}
-		
 		queue.add(C);
 		totalVisitors += 1;
+
 	}
 	public boolean checkFull(){
-		if(size() >= SEATS){
+		if(size() >= maxWait){
 			return true;
 		}return false;
 	} 
-	public void returnCust(){
+	
+	public void returnCust(Object customer){
 		if(isEmpty()){
 			messageString("Queue is empty, gets seated directly.");
 		}else if(checkFull()){
