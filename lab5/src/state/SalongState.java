@@ -3,11 +3,11 @@ package state;
 import java.util.Observable;
 import java.util.Observer;
 import state.FIFO;
-import simulator.EventState;
+import simulator.EventStore;
 
 public class SalongState implements Observer{
 	FIFO f = new FIFO();
-	EventState e = new EventState();
+	EventStore e = new EventStore();
 	
 	
 	public SalongState(){
@@ -20,31 +20,11 @@ public class SalongState implements Observer{
 		return f.checkFull();
 	}
 	public int currentTime(){
-		return e.time;
+		return e.time_counter;
 	}
 	public int haircitTime(){
 		return 1;
 	}
-	public void start(){
-		
-	}
-	public void stop(){
-		
-	}
-	public void running(){
-		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	@Override
 	public void update(Observable FIFO, Object arg1) {
