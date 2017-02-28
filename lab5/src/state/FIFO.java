@@ -29,13 +29,19 @@ public class FIFO extends Observable{
 	private ArrayList<Object> queue =  new ArrayList<Object>(); //The queue for the salon
 	private int SEATS = 0; //The number of seats available
 	private int totalVisitors = 0; //total visitors of the day
+	String message;
+	
+	public void messageString(String s){
+		message = s;
+		update;
+	}
 	
 	public void add(){
 		if(checkFull()){
-			System.out.println("The queue is full, customer leaves");
+			messageString("The queue is full, customer leaves");
 		}
 		else if(isEmpty()){
-			System.out.println("Customer sits direct in seat.");
+			messageString("Customer sits direct in seat.");
 		}
 		
 		queue.add(customer);
@@ -48,7 +54,7 @@ public class FIFO extends Observable{
 	} 
 	public void returnCust(){
 		if(isEmpty()){
-			System.out.println("Queue is empty, gets seated directly.");
+			messageString("Queue is empty, gets seated directly.");
 		}else if(checkFull()){
 			removeLast();
 			queue.add(customer);

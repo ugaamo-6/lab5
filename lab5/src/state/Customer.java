@@ -8,7 +8,7 @@ package state;
  * 
  * */
 public class Customer {
-	int id_counter = 0;
+	static int id_counter = 0;
 	
 	private int id;
 	public boolean happy;
