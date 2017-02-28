@@ -30,21 +30,25 @@ public class FIFO extends Observable{
 	//necessary variables
 	private ArrayList<Object> queue =  new ArrayList<Object>(); //The queue for the salon
 	private int SEATS = s.freeChairs; //The number of seats available
+	private static final int maxWait = 10;
 	private int totalVisitors = 0; //total visitors of the day
 	
 	public void add(){
-		if(checkFull()){
-			System.out.println("The queue is full, customer leaves");
+		if(SEATS == 0 && !checkFull()){ //if seats are 
+			queue.add(customer);
+			totalVisitors += 1;
 		}
-		else if(isEmpty()){
-			System.out.println("Customer sits direct in seat.");
+		else if(isEmpty() && SEATS != 0){//om väntrummet är tomt
+			System.out.println("Customer gets seated!");
+			SEATS -= 1;
+		}
+		else if(checkFull()){
+			System.out.println("customer leaves, waiting room full!");
 		}
 		
-		queue.add(customer);
-		totalVisitors += 1;
 	}
 	public boolean checkFull(){
-		if(size() >= SEATS){
+		if(size() >= maxWait){
 			return true;
 		}return false;
 	} 
