@@ -1,5 +1,11 @@
 package simulator;
 
-public class Event {
-
+abstract public class Event {
+	
+	public int time;
+	
+	public abstract void execute();
+	
+	public abstract String toString();
+	
 }
