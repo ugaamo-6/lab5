@@ -36,34 +36,33 @@ public class FIFO extends Observable{
 	
 	public void messageString(String s){
 		message = s;
-		update;
+		//update();
 	}
 	
-<<<<<<< HEAD
+
 	public void add(Object customer){
 		if(SEATS == 0 && !checkFull()){ //if seats are 
 			queue.add(customer);
 			totalVisitors += 1;
 			setChanged();
-			notifyObservers();
-=======
+			notifyObservers();}
+			}
+
 	public void add(){
 		if(checkFull()){
 			messageString("The queue is full, customer leaves");
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
+
 		}
-<<<<<<< HEAD
 		else if(isEmpty() && SEATS != 0){//om väntrummet är tomt
 			System.out.println("Customer gets seated!");
 			SEATS -= 1;
 			
 		}
 		else if(checkFull()){
-			System.out.println("customer leaves, waiting room full!");
-=======
+			System.out.println("customer leaves, waiting room full!");}
+
 		else if(isEmpty()){
 			messageString("Customer sits direct in seat.");
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 		}
 		
 	}
