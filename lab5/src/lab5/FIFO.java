@@ -2,8 +2,6 @@ package lab5;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
-public class FIFO {
 /**
  * 
  * A queue that represents the waiting room for a hairdresser
@@ -19,9 +17,12 @@ public class FIFO {
  * @param totalVisitors counts the total customers who have gotten a haircut
  * 
  * **/
-	public FIFO(){
+public class FIFO {
 
-		
+	private Customer customer;
+
+	public FIFO(Customer customer){
+		this.customer  = customer;
 	}
 	
 	//necessary variables
@@ -29,7 +30,7 @@ public class FIFO {
 	private int SEATS = 0; //The number of seats available
 	private int totalVisitors = 0; //total visitors of the day
 	
-	public void add(Object o){
+	public void add(){
 		if(checkFull()){
 			System.out.println("The queue is full, customer leaves");
 		}
@@ -37,7 +38,7 @@ public class FIFO {
 			System.out.println("Customer sits direct in seat.");
 		}
 		
-		queue.add(o);
+		queue.add(customer);
 		totalVisitors += 1;
 	}
 	public boolean checkFull(){
@@ -45,12 +46,15 @@ public class FIFO {
 			return true;
 		}return false;
 	} 
-	public void returnCust(Object o){
+	public void returnCust(){
 		if(isEmpty()){
 			System.out.println("Queue is empty, gets seated directly.");
-		}else{
+		}else if(checkFull()){
 			removeLast();
-			queue.add(0);
+			queue.add(customer);
+			Collections.rotate(queue, (SEATS-1));
+		}else{
+			queue.add(customer);
 			Collections.rotate(queue, (SEATS-1));
 		}
 	}
