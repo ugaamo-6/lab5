@@ -28,17 +28,28 @@ public class FIFO extends Observable{
 	}
 	
 	//necessary variables
+<<<<<<< HEAD
 	private ArrayList<Object> queue =  new ArrayList<Object>(); //The queue for the salon
 	private int SEATS = s.freeChairs; //The number of seats available
 	private static final int maxWait = 10;
+=======
+	private static ArrayList<Object> queue =  new ArrayList<Object>(); //The queue for the salon
+	private int SEATS = 0; //The number of seats available
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	private int totalVisitors = 0; //total visitors of the day
 	String message;
 	
 	public void messageString(String s){
 		message = s;
+<<<<<<< HEAD
 		//update();
+=======
+		setChanged();
+		notifyObservers(Object o);
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	}
 	
+<<<<<<< HEAD
 
 	public void add(Object customer){
 		if(SEATS == 0 && !checkFull()){ //if seats are 
@@ -49,6 +60,9 @@ public class FIFO extends Observable{
 			}
 
 	public void add(){
+=======
+	public void add(Customer C){//Lägg till input i form av kund
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 		if(checkFull()){
 			messageString("The queue is full, customer leaves");
 
@@ -65,6 +79,11 @@ public class FIFO extends Observable{
 			messageString("Customer sits direct in seat.");
 		}
 		
+<<<<<<< HEAD
+=======
+		queue.add(C);
+		totalVisitors += 1;
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	}
 	public boolean checkFull(){
 		if(size() >= maxWait){
