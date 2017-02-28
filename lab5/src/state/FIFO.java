@@ -3,6 +3,8 @@ package state;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Observable;
+import state.SalongState;
+
 /**
  * 
  * A queue that represents the waiting room for a hairdresser
@@ -19,7 +21,7 @@ import java.util.Observable;
  * 
  * */
 public class FIFO extends Observable{
-
+	SalongState s = new SalongState();
 	private Customer customer;
 
 	public FIFO(){
@@ -27,7 +29,7 @@ public class FIFO extends Observable{
 	
 	//necessary variables
 	private ArrayList<Object> queue =  new ArrayList<Object>(); //The queue for the salon
-	private int SEATS = 0; //The number of seats available
+	private int SEATS = s.freeChairs; //The number of seats available
 	private int totalVisitors = 0; //total visitors of the day
 	
 	public void add(){

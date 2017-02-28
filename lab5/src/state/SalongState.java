@@ -8,7 +8,7 @@ import simulator.EventStore;
 public class SalongState implements Observer{
 	FIFO f = new FIFO();
 	EventStore e = new EventStore();
-	
+	 public int freeChairs = 5;
 	
 	public SalongState(){
 		
@@ -20,7 +20,7 @@ public class SalongState implements Observer{
 		return f.checkFull();
 	}
 	public int currentTime(){
-		return e.time_counter;
+		return e.currentTime;
 	}
 	public int haircitTime(){
 		return 1;

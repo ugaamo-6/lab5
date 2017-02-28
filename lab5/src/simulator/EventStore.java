@@ -6,7 +6,7 @@ public class EventStore {
 	
 	//This array-list keep track of the queue of Events
 	ArrayList<Event> queue = new ArrayList<Event>();
-	int currentTime = 0 ;
+	public int currentTime = 0 ;
 
 	//hej
 	public void addEvent(Event addEvent){
