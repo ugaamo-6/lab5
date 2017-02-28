@@ -32,14 +32,27 @@ public class FIFO extends Observable{
 	private int SEATS = s.freeChairs; //The number of seats available
 	private static final int maxWait = 10;
 	private int totalVisitors = 0; //total visitors of the day
+	String message;
 	
+	public void messageString(String s){
+		message = s;
+		update;
+	}
+	
+<<<<<<< HEAD
 	public void add(Object customer){
 		if(SEATS == 0 && !checkFull()){ //if seats are 
 			queue.add(customer);
 			totalVisitors += 1;
 			setChanged();
 			notifyObservers();
+=======
+	public void add(){
+		if(checkFull()){
+			messageString("The queue is full, customer leaves");
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 		}
+<<<<<<< HEAD
 		else if(isEmpty() && SEATS != 0){//om väntrummet är tomt
 			System.out.println("Customer gets seated!");
 			SEATS -= 1;
@@ -47,6 +60,10 @@ public class FIFO extends Observable{
 		}
 		else if(checkFull()){
 			System.out.println("customer leaves, waiting room full!");
+=======
+		else if(isEmpty()){
+			messageString("Customer sits direct in seat.");
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 		}
 		
 	}
@@ -55,9 +72,10 @@ public class FIFO extends Observable{
 			return true;
 		}return false;
 	} 
+	
 	public void returnCust(Object customer){
 		if(isEmpty()){
-			System.out.println("Queue is empty, gets seated directly.");
+			messageString("Queue is empty, gets seated directly.");
 		}else if(checkFull()){
 			removeLast();
 			queue.add(customer);
