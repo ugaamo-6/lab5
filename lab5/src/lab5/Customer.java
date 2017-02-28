@@ -13,7 +13,7 @@ public class Customer {
 	
 	private int id;
 	boolean happy;
-	
+	//hej
 	public Customer(){
 		id = id_counter + 1;
 		happy = true;
