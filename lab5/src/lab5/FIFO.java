@@ -3,13 +3,29 @@ package lab5;
 import java.util.ArrayList;
 
 public class FIFO {
-
+/**
+ * 
+ * A queue that represents the waiting room for a hairdresser
+ * 
+ * @author Gustav Mattsson (ugaamo-6)
+ * @param add the add method adds to the queue unless the queue is full or empty
+ * @param checkFull checks if the queue is full or not
+ * @param returnCust 8===D
+ * @param isEmpty checks if waiting queue is empty
+ * @param size returns the size of the queue
+ * @param getFirst picks the first customer in the queue
+ * @param totalVisitors counts the total customers who have gotten a haircut
+ * 
+ * **/
 	public FIFO(){
+
 		
 	}
-	private ArrayList<Object> queue =  new ArrayList(); //The queue for the salon
+	
+	//necessary variables
+	private ArrayList<Object> queue =  new ArrayList<Object>(); //The queue for the salon
 	private int SEATS = 0; //The number of seats available
-	private int totalVisitors = 0;
+	private int totalVisitors = 0; //total visitors of the day
 	
 	public void add(Object o){
 		if(checkFull()){
@@ -21,7 +37,6 @@ public class FIFO {
 		
 		queue.add(o);
 		totalVisitors += 1;
-		
 	}
 	public boolean checkFull(){
 		if(size() >= SEATS){
