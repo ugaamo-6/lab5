@@ -18,7 +18,7 @@ public class CustReturns extends Event {
 	
 	public CustReturns(double time, Customer C, EventStore es, SalongState ss, State s, SalongView sv){
 		this.time = time;
-		this.C = C;
+		this.C=C;
 		this.es=es;
 		this.ss=ss;
 		this.s=s;
@@ -28,7 +28,8 @@ public class CustReturns extends Event {
 	
 	
 	public void execute() {
-		f.returnCust(this.C);
+		f = (FIFO) C.getFIFO();
+		f.returnCust(C);
 		
 	}
 

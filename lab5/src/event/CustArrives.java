@@ -15,7 +15,7 @@ public class CustArrives extends Event {
 	
 	
 	public CustArrives(double arrivalTime, EventStore es, SalongState ss, State s, SalongView sv, FIFO f){
-		this.time = arrivalTime + ss.haircutTime();
+		this.time = arrivalTime;
 		this.es=es;
 		this.ss=ss;
 		this.s=s;
@@ -30,11 +30,13 @@ public class CustArrives extends Event {
 		double nextCustTime = es.getTime() + ss.nextCustTime();
 		CustArrives nextCust = new CustArrives(nextCustTime, es, ss, s, sv, f);
 		es.addEvent(nextCust);
+		
 	}
 	
 	public double getArrivalTime(){
 		return time;
 	}
+	
 		
 	
 

@@ -41,7 +41,8 @@ public class FIFO extends Observable{
 		this.s=s;
 		this.sv=sv;
 	}
-	
+
+
 	private int hairdressSeats = ss.freeChairs; //The number of seats available
 	private final int maxWait = 10;
 	private static ArrayList<Object> queue =  new ArrayList<Object>(); //The queue for the salon
@@ -66,13 +67,12 @@ public class FIFO extends Observable{
 		else if(hairdressSeats != 0 && !checkFull()){//om väntrummet är tomt & palts är ledig
 			System.out.println("Customer gets a haircut!");
 			hairdressSeats--;	
-			double time = es.getTime() + ss.haircutTime();
-			es.addEvent(new CustLeaves(time , C, es, ss, s, sv));
+			es.addEvent(new CustLeaves(es.getTime() , C, es, ss, s, sv, f));
 		}
 		else if(checkFull()){
 			System.out.println("Customer leaves, waiting room full!");	
 		} 
-		else if(hairdressSeats == 0 && !checkFull()){//Gör om, gör rätt.
+		else if(hairdressSeats == 0 && !checkFull()){
 			queue.add(C);
 			System.out.println("Customer seats in waitroom.");
 		}

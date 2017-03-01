@@ -43,4 +43,8 @@ public class Customer {
 	public boolean get_happy(){
 		return happy;
 	}
+	
+	public FIFO getFIFO(){
+		return f;
+	}
 }
