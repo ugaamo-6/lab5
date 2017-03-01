@@ -18,22 +18,27 @@ public class SalongState implements Observer{
 	private double lambda = 4;
 	private int seed = 400;//Denna ska vara satt efter "tid"?
 	
-	private int chairs = 5;
+	private int percentageLeave = 20; //skrivs i heltal, ett nummer mellan 0-100
 	
 	private UniformRandomStream uniRand;
 	private ExponentialRandomStream expRand;
+	private FIFO f;
 	
-	
-	FIFO f = new FIFO();
 	EventStore e = new EventStore();
-	public static final int hMax = 4;
-	public static final int hMin = 2;
-	public int freeChairs = 5;
+	public static int freeChairs = 5;
 	
 	
 	
 	public SalongState(){
 		
+	}
+	
+	public void chairGotFree() {
+		freeChairs--;
+	}
+	
+	public int freeChairs() {
+		return freeChairs;
 	}
 	
 	public Object getFirst(){
@@ -52,6 +57,16 @@ public class SalongState implements Observer{
 		uniRand = new UniformRandomStream(haircutMinTime, haircutMaxTime);
 		double rand = uniRand.next();
 		return rand;
+	}
+	
+	public double randLeave() {
+		UniformRandomStream pRand = new UniformRandomStream(0,percentageLeave);
+		double rand = pRand.next()/100.0;
+		return rand;
+	}
+	
+	public int percentageLeave() {
+		return percentageLeave;
 	}
 	
 	public double returnTime(){

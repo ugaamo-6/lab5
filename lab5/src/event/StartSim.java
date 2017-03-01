@@ -1,21 +1,29 @@
 package event;
 
-import simulator.Event;
-import simulator.EventStore;
-import simulator.State;
+import hairdresser.*;
+import simulator.*;
+import state.*;
 
 public class StartSim extends Event {
 	
 	EventStore es;
+	SalongState ss;
 	State s;
+	SalongView sv;
+	FIFO f;
 	
-	public StartSim(){
+	public StartSim(EventStore es, SalongState ss, State s, SalongView sv, FIFO f){
+		this.es=es;
+		this.ss=ss;
+		this.s=s;
+		this.sv=sv;
+		this.f=f;
 		time = 0.0;
 	}
 	
 	public void execute() {		
 		s.start();
-		Event arrive = new CustArrives();
+		Event arrive = new CustArrives(time, es, ss, s, sv, f);
 		es.addEvent(arrive);
 	}
 

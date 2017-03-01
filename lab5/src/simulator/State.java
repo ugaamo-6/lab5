@@ -5,6 +5,7 @@ public class State {
 	boolean open = false;
 	
 	public void start(){
+		
 	 	running = true; 
 	 	open = true;
 	}

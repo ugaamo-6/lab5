@@ -1,4 +1,9 @@
 package state;
+
+import hairdresser.SalongView;
+import simulator.EventStore;
+import simulator.State;
+
 /**
  * This class defines the variables that a customer needs
  * 
@@ -8,12 +13,25 @@ package state;
  * 
  * */
 public class Customer {
+	
+	EventStore es;
+	SalongState ss;
+	State s;
+	SalongView sv;
+	FIFO f;
+		
 	static int id_counter = 0;
 	
 	private int id;
 	public boolean happy;
 
-	public Customer(){
+	
+	public Customer(EventStore es, SalongState ss, State s, SalongView sv, FIFO f){
+		this.es=es;
+		this.ss=ss;
+		this.s=s;
+		this.sv=sv;
+		this.f=f;
 		id = id_counter + 1;
 		happy = true;
 		id_counter++;

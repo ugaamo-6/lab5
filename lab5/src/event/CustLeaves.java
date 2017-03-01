@@ -1,30 +1,36 @@
 package event;
 
-import simulator.Event;
-import simulator.EventStore;
-import state.Customer;
+import hairdresser.SalongView;
+import simulator.*;
+import state.*;
 
 public class CustLeaves extends Event{
 	
-	private double time;
+	EventStore es;
+	SalongState ss;
+	State s;
+	SalongView sv;
 	Customer C;
+	double time;
 	
-	public CustLeaves(double t, Customer C){
-		this.time = t;
+	public CustLeaves(double time, Customer C, EventStore es, SalongState ss, State s, SalongView sv){
+		this.time = time;
 		this.C = C;
+		this.es=es;
+		this.ss=ss;
+		this.s=s;
+		this.sv=sv;
 	}
 	
 	
-	@Override
 	public void execute() {
-		
+		if(ss.randLeave()>=ss.percentageLeave()){
+			double returnTime = es.getTime()+ss.returnTime();
+			es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv));
+			ss.chairGotFree();
+			System.out.println("hej");
+		}
 		
 	}
-
-//	@Override
-//	public String toString() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 }

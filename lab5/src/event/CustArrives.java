@@ -1,22 +1,43 @@
 package event;
 
-import simulator.Event;
-import state.Customer;
-import state.FIFO;
+import hairdresser.SalongView;
+import simulator.*;
+import state.*;
 
 public class CustArrives extends Event {
-	FIFO f = new FIFO();
+	
+	EventStore es;
+	SalongState ss;
+	State s;
+	SalongView sv;
+	FIFO f;
+	double time;
+	
+	
+	public CustArrives(double arrivalTime, EventStore es, SalongState ss, State s, SalongView sv, FIFO f){
+		this.time = arrivalTime + ss.haircutTime();
+		this.es=es;
+		this.ss=ss;
+		this.s=s;
+		this.sv=sv;
+		this.f=f;
+	}
 	
 	@Override
 	public void execute() {
-		Customer kund = new Customer();
+		Customer kund = new Customer(es, ss, s, sv, f);
 		f.add(kund);
+		double nextCustTime = es.getTime() + ss.nextCustTime();
+		CustArrives nextCust = new CustArrives(nextCustTime, es, ss, s, sv, f);
+		es.addEvent(nextCust);
 	}
+	
+	public double getArrivalTime(){
+		return time;
+	}
+		
+	
 
-//	@Override
-//	public String toString() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+
 
 }

@@ -3,13 +3,13 @@ package state;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Observable;
-<<<<<<< HEAD
 
+import event.CustLeaves;
+import hairdresser.SalongView;
+import simulator.EventStore;
 import simulator.State;
-=======
-import state.SalongState;
 
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
+import state.SalongState;
 /**
  * 
  * A queue that represents the waiting room for a hairdresser
@@ -26,61 +26,62 @@ import state.SalongState;
  * @param totalVisitors counts the total customers who have gotten a haircut
  * 
  * */
+
 public class FIFO extends Observable{
 
-
-	State s;
-	private Customer customer;
-	SalongState ss = new SalongState();
+	private EventStore es;
+	private SalongState ss;
+	private State s;
+	private SalongView sv;
+	private FIFO f;
 	
-	public FIFO(){
-
+	public FIFO(EventStore es, SalongState ss, State s, SalongView sv){
+		this.es=es;
+		this.ss=ss;
+		this.s=s;
+		this.sv=sv;
 	}
 	
-	private int SEATS = s.freeChairs; //The number of seats available
-	private static final int maxWait = 10;
+	private int hairdressSeats = ss.freeChairs; //The number of seats available
+	private final int maxWait = 10;
 	private static ArrayList<Object> queue =  new ArrayList<Object>(); //The queue for the salon
 	private int totalVisitors = 0; //total visitors of the day
-	String message;
+	private static String message;
 	
 	public void messageString(String s){
 		message = s;
-//		setChanged();
-//		notifyObservers(Object o);
+		setChanged();
+		notifyObservers();
 	}
-
-	public void add(Object customer){
-		if(SEATS == 0 && !checkFull()){ //if seats are 
-			queue.add(customer);
-			totalVisitors += 1;
-			setChanged();
-			notifyObservers();}
-			}
-
-	public void add(){
-=======
+	
+	public String getMessageString(){
+		return message;
+	}
+	
 	public void add(Customer C){//Lägg till input i form av kund
-		if(checkFull() && s.opened()){
-			messageString("The queue is full, customer leaves");
+		if(checkFull() && s.opened() && hairdressSeats == 0){
+//			System.out.println("The queue is full, customer leaves");
 
 		}
-		else if(isEmpty() && SEATS != 0){//om väntrummet är tomt
-			System.out.println("Customer gets seated!");
-			SEATS -= 1;
-			
+		else if(hairdressSeats != 0 && !checkFull()){//om väntrummet är tomt & palts är ledig
+			System.out.println("Customer gets a haircut!");
+			hairdressSeats--;	
+			double time = es.getTime() + ss.haircutTime();
+			es.addEvent(new CustLeaves(time , C, es, ss, s, sv));
 		}
 		else if(checkFull()){
-			System.out.println("customer leaves, waiting room full!");}
-
-		else if(isEmpty()){
-			messageString("Customer sits direct in seat.");
+			System.out.println("Customer leaves, waiting room full!");	
+		} 
+		else if(hairdressSeats == 0 && !checkFull()){//Gör om, gör rätt.
+			queue.add(C);
+			System.out.println("Customer seats in waitroom.");
 		}
-		queue.add(C);
+		
 		totalVisitors += 1;
 
 	}
 	public boolean checkFull(){
-		if(size() >= maxWait){
+		if(queueSize() >= maxWait){
 			return true;
 		}return false;
 	} 
@@ -91,21 +92,21 @@ public class FIFO extends Observable{
 		}else if(checkFull()){
 			removeLast();
 			queue.add(customer);
-			Collections.rotate(queue, (SEATS-1));
+			Collections.rotate(queue, (hairdressSeats-1));
 		}else{
 			queue.add(customer);
-			Collections.rotate(queue, (SEATS-1));
+			Collections.rotate(queue, (hairdressSeats-1));
 		}
 	}
 	public void removeLast(){
 		queue.remove(queue.get(-1));
 	}
 	public boolean isEmpty(){
-		if(size() == 0){
+		if(queueSize() == 0){
 			return true;
 		}return false;
 	}
-	public int size(){
+	public int queueSize(){
 		return queue.size();
 	}
 	public Object getFirst(){

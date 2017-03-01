@@ -8,11 +8,12 @@ public class EventStore {
 	ArrayList<Event> queue = new ArrayList<Event>();
 	private static double currentTime = 0;
 	
-	public static double getTime() { return currentTime; }
+	public double getTime() { return currentTime; }
 	
 	public void setTime(double time) { currentTime = time; }
 
 	public void addEvent(Event addEvent){
+		
 		if (queue.size() == 0) {
 			queue.add(addEvent);
 		} else {
