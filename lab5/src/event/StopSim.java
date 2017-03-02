@@ -13,6 +13,8 @@ public class StopSim extends Event {
 		System.out.println("Average haircut time: "+(stat.getTime()/stat.getCust()));
 		System.out.println("Total leaves: "+stat.getLeave());
 		System.out.println("Average queue time: " + (stat.getQtime()/stat.getCust()));
+		System.out.println("Max customers at the same time in queue: "+ stat.getMax());
+		System.out.println("Amount of disssatisfied customers: " + stat.getDiss());
 		this.s=s;
 	}
 	

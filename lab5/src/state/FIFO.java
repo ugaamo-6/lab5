@@ -38,6 +38,8 @@ public class FIFO extends Observable {
 	private FIFO f;
 	private Observable notifier;
 	
+	private int maximus = 0; //max customers in queue at once 
+	
 	public FIFO(EventStore es, SalongState ss, State s){
 		this.es=es;
 		this.ss=ss;
@@ -74,6 +76,11 @@ public class FIFO extends Observable {
 //			System.out.println(stat.getCust());
 		}
 		
+		if(maximus < queueSize()){
+			stat.maxSize(queueSize());
+			maximus = queueSize();
+		}
+		
 		
 
 	}
@@ -106,9 +113,11 @@ public class FIFO extends Observable {
 			removeLast();
 			queue.add(customer);
 			Collections.rotate(queue, (hairdressSeats-1));
+			stat.addDiss();
 		}else{
 			queue.add(customer);
 			Collections.rotate(queue, (hairdressSeats-1));
+			stat.addDiss();
 		}
 	}
 	
