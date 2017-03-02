@@ -46,20 +46,16 @@ public class FIFO extends Observable {
 	private Statistics stat = new Statistics();
 	private int hairdressSeats = ss.freeChairs; //The number of seats available
 	private final int maxWait = 10;
-	private static ArrayList<Object> queue =  new ArrayList<Object>(); //The queue for the salon
+	private ArrayList<Object> queue =  new ArrayList<Object>(); //The queue for the salon
 	private int totalVisitors = 0; //total visitors of the day
 	private static String message;
 	
 	public void add(Customer C){//Lägg till input i form av kund
 
 		if(isFull() && s.opened() && ss.freeChairs() != 0){
-//			messageString("The queue is full, customer leaves");
+	//		messageString("The queue is full, customer leaves");
 			stat.addLeave();
 		}
-
-
-		}
-
 		else if(hairdressSeats != 0 && isEmpty() && ss.freeChairs() != 0){//DENNA ÄR FEL, kunder går direkt in.
 			messageString("Customer gets a haircut!");
 			ss.chairGotBusy();	
@@ -71,13 +67,14 @@ public class FIFO extends Observable {
 		
 		else if(ss.freeChairs() == 0){//Ändra?? Blir fel, om en person lämnar en full salong kommer värdet aldrig bli 0 igen.
 			queue.add(C);
+			System.out.println("------- "+queue.size()+"( -------)");
 			messageString("Customer wait.");
 		}
 		
 		totalVisitors += 1;
 
 	}
-	
+
 	public void messageString(String s){
 		message = s;
 		setChanged();
@@ -89,6 +86,8 @@ public class FIFO extends Observable {
 	}
 	
 	public boolean isFull(){
+		//System.out.println("-----------------------------------------------");
+		//System.out.println(queueSize());
 		if(queueSize() >= maxWait){
 			return true;
 		}return false;
