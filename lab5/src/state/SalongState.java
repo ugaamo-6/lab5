@@ -38,6 +38,8 @@ public class SalongState {
 		return maxWaitInQueue;
 	}
 	
+	
+	
 	public void chairGotFree() {
 		freeChairs++;
 	}

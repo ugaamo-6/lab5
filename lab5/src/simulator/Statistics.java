@@ -10,17 +10,14 @@ public class Statistics {
 	//addition methods
 	public void custStatAddTime(double waitTime){
 		totalTime += waitTime;
-		System.out.println(totalTime);
 	}
 	public void custCountAdd(){
 		totalCust++;
 	}
 	public void calcAvg(){
-		System.out.println(totalTime/totalCust);
 	}
 	public void addLeave(){
 		leave += 1;
-		System.out.println("---- "+leave);	
 		}
 
 	

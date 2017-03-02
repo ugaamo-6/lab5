@@ -6,6 +6,7 @@ import java.util.Observable;
 import java.util.Observer;
 import simulator.Statistics;
 import event.CustLeaves;
+import event.CustReturns;
 import hairdresser.SalongView;
 import simulator.EventStore;
 import simulator.State;
@@ -51,7 +52,6 @@ public class FIFO extends Observable {
 	private static String message;
 	
 	public void add(Customer C){//Lägg till input i form av kund
-		System.out.println(queueSize());
 		if(isFull() && s.opened() && ss.freeChairs() != 0){
 			messageString("The queue is full, customer leaves");
 			stat.addLeave();
@@ -135,7 +135,15 @@ public class FIFO extends Observable {
 		}
 		return null;
 	}
-
+	
+	public void checkIfSatisfied(Customer C){
+		if(ss.randReturn()<=ss.percentageReturn()){
+			messageString("Customer is not happy.");
+			double returnTime = es.getTime()+ss.returnTime();
+			es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv));	
+		}
+	}
+	
 	public int getTotalVisitors(){
 		return totalVisitors;
 	}
