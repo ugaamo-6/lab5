@@ -31,6 +31,7 @@ public class CustReturns extends Event {
 		f = (FIFO) C.getFIFO();
 		f.custFinished();
 		f.returnCust(C);
+		f.checkIfSatisfied(C);
 	}
 	
 	public double getTime() {

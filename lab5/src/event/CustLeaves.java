@@ -34,11 +34,7 @@ public class CustLeaves extends Event{
 		f.messageString("Haircut is done, customer leaves.");
 		ss.chairGotFree();
 		
-		if(ss.randReturn()<=ss.percentageReturn()){
-			f.messageString("Customer is not happy.");
-			double returnTime = es.getTime()+ss.returnTime();
-			es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv));	
-		}
+		f.checkIfSatisfied(C);
 		
 		
 		f.getFirst();
