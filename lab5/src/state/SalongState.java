@@ -17,6 +17,7 @@ public class SalongState {
 	private double haircutMaxTime = 60;
 	private double returnMinTime = 30;
 	private double returnMaxTime = 200;
+	private final int maxWaitInQueue = 10;
 	
 	private double lambda = 60;
 	private long seed = System.currentTimeMillis();
@@ -31,6 +32,10 @@ public class SalongState {
 	
 	public SalongState(){
 
+	}
+	
+	public int maxWaitInQueue() {
+		return maxWaitInQueue;
 	}
 	
 	public void chairGotFree() {
