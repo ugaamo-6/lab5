@@ -2,28 +2,29 @@ package simulator;
 
 public class Statistics {
 	//average time
-	private int totalCust = 0; private double totalTime = 0; private double avgTime = totalTime/totalCust;
-	public void custStatTime(double waitTime){
-		totalCust ++;
+	double totalCust = 0; double totalTime = 0;
+	public void custStatAddTime(double waitTime){
 		totalTime += waitTime;
+		System.out.println(totalTime);
+	}
+	public void custCountAdd(){
+		totalCust++;
 	}
 	public double getAvgTime(){
-		return avgTime;
+		return totalTime / totalCust;
 	}
 	
 	//Hur många som försvinner
-	private int leave = 0;
+	int leave = 0;
 	public void addLeave(){
-		leave++;
-	}
+		leave += 1;
+		System.out.println("---- "+leave);	}
 	public int returnLeave(){
 		return leave;
 	}
 	
-	public String returnStats(){
-		String avg = ("Medel klipptid: "+ avgTime);
-		String left = (leave + " customers left without haircut.");
-		String main = avg + " " + left;
-		return main;
+	public void returnStats(){
+		System.out.println(totalCust);
+		System.out.println(returnLeave());
 	}
 }
