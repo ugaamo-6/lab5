@@ -6,6 +6,7 @@ import state.*;
 
 public class CustLeaves extends Event{
 	
+	Statistics stat = new Statistics();
 	EventStore es;
 	SalongState ss;
 	State s;
@@ -29,6 +30,7 @@ public class CustLeaves extends Event{
 	}
 	
 	public void execute() {
+		stat.custCountAdd();
 		FIFO f = C.getFIFO();
 		
 		f.messageString("Haircut is done, customer leaves.");

@@ -6,8 +6,12 @@ import simulator.Statistics;
 
 public class StopSim extends Event {
 	State s;
-	Statistics stat;
+	Statistics stat = new Statistics();
 	public StopSim(State s){
+		System.out.println("---- Some Statistics ----");
+		System.out.println("Total Customers: "+stat.getCust());
+		System.out.println("Average haircut time: "+(stat.getTime()/stat.getCust()));
+		System.out.println("Total leaves: "+stat.getLeave());
 		this.s=s;
 	}
 	
