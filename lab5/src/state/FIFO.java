@@ -53,9 +53,20 @@ public class FIFO extends Observable {
 	public void add(Customer C){//Lägg till input i form av kund
 		System.out.println(queueSize());
 		if(isFull() && s.opened() && ss.freeChairs() != 0){
+
+	//		messageString("The queue is full, customer leaves");
+
+			messageString("The queue is full, customer leaves");
+
+//			messageString("The queue is full, customer leaves");
+			
+			stat.addLeave();
+
 			messageString("The queue is full, customer leaves");
 			stat.addLeave();
+
 		}
+
 		else if(hairdressSeats != 0 && isEmpty() && ss.freeChairs() != 0){//DENNA ÄR FEL, kunder går direkt in.
 			messageString("Customer gets a haircut!");
 			ss.chairGotBusy();	

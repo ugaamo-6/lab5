@@ -11,7 +11,6 @@ public abstract class View {
 	}
 	
 	public void endInfoPrint() {
-		System.out.println(s.returnStats());
 		System.out.println("Closed.");
 		
 	}
