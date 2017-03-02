@@ -26,11 +26,10 @@ public class CustArrives extends Event {
 		this.f=f;
 	}
 	
-	@Override
 	public void execute() {
 		Customer kund = new Customer(es, ss, s, sv, f);
 		f.add(kund);
-		double nextCustTime = es.getTime() + ss.nextCustTime();
+		double nextCustTime = es.getTime() + 6; // ss.nextCustTime();
 		CustArrives nextCust = new CustArrives(nextCustTime, es, ss, s, sv, f);
 		es.addEvent(nextCust);
 	}

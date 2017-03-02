@@ -50,6 +50,34 @@ public class FIFO extends Observable {
 	private int totalVisitors = 0; //total visitors of the day
 	private static String message;
 	
+	public void add(Customer C){//Lägg till input i form av kund
+
+		if(isFull() && s.opened() && ss.freeChairs() != 0){
+//			messageString("The queue is full, customer leaves");
+			stat.addLeave();
+		}
+
+
+		}
+
+		else if(hairdressSeats != 0 && isEmpty() && ss.freeChairs() != 0){//DENNA ÄR FEL, kunder går direkt in.
+			messageString("Customer gets a haircut!");
+			ss.chairGotBusy();	
+			es.addEvent(new CustLeaves(es.getTime() , C, es, ss, s, sv, f));
+		}
+		else if(isFull()){
+//			messageString("Customer leaves, waiting room full!");	
+		} 
+		
+		else if(ss.freeChairs() == 0){//Ändra?? Blir fel, om en person lämnar en full salong kommer värdet aldrig bli 0 igen.
+			queue.add(C);
+			messageString("Customer wait.");
+		}
+		
+		totalVisitors += 1;
+
+	}
+	
 	public void messageString(String s){
 		message = s;
 		setChanged();
@@ -60,27 +88,6 @@ public class FIFO extends Observable {
 		return message;
 	}
 	
-	public void add(Customer C){//Lägg till input i form av kund
-		if(isFull() && s.opened() && ss.freeChairs() != 0){
-//			messageString("The queue is full, customer leaves");
-			stat.addLeave();
-		}
-		else if(hairdressSeats != 0 && isEmpty() && ss.freeChairs() != 0){//DENNA ÄR FEL, kunder går direkt in.
-			messageString("Customer gets a haircut!");
-			ss.chairGotBusy();	
-			es.addEvent(new CustLeaves(es.getTime() , C, es, ss, s, sv, f));
-		}
-		else if(isFull()){
-//			messageString("Customer leaves, waiting room full!");	
-		} 
-		else if(ss.freeChairs == 0){
-			queue.add(C);
-			messageString("Customer wait.");
-		}
-		
-		totalVisitors += 1;
-
-	}
 	public boolean isFull(){
 		if(queueSize() >= maxWait){
 			return true;
@@ -93,7 +100,7 @@ public class FIFO extends Observable {
 	
 	public void returnCust(Object customer){
 		if(isEmpty()){
-			messageString("Queue is empty, gets seated directly.");
+			messageString("Returning customer: Queue is empty, gets seated directly.");
 		}else if(isFull()){
 			removeLast();
 			queue.add(customer);
@@ -103,17 +110,21 @@ public class FIFO extends Observable {
 			Collections.rotate(queue, (hairdressSeats-1));
 		}
 	}
+	
 	public void removeLast(){
 		queue.remove(queue.size()-1);
 	}
+	
 	public boolean isEmpty(){//Fixa denna, den kan gå till negativa tal.
 		if(queueSize() == 0){
 			return true;
 		}return false;
 	}
+	
 	public int queueSize(){
 		return queue.size();
 	}
+
 	public Customer getFirst(){
 		if(!isEmpty()){
 			messageString("Customer leaves queue and gets a haircut.");
@@ -123,6 +134,7 @@ public class FIFO extends Observable {
 		}
 		return null;
 	}
+
 	public int getTotalVisitors(){
 		return totalVisitors;
 	}

@@ -21,7 +21,7 @@ public class SalongState {
 	private double lambda = 60;
 	private long seed = System.currentTimeMillis();
 	
-	private double percentageLeave = 0.5; //skrivs i heltal, ett nummer mellan 0-100
+	private double percentageReturn = 0.5; //skrivs i heltal, ett nummer mellan 0-100
 	
 	private UniformRandomStream uniRand;
 	private ExponentialRandomStream expRand;
@@ -70,8 +70,8 @@ public class SalongState {
 	}
 	
 	
-	public double percentageLeave() {
-		return percentageLeave;
+	public double percentageReturn() {
+		return percentageReturn;
 	}
 	
 	public double returnTime(){
@@ -81,7 +81,7 @@ public class SalongState {
 		return rand;
 	}
 	
-	public double nextCustTime(){
+	public double nextCustTime(){//FÅ KOLL PÅ DENNA.
 		expRand = new ExponentialRandomStream(lambda, seed);
 		double rand = expRand.next();
 		return rand;
