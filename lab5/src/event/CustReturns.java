@@ -30,7 +30,7 @@ public class CustReturns extends Event {
 	public void execute() {
 		f = (FIFO) C.getFIFO();
 		f.custFinished();
-		f.returnCust(C);
+		f.addReturnCust(C);
 		f.checkIfSatisfied(C);
 	}
 	
