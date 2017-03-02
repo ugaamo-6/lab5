@@ -35,6 +35,8 @@ public class Closing extends Event {
 		System.out.println("Total leaves: "+stat.getLeave());
 	
 		s.stop();
+
+		s.closing();
 	}
 	
 	public double getTime() {
@@ -42,7 +44,7 @@ public class Closing extends Event {
 	}
 
 	public String toString() {
-		return null;
+		return null;//FIXME
 	}
 
 }
