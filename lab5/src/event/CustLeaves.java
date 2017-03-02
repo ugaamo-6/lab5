@@ -14,6 +14,7 @@ public class CustLeaves extends Event{
 	Customer C;
 	double time;
 	
+	
 	public CustLeaves(double time, Customer C, EventStore es, SalongState ss, State s, SalongView sv, FIFO f){
 		this.time = time + ss.haircutTime();
 		this.C = C;
@@ -29,12 +30,19 @@ public class CustLeaves extends Event{
 	}
 	
 	public void execute() {
-		if(ss.randReturn()<=ss.percentageLeave()){
+		FIFO f = C.getFIFO();
+		f.messageString("Haircut is done, customer leaves.");
+		ss.chairGotFree();
+		
+		if(ss.randReturn()<=ss.percentageReturn()){
+			f.messageString("Customer is not happy.");
 			double returnTime = es.getTime()+ss.returnTime();
 			es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv));	
 		}
-		System.out.println("Left");
-		ss.chairGotFree();
+		
+		
+		
+		f.getFirst();
 	}
 
 }
