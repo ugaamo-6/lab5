@@ -5,10 +5,18 @@ import simulator.State;
 
 public class StopSim extends Event {
 	State s;
-	@Override
+
+	public StopSim(int time){
+		this.time=time;
+	}
+	
 	public void execute() {
 		s.stop();
 		
+	}
+	@Override
+	public double getTime() {
+		return time;
 	}
 
 	

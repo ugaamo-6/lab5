@@ -1,5 +1,8 @@
 package event;
 
+import java.util.Observable;
+
+
 import hairdresser.SalongView;
 import simulator.*;
 import state.*;
@@ -30,7 +33,10 @@ public class CustArrives extends Event {
 		double nextCustTime = es.getTime() + ss.nextCustTime();
 		CustArrives nextCust = new CustArrives(nextCustTime, es, ss, s, sv, f);
 		es.addEvent(nextCust);
-		
+	}
+	
+	public double getTime() {
+		return time;
 	}
 	
 	public double getArrivalTime(){

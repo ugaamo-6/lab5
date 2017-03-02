@@ -29,8 +29,12 @@ public class CustReturns extends Event {
 	
 	public void execute() {
 		f = (FIFO) C.getFIFO();
+		f.custFinished();
 		f.returnCust(C);
-		
+	}
+	
+	public double getTime() {
+		return time;
 	}
 
 	@Override

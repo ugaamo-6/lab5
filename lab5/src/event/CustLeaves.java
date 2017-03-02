@@ -24,14 +24,17 @@ public class CustLeaves extends Event{
 		this.f =f;
 	}
 	
+	public double getTime() {
+		return this.time;
+	}
 	
 	public void execute() {
-		if(ss.randLeave()<=ss.percentageLeave()){//BYT HÅLL PÅ <!!!! TODO
+		if(ss.randReturn()<=ss.percentageLeave()){
 			double returnTime = es.getTime()+ss.returnTime();
-			es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv));
-			ss.chairGotFree();
-	
+			es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv));	
 		}
+		System.out.println("Left");
+		ss.chairGotFree();
 	}
 
 }

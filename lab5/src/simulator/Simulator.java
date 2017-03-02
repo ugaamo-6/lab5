@@ -1,6 +1,6 @@
 package simulator;
 
-import event.StartSim;
+import event.*;
 import hairdresser.SalongView;
 import state.*;
 
@@ -24,6 +24,7 @@ public class Simulator {
 	public void Run() {
 		s.start();
 		es.addEvent(new StartSim(es, ss, s, sv, f));
+		es.addEvent(new Closing(ss.getCloseTime() , es,ss,s,sv,f));
 		sv.beginInfoPrint();
 		while (s.running()) {
 			Event currentEvent = es.nextEvent();
@@ -37,9 +38,9 @@ public class Simulator {
 	public static void main(String args[]){
 		EventStore es = new EventStore();
 		State s = new State();
-		SalongView sv = new SalongView();
 		SalongState ss = new SalongState();
-		FIFO f = new FIFO(es, ss, s, sv);
+		FIFO f = new FIFO(es, ss, s);
+		SalongView sv = new SalongView(f);
 		Simulator sim = new Simulator(es, s, sv, ss, f);
 		sim.Run();
 	}

@@ -26,6 +26,10 @@ public class StartSim extends Event {
 		Event arrive = new CustArrives(time, es, ss, s, sv, f);
 		es.addEvent(arrive);
 	}
+	
+	public double getTime() {
+		return time;
+	}
 
 //	@Override
 //	public String toString() {

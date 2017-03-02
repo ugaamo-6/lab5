@@ -1,24 +1,39 @@
 package event;
 
+import hairdresser.SalongView;
 import simulator.Event;
+import simulator.EventStore;
 import simulator.State;
+import state.FIFO;
+import state.SalongState;
 
 public class Closing extends Event {
 	
 	State s;
+	EventStore es;
+	SalongState ss;
+	SalongView sv;
+	FIFO f;
 	
-	public Closing(){
-		time = 10.0;
-	}
-	public void execute() {
-		s.closing();
-		// TODO Auto-generated method stub
-		
+	
+	public Closing(double time, EventStore es, SalongState ss, State s, SalongView sv, FIFO f) {
+		this.time=time;
+		this.es=es;
+		this.ss=ss;
+		this.s=s;
+		this.sv=sv;
+		this.f=f;
 	}
 
-	@Override
+	public void execute() {
+		s.stop();
+	}
+	
+	public double getTime() {
+		return time;
+	}
+
 	public String toString() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

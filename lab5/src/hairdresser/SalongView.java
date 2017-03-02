@@ -8,7 +8,12 @@ import java.util.Observer;
 
 public class SalongView extends View implements Observer {
 
-	FIFO FIFO;
+	FIFO f;
+	
+	public SalongView(FIFO f){
+		this.f=f;
+		f.addObserver(this);
+	}
 	
 	public void runningInfoPrint() {
 		
@@ -16,7 +21,7 @@ public class SalongView extends View implements Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg) {
-		System.out.println(FIFO.getMessageString());
+		System.out.println(f.getMessageString());
 		
 	}
 }
