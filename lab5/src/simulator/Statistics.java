@@ -41,7 +41,7 @@ public class Statistics {
 		System.out.println("Average time/customer "+getAvgTime());
 		System.out.println("Total leave: "+leave);
 		
-	};
+	}
 
 
 
