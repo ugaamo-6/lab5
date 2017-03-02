@@ -15,14 +15,13 @@ public class CustLeaves extends Event{
 	double time;
 	
 	
-	public CustLeaves(double time, Customer C, EventStore es, SalongState ss, State s, SalongView sv, FIFO f){
+	public CustLeaves(double time, Customer C, EventStore es, SalongState ss, State s, SalongView sv){
 		this.time = time + ss.haircutTime();
 		this.C = C;
 		this.es=es;
 		this.ss=ss;
 		this.s=s;
 		this.sv=sv;
-		this.f =f;
 	}
 	
 	public double getTime() {
@@ -31,6 +30,7 @@ public class CustLeaves extends Event{
 	
 	public void execute() {
 		FIFO f = C.getFIFO();
+		
 		f.messageString("Haircut is done, customer leaves.");
 		ss.chairGotFree();
 		

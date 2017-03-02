@@ -46,26 +46,26 @@ public class FIFO extends Observable {
 
 	private int hairdressSeats = ss.freeChairs; //The number of seats available
 	private final int maxWait = 10;
-	private static ArrayList<Object> queue =  new ArrayList<Object>(); //The queue for the salon
+	private ArrayList<Object> queue =  new ArrayList<Object>(); //The queue for the salon
 	private int totalVisitors = 0; //total visitors of the day
 	private static String message;
 	
 	public void add(Customer C){//Lägg till input i form av kund
-
+		System.out.println(queueSize());
 		if(isFull() && s.opened() && ss.freeChairs() != 0){
-//			messageString("The queue is full, customer leaves");
+			messageString("The queue is full, customer leaves");
 
 		}
 		else if(hairdressSeats != 0 && isEmpty() && ss.freeChairs() != 0){//DENNA ÄR FEL, kunder går direkt in.
 			messageString("Customer gets a haircut!");
 			ss.chairGotBusy();	
-			es.addEvent(new CustLeaves(es.getTime() , C, es, ss, s, sv, f));
+			es.addEvent(new CustLeaves(es.getTime() , C, es, ss, s, sv));
 		}
 		else if(isFull()){
-//			messageString("Customer leaves, waiting room full!");	
+			messageString("Customer leaves, waiting room full!");	
 		} 
 		
-		else if(ss.freeChairs() == 0){//Ändra?? Blir fel, om en person lämnar en full salong kommer värdet aldrig bli 0 igen.
+		else {//Ändra?? Blir fel, om en person lämnar en full salong kommer värdet aldrig bli 0 igen.
 			queue.add(C);
 			messageString("Customer wait.");
 		}
@@ -98,6 +98,7 @@ public class FIFO extends Observable {
 		if(isEmpty()){
 			messageString("Returning customer: Queue is empty, gets seated directly.");
 		}else if(isFull()){
+			messageString("Returning customer: Stands in queue. Last person left.");
 			removeLast();
 			queue.add(customer);
 			Collections.rotate(queue, (hairdressSeats-1));

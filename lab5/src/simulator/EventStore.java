@@ -37,7 +37,7 @@ public class EventStore {
 	
 	public Event nextEvent() {
 		Event sendEvent = queue.get(0);
-		currentTime = queue.get(0).time;
+		setTime(queue.get(0).time);
 
 		currentTime = queue.get(0).getTime();
 		queue.remove(0);
