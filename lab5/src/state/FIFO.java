@@ -3,7 +3,6 @@ package state;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Observable;
-import java.util.Observer;
 import simulator.Statistics;
 import event.CustLeaves;
 import event.CustReturns;
@@ -36,7 +35,6 @@ public class FIFO extends Observable {
 	private State s;
 	private SalongView sv;
 	private FIFO f;
-	private Observable notifier;
 	
 	private int maximus = 0; //max customers in queue at once 
 	
@@ -59,7 +57,7 @@ public class FIFO extends Observable {
 			stat.addLeave();
 		}
 
-		else if(hairdressSeats != 0 && isEmpty() && ss.freeChairs() != 0){//DENNA ÄR FEL, kunder går direkt in.
+		else if(hairdressSeats != 0 && isEmpty() && ss.freeChairs() != 0){
 			messageString("Customer gets a haircut!");
 			ss.chairGotBusy();	
 			es.addEvent(new CustLeaves(es.getTime() , C, es, ss, s, sv));
@@ -68,12 +66,10 @@ public class FIFO extends Observable {
 			messageString("Customer leaves, waiting room full!");	
 		} 
 		
-		else {//Ändra?? Blir fel, om en person lämnar en full salong kommer värdet aldrig bli 0 igen.
+		else {
 			queue.add(C);
 			C.queueTime = es.getTime();
 			messageString("Customer wait.");
-			
-//			System.out.println(stat.getCust());
 		}
 		
 		if(maximus < queueSize()){
@@ -98,19 +94,35 @@ public class FIFO extends Observable {
 	public boolean isFull(){
 		if(queueSize() >= maxWait){
 			return true;
-		}return false;
+		}
+		return false;
 	} 
 	
-	public void custFinished() {
+	public int returningCustInQueue(){
+		int count=0;
+		for (int i=0;i<queue.size();i++){
+			if (!((boolean) ((Customer) queue.get(i)).get_happy())) {
+				count++;
+			}
+		}
+		return count;
+	}
+	
+	public void custFinished(){
+		messageString("Customer is finished, pays and leaves the salon.");
 		ss.chairGotFree();	
 	}
 	
-	public void returnCust(Object customer){
+	public void addReturnCust(Customer C){
 		if(isEmpty()){
-			messageString("Returning customer: Queue is empty, gets seated directly.");
+			messageString("Returning customer: Queue is empty, gets haircut directly.");
 		}else if(isFull()){
-			messageString("Returning customer: Stands in queue. Last person left.");
+			
+			//DUBBELKOLLA OM HELA KÖN ÄR RETURNING!!
+			
+			messageString("Returning customer: Stands in queue. Last customer in queue left.");
 			removeLast();
+<<<<<<< HEAD
 			queue.add(customer);
 			Collections.rotate(queue, (hairdressSeats-1));
 			stat.addDiss();
@@ -118,6 +130,12 @@ public class FIFO extends Observable {
 			queue.add(customer);
 			Collections.rotate(queue, (hairdressSeats-1));
 			stat.addDiss();
+=======
+			queue.add(returningCustInQueue(), C);
+		}else if(!isFull()){
+			messageString("Returning customer: Customer stands in queue.");
+			queue.add(returningCustInQueue(), C);
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 		}
 	}
 	

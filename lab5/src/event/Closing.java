@@ -29,7 +29,12 @@ public class Closing extends Event {
 	}
 
 	public void execute() {
+<<<<<<< HEAD
 		s.closing();
+=======
+		s.closing();
+		f.messageString("----------The store is closing.---------");
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	}
 	
 	public double getTime() {
