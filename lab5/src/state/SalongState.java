@@ -65,8 +65,7 @@ public class SalongState {
 	public double haircutTime(){
 		uniRand = new UniformRandomStream(haircutMinTime, haircutMaxTime);
 		double rand = uniRand.next();
-		System.out.println("----- "+rand);
-		s.custCountAdd();
+//		System.out.println("----- "+rand);
 		s.custStatAddTime(rand);
 		return rand;
 	}

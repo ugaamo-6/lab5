@@ -1,9 +1,6 @@
 package simulator;
 
-import simulator.Statistics;
-
 public class State {
-	Statistics s = new Statistics();
 	boolean running = false;
 	boolean open = false;
 	
@@ -14,7 +11,6 @@ public class State {
 	}
 	 	
 	public void stop(){
-		s.returnStats();
 		running = false;
 	}
 	

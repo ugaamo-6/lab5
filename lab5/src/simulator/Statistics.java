@@ -1,8 +1,13 @@
 package simulator;
 
 public class Statistics {
-	//average time
-	double totalCust = 0; double totalTime = 0;
+	//all variables
+	static double totalCust = 0;
+	static double totalTime = 0;
+	static double averageTime = (totalTime)/(totalCust);
+	static int leave = 0;
+	
+	//addition methods
 	public void custStatAddTime(double waitTime){
 		totalTime += waitTime;
 		System.out.println(totalTime);
@@ -10,21 +15,41 @@ public class Statistics {
 	public void custCountAdd(){
 		totalCust++;
 	}
-	public double getAvgTime(){
-		return totalTime / totalCust;
+	public void calcAvg(){
+		System.out.println(totalTime/totalCust);
 	}
-	
-	//Hur många som försvinner
-	int leave = 0;
 	public void addLeave(){
 		leave += 1;
-		System.out.println("---- "+leave);	}
-	public int returnLeave(){
+		System.out.println("---- "+leave);	
+		}
+
+	
+	//get... methods
+	public double getCust(){
+		return totalCust;
+	}
+	public double getTime(){
+		return totalTime;
+	}
+	public double getAvgTime(){
+		return averageTime;
+	}
+	public int getLeave(){
 		return leave;
 	}
 	
-	public void returnStats(){
-		System.out.println(totalCust);
-		System.out.println(returnLeave());
-	}
+
+	public void getStats(){
+		System.out.println("Total customers: "+getCust());
+		System.out.println("Average time/customer "+getAvgTime());
+		System.out.println("Total leave: "+leave);
+		
+	};
+
+
+
+
+
+
+
 }
