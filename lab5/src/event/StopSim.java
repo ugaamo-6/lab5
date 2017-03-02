@@ -7,8 +7,8 @@ import simulator.Statistics;
 public class StopSim extends Event {
 	State s;
 	Statistics stat;
-	public StopSim(int time){
-		this.time=time;
+	public StopSim(State s){
+		this.s=s;
 	}
 	
 	public void execute() {

@@ -26,7 +26,7 @@ public class Closing extends Event {
 	}
 
 	public void execute() {
-		s.stop();
+		s.closing();
 	}
 	
 	public double getTime() {
