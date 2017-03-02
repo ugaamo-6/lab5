@@ -14,6 +14,7 @@ public class CustLeaves extends Event{
 	Customer C;
 	double time;
 	
+	
 	public CustLeaves(double time, Customer C, EventStore es, SalongState ss, State s, SalongView sv, FIFO f){
 		this.time = time + ss.haircutTime();
 		this.C = C;

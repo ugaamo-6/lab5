@@ -2,12 +2,14 @@ package state;
 
 import java.util.Observable;
 import java.util.Observer;
-
+import simulator.Statistics;
 import random.*;
 import state.FIFO;
 import simulator.EventStore;
 
 public class SalongState {
+	
+	private Statistics s = new Statistics();
 	
 	private double closeTime = 480.0;
 	
@@ -75,6 +77,7 @@ public class SalongState {
 	public double returnTime(){
 		uniRand = new UniformRandomStream(returnMinTime, returnMaxTime, seed);
 		double rand = uniRand.next();
+		s.custStatTime(rand);
 		return rand;
 	}
 	

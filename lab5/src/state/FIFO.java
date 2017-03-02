@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Observable;
 import java.util.Observer;
-
+import simulator.Statistics;
 import event.CustLeaves;
 import hairdresser.SalongView;
 import simulator.EventStore;
@@ -43,7 +43,7 @@ public class FIFO extends Observable {
 		this.s=s;
 	}
 
-
+	private Statistics stat = new Statistics();
 	private int hairdressSeats = ss.freeChairs; //The number of seats available
 	private final int maxWait = 10;
 	private static ArrayList<Object> queue =  new ArrayList<Object>(); //The queue for the salon
@@ -63,7 +63,7 @@ public class FIFO extends Observable {
 	public void add(Customer C){//Lägg till input i form av kund
 		if(isFull() && s.opened() && ss.freeChairs() != 0){
 //			messageString("The queue is full, customer leaves");
-
+			stat.addLeave();
 		}
 		else if(hairdressSeats != 0 && isEmpty() && ss.freeChairs() != 0){//DENNA ÄR FEL, kunder går direkt in.
 			messageString("Customer gets a haircut!");
