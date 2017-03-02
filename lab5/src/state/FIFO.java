@@ -3,7 +3,6 @@ package state;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Observable;
-import java.util.Observer;
 import simulator.Statistics;
 import event.CustLeaves;
 import event.CustReturns;
@@ -36,7 +35,6 @@ public class FIFO extends Observable {
 	private State s;
 	private SalongView sv;
 	private FIFO f;
-	private Observable notifier;
 	
 	public FIFO(EventStore es, SalongState ss, State s){
 		this.es=es;
