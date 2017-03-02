@@ -68,6 +68,7 @@ public class FIFO extends Observable {
 		
 		else {//Ändra?? Blir fel, om en person lämnar en full salong kommer värdet aldrig bli 0 igen.
 			queue.add(C);
+			C.queueTime = es.getTime();
 			messageString("Customer wait.");
 			
 //			System.out.println(stat.getCust());

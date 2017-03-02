@@ -29,16 +29,14 @@ public class Closing extends Event {
 	}
 
 	public void execute() {
-<<<<<<< HEAD
+
 		s.closing();
-		
-=======
+	
 		System.out.println("---- Some Statistics ----");
 		System.out.println("Total Customers: "+stat.getCust());
 		System.out.println("Average haircut time: "+(stat.getTime()/stat.getCust()));
 		System.out.println("Total leaves: "+stat.getLeave());
 		s.closing();
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	}
 	
 	public double getTime() {
