@@ -16,7 +16,14 @@ public class Statistics {
 	public void addLeave(){
 		leave++;
 	}
+	public int returnLeave(){
+		return leave;
+	}
 	
-	
-	
+	public String returnStats(){
+		String avg = ("Medel klipptid: "+ avgTime);
+		String left = (leave + " customers left without haircut.");
+		String main = avg + " " + left;
+		return main;
+	}
 }
