@@ -22,7 +22,7 @@ public class SalongState {
 	private double lambda = 60;
 	private long seed = System.currentTimeMillis();
 	
-	private double percentageReturn = 0.5; //skrivs i heltal, ett nummer mellan 0-100
+	private double percentageReturn; //skrivs i heltal, ett nummer mellan 0-100
 	
 	private UniformRandomStream uniRand;
 	private ExponentialRandomStream expRand;
@@ -30,8 +30,8 @@ public class SalongState {
 	public static int freeChairs = 5;
 
 	
-	public SalongState(){
-
+	public SalongState(double percentageReturn){
+		this.percentageReturn=percentageReturn;
 	}
 	
 	public int maxWaitInQueue() {

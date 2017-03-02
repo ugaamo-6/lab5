@@ -38,7 +38,7 @@ public class Simulator {
 	public static void main(String args[]){
 		EventStore es = new EventStore();
 		State s = new State();
-		SalongState ss = new SalongState();
+		SalongState ss = new SalongState(0.5);
 		FIFO f = new FIFO(es, ss, s);
 		SalongView sv = new SalongView(f);
 		Simulator sim = new Simulator(es, s, sv, ss, f);

@@ -34,7 +34,7 @@ public class Closing extends Event {
 	}
 
 	public String toString() {
-		return null;
+		return null;//FIXME
 	}
 
 }
