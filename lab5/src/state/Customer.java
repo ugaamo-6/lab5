@@ -22,9 +22,10 @@ public class Customer {
 		
 	static int id_counter = 0;
 	
+	public double queueTime = 0;
+	
 	private int id;
 	public boolean happy;
-
 	
 	public Customer(EventStore es, SalongState ss, State s, SalongView sv, FIFO f){
 		this.es=es;
@@ -35,6 +36,7 @@ public class Customer {
 		id = id_counter + 1;
 		happy = true;
 		id_counter++;
+		
 	}
 
 	public int get_id(){

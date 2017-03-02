@@ -66,6 +66,7 @@ public class FIFO extends Observable {
 		
 		else {
 			queue.add(C);
+			C.queueTime = es.getTime();
 			messageString("Customer wait.");
 		}
 		

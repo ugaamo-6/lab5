@@ -31,6 +31,7 @@ public class CustLeaves extends Event{
 	
 	public void execute() {
 		stat.custCountAdd();
+		stat.qTime(qTimeCalc(C));
 		FIFO f = C.getFIFO();
 		
 		f.messageString("Haircut is done, customer leaves.");
@@ -41,6 +42,9 @@ public class CustLeaves extends Event{
 		
 		f.getFirst();
 
+	}
+	private double qTimeCalc(Customer C){
+		return time-C.queueTime;
 	}
 
 }
