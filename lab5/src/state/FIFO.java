@@ -61,13 +61,11 @@ public class FIFO extends Observable {
 //			messageString("The queue is full, customer leaves");
 			
 			stat.addLeave();
+
+			messageString("The queue is full, customer leaves");
+			stat.addLeave();
+
 		}
-
-
-
-
-		
-
 
 		else if(hairdressSeats != 0 && isEmpty() && ss.freeChairs() != 0){//DENNA ÄR FEL, kunder går direkt in.
 			messageString("Customer gets a haircut!");
@@ -80,14 +78,13 @@ public class FIFO extends Observable {
 		
 		else {//Ändra?? Blir fel, om en person lämnar en full salong kommer värdet aldrig bli 0 igen.
 			queue.add(C);
-			System.out.println("------- "+queue.size()+"( -------)");
 			messageString("Customer wait.");
 		}
 		
 		totalVisitors += 1;
 
 	}
-
+	
 	public void messageString(String s){
 		message = s;
 		setChanged();
@@ -99,8 +96,6 @@ public class FIFO extends Observable {
 	}
 	
 	public boolean isFull(){
-		//System.out.println("-----------------------------------------------");
-		//System.out.println(queueSize());
 		if(queueSize() >= maxWait){
 			return true;
 		}return false;
@@ -142,6 +137,7 @@ public class FIFO extends Observable {
 		if(!isEmpty()){
 			messageString("Customer leaves queue and gets a haircut.");
 			Customer getFirst = (Customer) queue.get(0);
+			es.addEvent(new CustLeaves(es.getTime(), getFirst, es, ss, s, sv));
 			queue.remove(0);
 			return getFirst;
 		}
