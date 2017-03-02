@@ -110,6 +110,9 @@ public class FIFO extends Observable {
 		if(isEmpty()){
 			messageString("Returning customer: Queue is empty, gets haircut directly.");
 		}else if(isFull()){
+			
+			//DUBBELKOLLA OM HELA KÖN ÄR RETURNING!!
+			
 			messageString("Returning customer: Stands in queue. Last customer in queue left.");
 			removeLast();
 			queue.add(returningCustInQueue(), C);
