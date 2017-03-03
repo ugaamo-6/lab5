@@ -18,6 +18,14 @@ public class Closing extends Event {
 	SalongView sv;
 	FIFO f;
 	
+	private int C;
+	private String namn = "CustArrives";
+	public String getName(){
+		return namn;
+	}
+	public int getCustomerID(){
+		return C;
+	}
 	
 	public Closing(double time, EventStore es, SalongState ss, State s, SalongView sv, FIFO f) {
 		this.time=time;
@@ -29,12 +37,9 @@ public class Closing extends Event {
 	}
 
 	public void execute() {
-<<<<<<< HEAD
 		s.closing();
-=======
 		s.closing();
 		f.messageString("----------The store is closing.---------");
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	}
 	
 	public double getTime() {
