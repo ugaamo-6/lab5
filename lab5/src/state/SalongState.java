@@ -52,6 +52,22 @@ public class SalongState {
 		return freeChairs;
 	}
 	
+	public double getLambda(){
+		return lambda;
+	}
+	
+	public double getHMax(){
+		return haircutMaxTime;
+	}
+	public double getHMin(){
+		return haircutMinTime;
+	}
+	public double getRetMax(){
+		return returnMaxTime;
+	}
+	public double getRetMin(){
+		return returnMinTime;
+	}
 //	public Object getFirst(){
 //		return f.getFirst();
 //	}

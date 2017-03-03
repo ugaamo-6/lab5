@@ -42,6 +42,7 @@ public class FIFO extends Observable {
 		this.es=es;
 		this.ss=ss;
 		this.s=s;
+		
 	}
 
 	private Statistics stat = new Statistics();
@@ -61,6 +62,7 @@ public class FIFO extends Observable {
 			messageString("Customer gets a haircut!");
 			ss.chairGotBusy();	
 			es.addEvent(new CustLeaves(es.getTime() , C, es, ss, s, sv));
+			
 		}
 		else if(isFull()){
 			messageString("Customer leaves, waiting room full!");	
@@ -70,6 +72,10 @@ public class FIFO extends Observable {
 			queue.add(C);
 			C.queueTime = es.getTime();
 			messageString("Customer wait.");
+			if(isFull()){
+				stat.setTime1(es.getTime());
+				stat.idleCalc();
+			}
 		}
 		
 		if(maximus < queueSize()){
@@ -110,7 +116,11 @@ public class FIFO extends Observable {
 	
 	public void custFinished(){
 		messageString("Customer is finished, pays and leaves the salon.");
-		ss.chairGotFree();	
+		ss.chairGotFree();
+		if(!isFull() && !stat.getGoing()){
+			stat.setTime2(es.getTime());
+			stat.goingTrue();
+		}
 	}
 	
 	public void addReturnCust(Customer C){
@@ -122,23 +132,20 @@ public class FIFO extends Observable {
 			
 			messageString("Returning customer: Stands in queue. Last customer in queue left.");
 			removeLast();
-<<<<<<< HEAD
-			queue.add(customer);
+			queue.add(C);
 			Collections.rotate(queue, (hairdressSeats-1));
 			stat.addDiss();
-		}else{
-			queue.add(customer);
-			Collections.rotate(queue, (hairdressSeats-1));
-			stat.addDiss();
-=======
-			queue.add(returningCustInQueue(), C);
 		}else if(!isFull()){
 			messageString("Returning customer: Customer stands in queue.");
 			queue.add(returningCustInQueue(), C);
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
+		}else{
+			queue.add(C);
+			Collections.rotate(queue, (hairdressSeats-1));
+			stat.addDiss();
+			queue.add(returningCustInQueue(), C);
 		}
 	}
-	
+
 	public void removeLast(){
 		queue.remove(queue.size()-1);
 	}
@@ -172,6 +179,9 @@ public class FIFO extends Observable {
 		}
 	}
 	
+	public int getMax(){
+		return maxWait;
+	}
 	public int getTotalVisitors(){
 		return totalVisitors;
 	}

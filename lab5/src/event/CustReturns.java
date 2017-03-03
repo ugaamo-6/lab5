@@ -16,6 +16,19 @@ public class CustReturns extends Event {
 	private Customer C;
 	double time;
 	
+	private String namn = "Customer Returns";
+	public String getName(){
+		return namn;
+	}
+	public int getCustomerID(){
+		return C.getID();
+	}
+	
+	
+	
+	
+	
+	
 	public CustReturns(double time, Customer C, EventStore es, SalongState ss, State s, SalongView sv){
 		this.time = time;
 		this.C=C;

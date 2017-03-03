@@ -15,6 +15,13 @@ public class CustLeaves extends Event{
 	Customer C;
 	double time;
 	
+	private String namn = "Customer Leaves";
+	public String getName(){
+		return namn;
+	}
+	public int getCustomerID(){
+		return C.getID();
+	}
 	
 	public CustLeaves(double time, Customer C, EventStore es, SalongState ss, State s, SalongView sv){
 		this.time = time + ss.haircutTime();
@@ -32,6 +39,7 @@ public class CustLeaves extends Event{
 	public void execute() {
 		stat.custCountAdd();
 		stat.qTime(qTimeCalc(C));
+		stat.lastCustTime(es.getTime());
 		FIFO f = C.getFIFO();
 		
 		f.messageString("Haircut is done, customer leaves.");

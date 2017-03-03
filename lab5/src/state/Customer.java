@@ -39,7 +39,7 @@ public class Customer {
 		
 	}
 
-	public int get_id(){
+	public int getID(){
 		return id;
 	}
 	public boolean get_happy(){

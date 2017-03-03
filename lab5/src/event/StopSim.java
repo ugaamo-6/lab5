@@ -5,8 +5,19 @@ import simulator.State;
 import simulator.Statistics;
 
 public class StopSim extends Event {
+	
 	State s;
 	Statistics stat = new Statistics();
+	
+	private int C;
+	private String namn = "Stop Simulation";
+	public String getName(){
+		return namn;
+	}
+	public int getCustomerID(){
+		return C;
+	}
+	
 	public StopSim(State s){
 		System.out.println("---- Some Statistics ----");
 		System.out.println("Total Customers: "+stat.getCust());
@@ -15,6 +26,9 @@ public class StopSim extends Event {
 		System.out.println("Average queue time: " + (stat.getQtime()/stat.getCust()));
 		System.out.println("Max customers at the same time in queue: "+ stat.getMax());
 		System.out.println("Amount of disssatisfied customers: " + stat.getDiss());
+		System.out.println("Last customer left at: "+stat.getLast());
+		System.out.println("Chair idle time: "+stat.getIdle());
+		System.out.println("-------------------------");
 		this.s=s;
 	}
 	

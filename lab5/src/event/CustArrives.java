@@ -9,6 +9,7 @@ import state.*;
 
 public class CustArrives extends Event {
 	
+	
 	EventStore es;
 	SalongState ss;
 	State s;
@@ -16,6 +17,14 @@ public class CustArrives extends Event {
 	FIFO f;
 	double time;
 	
+	int C;
+	private String namn = "Customer Arrives";
+	public String getName(){
+		return namn;
+	}
+	public int getCustomerID(){
+		return C;
+	}
 	
 	public CustArrives(double arrivalTime, EventStore es, SalongState ss, State s, SalongView sv, FIFO f){
 		this.time = arrivalTime;
@@ -41,6 +50,7 @@ public class CustArrives extends Event {
 	public double getArrivalTime(){
 		return time;
 	}
+	
 	
 		
 	
