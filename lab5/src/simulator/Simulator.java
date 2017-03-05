@@ -39,7 +39,7 @@ public class Simulator {
 		
 		State s = new State();
 		EventStore es = new EventStore(s);
-		SalongState ss = new SalongState(0.5);
+		SalongState ss = new SalongState();
 		FIFO f = new FIFO(es, ss, s);
 		SalongView sv = new SalongView(f);
 		Simulator sim = new Simulator(es, s, sv, ss, f);

@@ -18,20 +18,20 @@ public class SalongState {
 	private double returnMinTime = 30;
 	private double returnMaxTime = 200;
 	private final int maxWaitInQueue = 10;
+	private int freeChairs = 5;
+	private final int totalChairs = 5;
 	
 	private double lambda = 60;
 	private long seed = System.currentTimeMillis();
 	
-	private double percentageReturn; //skrivs i heltal, ett nummer mellan 0-100
+	private double percentageReturn=0.1; //skrivs i heltal, ett nummer mellan 0-100
 	
 	private UniformRandomStream uniRand;
 	private ExponentialRandomStream expRand;
 
-	public static int freeChairs = 5;
-
 	
-	public SalongState(double percentageReturn){
-		this.percentageReturn=percentageReturn;
+	public SalongState(/*double percentageReturn*/){
+		/*this.percentageReturn=percentageReturn;*/
 	}
 	
 	public int maxWaitInQueue() {
@@ -50,6 +50,10 @@ public class SalongState {
 	
 	public int freeChairs() {
 		return freeChairs;
+	}
+	
+	public int totalChairs() {
+		return totalChairs;
 	}
 	
 //	public Object getFirst(){
@@ -75,6 +79,7 @@ public class SalongState {
 	public double randReturn() {
 		UniformRandomStream pRand = new UniformRandomStream(0,1);
 		double rand = pRand.next();
+//		System.out.println("----- "+rand);
 		return rand;
 	}
 	

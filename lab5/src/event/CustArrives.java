@@ -27,8 +27,8 @@ public class CustArrives extends Event {
 	}
 	
 	public void execute() {
-		Customer kund = new Customer(es, ss, s, sv, f);
-		f.add(kund);
+		Customer C = new Customer(es, ss, s, sv, f);
+		f.add(C);
 		double nextCustTime = es.getTime() + 5;
 		CustArrives nextCust = new CustArrives(nextCustTime, es, ss, s, sv, f);
 		es.addEvent(nextCust);

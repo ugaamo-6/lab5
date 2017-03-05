@@ -1,5 +1,8 @@
 package event;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import hairdresser.SalongView;
 import simulator.Event;
 import simulator.EventStore;
@@ -8,7 +11,7 @@ import state.FIFO;
 import state.SalongState;
 import simulator.Statistics;
 
-public class Closing extends Event {
+public class Closing extends Event implements Observer{
 	
 	
 	static Statistics stat = new Statistics();
@@ -26,6 +29,7 @@ public class Closing extends Event {
 		this.s=s;
 		this.sv=sv;
 		this.f=f;
+		f.addObserver(this);
 	}
 
 	public void execute() {
@@ -37,8 +41,14 @@ public class Closing extends Event {
 		return time;
 	}
 
-	public String toString() {
-		return null;//FIXME
+	public void update(Observable arg0, Object arg) {
+		if (ss.totalChairs() == ss.freeChairs() && !s.opened()) {
+			/*if (f.isEmpty()){
+				es.allEventDone(true);
+			}*/
+			
+//			f.getFirst();
+		}
 	}
 
 }
