@@ -57,7 +57,6 @@ public class FIFO extends Observable {
 		else if(ss.freeChairs() != 0 && isEmpty()){
 			queue.add(C);
 			getFirst();
-
 		}
 		else {
 			queue.add(C);
@@ -109,12 +108,14 @@ public class FIFO extends Observable {
 	public void custFinished(){
 		ss.chairGotFree();
 		messageString("Customer is finished, pays and leaves the salon.");
+
 		if(!isFull() && !stat.getGoing()){
 			stat.setTime2(es.getTime());
 			stat.goingTrue();
 		}
-		System.out.println(ss.freeChairs());
-		System.out.println(queueSize());
+//		System.out.println(ss.freeChairs());
+//		System.out.println(queueSize());
+
 	}
 	
 	public void addReturnCust(Customer C){
@@ -128,8 +129,6 @@ public class FIFO extends Observable {
 //			System.out.println(ss.freeChairs());
 //			System.out.println(queueSize());
 		}else if(isFull()){
-			
-
 			//Kontrollerar ifall hela kön är återkommande. 
 			if (returningCustInQueue() == ss.maxWaitInQueue()) {
 				double returnTime = es.getTime()+ss.returnTime();
@@ -145,19 +144,28 @@ public class FIFO extends Observable {
 //				System.out.println(ss.freeChairs());
 //				System.out.println(queueSize());
 			}
-
-		}else if(!isFull()){
-			messageString("Returning customer: Customer stands in queue.");
-			queue.add(returningCustInQueue(), C);
-//			System.out.println(ss.freeChairs());
-//			System.out.println(queueSize());
-		}else{
-//			queue.add(C);
-//			Collections.rotate(queue, (hairdressSeats-1));
-			stat.addDiss();
-			queue.add(returningCustInQueue(), C);
 		}
 	}
+
+//			//DUBBELKOLLA OM HELA KÖN ÄR RETURNING!!
+//
+//		}else if(!isFull()){
+//			messageString("Returning customer: Customer stands in queue.");
+//			queue.add(returningCustInQueue(), C);
+//		}else{
+//			queue.add(C);
+//			Collections.rotate(queue, (hairdressSeats-1));
+//			stat.addDiss();
+//			queue.add(returningCustInQueue(), C);
+////			System.out.println(ss.freeChairs());
+////			System.out.println(queueSize());
+//		}else{
+////			queue.add(C);
+////			Collections.rotate(queue, (hairdressSeats-1));
+//			stat.addDiss();
+//			queue.add(returningCustInQueue(), C);
+//		}
+//	}
 
 	public void removeLast(){
 		queue.remove(queue.size()-1);
@@ -199,11 +207,7 @@ public class FIFO extends Observable {
 		} else { C.happy = true; }
 		
 	}
-	
-//	public int getMax(){
-//		return maxWait;
-//	}
-	
+
 	public int getTotalVisitors(){
 		return totalVisitors;
 	}

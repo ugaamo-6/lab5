@@ -51,7 +51,7 @@ public class SalongState {
 	public int totalChairs() {
 		return totalChairs;
 	}
-	
+
 	public double getLambda(){
 		return lambda;
 	}

@@ -42,6 +42,7 @@ public class Closing extends Event implements Observer{
 
 	public void execute() {
 		s.closing();
+		s.closing();
 		f.messageString("----------The store is closing.---------");
 	}
 	
