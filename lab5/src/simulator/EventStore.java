@@ -2,7 +2,6 @@ package simulator;
 
 import java.util.ArrayList;
 
-import event.CustArrives;
 import event.StopSim;
 
 public class EventStore {
@@ -10,7 +9,6 @@ public class EventStore {
 	//This array-list keep track of the queue of Events
 	ArrayList<Event> queue = new ArrayList<Event>();
 	private double currentTime = 0;
-	private boolean allEventDone = false;
 	private State s; 
 	
 	public EventStore(State s) {
@@ -23,8 +21,7 @@ public class EventStore {
 
 	public void addEvent(Event addEvent){
 		
-		if (!s.opened() && (addEvent instanceof CustArrives)){
-		} else if (queue.size() == 0) {
+		if (queue.size() == 0) {
 			queue.add(addEvent);
 		} else {	
 				for(int i=0; i < queue.size(); i++){
@@ -44,13 +41,8 @@ public class EventStore {
 		
 	}
 	
-	public void allEventDone(boolean bool) {
-		allEventDone = bool;
-		
-	}
-	
 	public Event nextEvent() {
-		if (queue.size() == 0 /*&& allEventDone*/) {
+		if (queue.size() == 0 ) {
 			addEvent(new StopSim(s));
 		} else {
 			setTime(queue.get(0).time);

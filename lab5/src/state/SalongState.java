@@ -1,30 +1,26 @@
 package state;
 
-import java.util.Observable;
-import java.util.Observer;
 import simulator.Statistics;
 import random.*;
-import state.FIFO;
-import simulator.EventStore;
 
 public class SalongState {
-	
+		
 	private Statistics s = new Statistics();
 	
-	private double closeTime = 480.0;
+	private double closeTime = 7.0;
 	
-	private double haircutMinTime = 30;
-	private double haircutMaxTime = 60;
-	private double returnMinTime = 30;
-	private double returnMaxTime = 200;
-	private final int maxWaitInQueue = 10;
-	private int freeChairs = 5;
-	private final int totalChairs = 5;
+	private double haircutMinTime = 1.0;
+	private double haircutMaxTime = 2.0;
+	private double returnMinTime = 1.0;
+	private double returnMaxTime = 2.0;
+	private final int maxWaitInQueue = 2;
+	private int freeChairs = 2;
+	private final int totalChairs = 2;
+	private double percentageReturn=0.5; 
+	private double lambda = 1.2;
+	private long seed = 1116; //System.currentTimeMillis();
 	
-	private double lambda = 60;
-	private long seed = System.currentTimeMillis();
 	
-	private double percentageReturn=0.1; //skrivs i heltal, ett nummer mellan 0-100
 	
 	private UniformRandomStream uniRand;
 	private ExponentialRandomStream expRand;
@@ -56,6 +52,22 @@ public class SalongState {
 		return totalChairs;
 	}
 	
+	public double getLambda(){
+		return lambda;
+	}
+	
+	public double getHMax(){
+		return haircutMaxTime;
+	}
+	public double getHMin(){
+		return haircutMinTime;
+	}
+	public double getRetMax(){
+		return returnMaxTime;
+	}
+	public double getRetMin(){
+		return returnMinTime;
+	}
 //	public Object getFirst(){
 //		return f.getFirst();
 //	}
@@ -69,7 +81,7 @@ public class SalongState {
 //	}
 
 	public double haircutTime(){
-		uniRand = new UniformRandomStream(haircutMinTime, haircutMaxTime);
+		uniRand = new UniformRandomStream(haircutMinTime, haircutMaxTime, seed);
 		double rand = uniRand.next();
 //		System.out.println("----- "+rand);
 		s.custStatAddTime(rand);

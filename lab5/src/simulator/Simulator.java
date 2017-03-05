@@ -1,3 +1,10 @@
+//Kika på 6.8, har vi gjort rätt?
+//Kika på 6.9, har vi gjort rätt?
+//Använd private!!
+//Kika på 6.10, har vi gjort rätt?
+//Kika på 6.15, har vi gjort rätt?
+
+
 package simulator;
 
 import event.*;

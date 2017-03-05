@@ -21,6 +21,14 @@ public class Closing extends Event implements Observer{
 	SalongView sv;
 	FIFO f;
 	
+	private int C;
+	private String namn = "CustArrives";
+	public String getName(){
+		return namn;
+	}
+	public int getCustomerID(){
+		return C;
+	}
 	
 	public Closing(double time, EventStore es, SalongState ss, State s, SalongView sv, FIFO f) {
 		this.time=time;
