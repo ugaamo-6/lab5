@@ -1,5 +1,4 @@
 package simulator;
-
 public class Statistics {
 	
 	//all variables

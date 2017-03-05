@@ -53,21 +53,26 @@ public class FIFO extends Observable {
 		if(isFull()){
 			messageString("The queue is full, customer leaves");
 			stat.addLeave();
+			stat.setTime1(es.getTime());
+			stat.idleCalc();
 		}
 		else if(ss.freeChairs() != 0 && isEmpty()){
 			queue.add(C);
 			getFirst();
-		}
-		else {
+		} else if(ss.freeChairs() != 0 && isEmpty() && ss.freeChairs() != 0){
+			messageString("Customer gets a haircut!");
+			ss.chairGotBusy();	
+			es.addEvent(new CustLeaves(es.getTime() , C, es, ss, s, sv));
+		} else {
 			queue.add(C);
 			C.queueTime = es.getTime();
 			messageString("Customer wait.");
-
-			if(isFull()){
-				stat.setTime1(es.getTime());
-				stat.idleCalc();
-			}
 		}
+
+		if(isFull()){
+				
+			}
+		
 		
 		if(maximus < queueSize()){
 			stat.maxSize(queueSize());
@@ -113,59 +118,41 @@ public class FIFO extends Observable {
 			stat.setTime2(es.getTime());
 			stat.goingTrue();
 		}
+	}
 //		System.out.println(ss.freeChairs());
 //		System.out.println(queueSize());
-
-	}
 	
 	public void addReturnCust(Customer C){
-		if (ss.freeChairs() == ss.totalChairs()) {
-			queue.add(returningCustInQueue(), C);
-			getFirst();
-			messageString("Returning customer: Customer get haircut.");
-		} else if(!isFull()){
-			queue.add(returningCustInQueue(), C);
-			messageString("Returning customer: Customer stands in queue.");		
-//			System.out.println(ss.freeChairs());
-//			System.out.println(queueSize());
-		}else if(isFull()){
-			//Kontrollerar ifall hela kön är återkommande. 
-			if (returningCustInQueue() == ss.maxWaitInQueue()) {
-				double returnTime = es.getTime()+ss.returnTime();
-				es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv));	
-				messageString("Queue full with dissatisfied customers, gets a walk and come back later.");
-//				System.out.println(ss.freeChairs());
-//				System.out.println(queueSize());
-			} else {
-				removeLast();
+		
+			if (ss.freeChairs() == ss.totalChairs()) {
 				queue.add(returningCustInQueue(), C);
-				messageString("Returning customer: Stands in queue. Last customer in queue left.");		
-				stat.addDiss();
+				getFirst();
+				messageString("Returning customer: Customer get haircut.");
+			} else if(!isFull()){
+				queue.add(returningCustInQueue(), C);
+				messageString("Returning customer: Customer stands in queue.");		
 //				System.out.println(ss.freeChairs());
 //				System.out.println(queueSize());
+			}else if(isFull()){
+				
+
+				//Kontrollerar ifall hela kön är återkommande. 
+				if (returningCustInQueue() == ss.maxWaitInQueue()) {
+					double returnTime = es.getTime()+ss.returnTime();
+					es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv));	
+					messageString("Queue full with dissatisfied customers, gets a walk and come back later.");
+//					System.out.println(ss.freeChairs());
+//					System.out.println(queueSize());
+				} else {
+					removeLast();
+					queue.add(returningCustInQueue(), C);
+					messageString("Returning customer: Stands in queue. Last customer in queue left.");		
+					stat.addDiss();
+//					System.out.println(ss.freeChairs());
+//					System.out.println(queueSize());
+				}
 			}
 		}
-	}
-
-//			//DUBBELKOLLA OM HELA KÖN ÄR RETURNING!!
-//
-//		}else if(!isFull()){
-//			messageString("Returning customer: Customer stands in queue.");
-//			queue.add(returningCustInQueue(), C);
-//		}else{
-//			queue.add(C);
-//			Collections.rotate(queue, (hairdressSeats-1));
-//			stat.addDiss();
-//			queue.add(returningCustInQueue(), C);
-////			System.out.println(ss.freeChairs());
-////			System.out.println(queueSize());
-//		}else{
-////			queue.add(C);
-////			Collections.rotate(queue, (hairdressSeats-1));
-//			stat.addDiss();
-//			queue.add(returningCustInQueue(), C);
-//		}
-//	}
 
 	public void removeLast(){
 		queue.remove(queue.size()-1);
