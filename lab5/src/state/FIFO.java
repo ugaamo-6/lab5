@@ -116,7 +116,7 @@ public class FIFO extends Observable {
 	
 	public void custFinished(){
 		messageString("Customer is finished, pays and leaves the salon.");
-		ss.chairGotFree();
+		//ss.chairGotFree();
 		if(!isFull() && !stat.getGoing()){
 			stat.setTime2(es.getTime());
 			stat.goingTrue();
@@ -135,14 +135,17 @@ public class FIFO extends Observable {
 			queue.add(C);
 			Collections.rotate(queue, (hairdressSeats-1));
 			stat.addDiss();
+			ss.chairGotBusy();
 		}else if(!isFull()){
 			messageString("Returning customer: Customer stands in queue.");
 			queue.add(returningCustInQueue(), C);
+			ss.chairGotBusy();
 		}else{
 			queue.add(C);
 			Collections.rotate(queue, (hairdressSeats-1));
 			stat.addDiss();
 			queue.add(returningCustInQueue(), C);
+			ss.chairGotBusy();
 		}
 	}
 

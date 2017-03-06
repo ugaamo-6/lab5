@@ -41,14 +41,14 @@ public class EventStore {
 						System.out.println("--- Time of event: "+getTime());
 						System.out.println("--- Event type/name: "+addEvent.getName());
 						System.out.println("--- Customer ID: "+addEvent.getCustomerID());
-						System.out.println("--- Free Chairs: ");
+						System.out.println("--- "+ss.freeChairs);
 						break;
 					} else if (i+1 == queue.size()){
 						queue.add(addEvent);
 						System.out.println("--- Time of event: "+getTime());
 						System.out.println("--- Event type/name: "+addEvent.getName());
 						System.out.println("--- Customer ID: "+addEvent.getCustomerID());
-						System.out.println("--- Free Chairs: ");
+						System.out.println("--- "+ss.freeChairs);
 						break;
 					}
 				}
