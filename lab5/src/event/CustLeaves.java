@@ -1,5 +1,7 @@
 package event;
 
+import java.util.ArrayList;
+
 import hairdresser.SalongView;
 import simulator.*;
 import state.*;
@@ -15,6 +17,8 @@ public class CustLeaves extends Event{
 	FIFO f;
 	Customer C;
 	double time;
+	
+	ArrayList<Integer> dissatisfied = new ArrayList<Integer>();
 	
 	private String namn = "Leaves";
 	public String getName(){
@@ -74,7 +78,13 @@ public class CustLeaves extends Event{
 			double returnTime = es.getTime()+ss.returnTime();
 			es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv, f));	
 			C.happy = false;
-			stat.addDiss(); //if customer not happy, add 1 to counter in stat.
+			if(!dissatisfied.contains(C.getID())){
+				//System.out.println("--- Dissatisfied contains: "+C.getID());
+				stat.addDiss(); //if customer not happy, add 1 to counter in stat.
+				dissatisfied.add(C.getID());
+			}
+			
+			
 		} else { C.happy = true; }
 		
 }

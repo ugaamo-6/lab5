@@ -11,8 +11,9 @@ public class SalongView extends View implements Observer {
 	SalongState ss;
 	FIFO f;
 	
-	public SalongView(FIFO f){
+	public SalongView(FIFO f, SalongState ss){
 		this.f=f;
+		this.ss=ss;
 		f.addObserver(this);
 	}
 	

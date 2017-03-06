@@ -32,7 +32,7 @@ public class Simulator {
 		s.start();
 		es.addEvent(new StartSim(es, ss, s, sv, f));
 		es.addEvent(new Closing(ss.getCloseTime() , es,ss,s,sv,f));
-		sv.beginInfoPrint();
+		sv.runningInfoPrint();
 		while (s.running()) {
 			Event currentEvent = es.nextEvent();
 			currentEvent.execute();
@@ -48,7 +48,7 @@ public class Simulator {
 		EventStore es = new EventStore(s);
 		SalongState ss = new SalongState();
 		FIFO f = new FIFO(es, ss, s);
-		SalongView sv = new SalongView(f);
+		SalongView sv = new SalongView(f,ss);
 		Simulator sim = new Simulator(es, s, sv, ss, f);
 		sim.Run();
 	}
