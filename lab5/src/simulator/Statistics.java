@@ -2,7 +2,7 @@ package simulator;
 public class Statistics {
 	
 	//all variables
-	static double totalCust = 0;
+	static int totalCust = 0;
 	static double totalTime = 0;
 	static double averageTime = (totalTime)/(totalCust);
 	static int leave = 0;

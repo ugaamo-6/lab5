@@ -22,7 +22,8 @@ public class EventStore {
 		this.s=s;
 	}
 
-	public double getTime() { return currentTime; }
+	public double getTime() { 
+		return currentTime; }
 	
 	public void setTime(double time) { currentTime = time; }
 

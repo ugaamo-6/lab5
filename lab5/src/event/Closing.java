@@ -20,6 +20,7 @@ public class Closing extends Event implements Observer{
 	SalongState ss;
 	SalongView sv;
 	FIFO f;
+	EventPrint ep;
 	
 	private int C;
 	private String namn = "CustArrives";
@@ -43,7 +44,8 @@ public class Closing extends Event implements Observer{
 	public void execute() {
 		s.closing();
 		s.closing();
-		f.messageString("----------The store is closing.---------");
+		System.out.println(es.getTime()+"   CLOSING-------");
+		//f.messageString("----------The store is closing.---------");
 	}
 	
 	public double getTime() {

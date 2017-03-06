@@ -8,7 +8,7 @@ import state.*;
 
 public class CustArrives extends Event {
 	
-	
+	EventPrint ep;
 	EventStore es;
 	SalongState ss;
 	State s;
@@ -17,7 +17,7 @@ public class CustArrives extends Event {
 	double time;
 	
 	int C;
-	private String namn = "Customer Arrives";
+	private String namn = "Arrives";
 	public String getName(){
 		return namn;
 	}
@@ -41,24 +41,25 @@ public class CustArrives extends Event {
 			double nextCustTime = es.getTime() + ss.nextCustTime();
 			CustArrives nextCust = new CustArrives(nextCustTime, es, ss, s, sv, f);
 			es.addEvent(nextCust);
+			ep = new EventPrint(namn, C.getID(), es,ss,f);
 		}
 	}
 	
 	private void addToFIFO(Customer C) {
 		if(f.isFull()){
-			f.messageString("The queue is full, customer leaves");
+			//f.messageString("The queue is full, customer leaves");
 		}
 		else if(ss.getFreeChairs() != 0 && f.isEmpty()){
 			f.addNewCustomerToFIFO((Customer) C);
 			getFirst();
 		} else if(ss.getFreeChairs() != 0 && f.isEmpty() && ss.getFreeChairs() != 0){
-			f.messageString("Customer gets a haircut!");
+			//f.messageString("Customer gets a haircut!");
 			ss.chairGotBusy();	
 			es.addEvent(new CustLeaves(es.getTime() , C, es, ss, s, sv, f));
 		} else {
 			f.addNewCustomerToFIFO((Customer) C);
 			C.queueTime = es.getTime();
-			f.messageString("Customer wait.");
+			//f.messageString("Customer wait.");
 		}
 		
 	}
@@ -69,7 +70,7 @@ public class CustArrives extends Event {
 			ss.chairGotBusy();
 			es.addEvent(new CustLeaves(es.getTime(), f.getFirst(), es, ss, s, sv, f));
 			f.removeFirst();;
-			f.messageString("Customer gets a haircut.");
+			//f.messageString("Customer gets a haircut.");
 		} 
 	}
 	

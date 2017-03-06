@@ -6,6 +6,7 @@ import state.*;
 
 public class StartSim extends Event {
 	
+	EventPrint ep;
 	EventStore es;
 	SalongState ss;
 	State s;
@@ -40,6 +41,8 @@ public class StartSim extends Event {
 		s.start();
 		Event arrive = new CustArrives(time, es, ss, s, sv, f);
 		es.addEvent(arrive);
+		
+		System.out.println(es.getTime()+"   START----");
 	}
 	
 	public double getTime() {

@@ -7,6 +7,7 @@ import state.*;
 
 public class CustReturns extends Event {
 	
+	EventPrint ep;
 	EventStore es;
 	SalongState ss;
 	State s;
@@ -16,7 +17,7 @@ public class CustReturns extends Event {
 	private Customer C;
 	double time;
 	
-	private String namn = "Customer Returns";
+	private String namn = "Returns";
 	public String getName(){
 		return namn;
 	}
@@ -46,7 +47,7 @@ public class CustReturns extends Event {
 //		f.custFinished();
 //		f.checkIfSatisfied(C);
 		addReturnCust(C);
-		
+		ep = new EventPrint(namn, C.getID(), es,ss,f);
 	}
 	
 	public void addReturnCust(Customer C){
@@ -55,10 +56,10 @@ public class CustReturns extends Event {
 		if (ss.getFreeChairs() == ss.totalChairs()) {
 			f.addReturnToQueue(C);
 			getFirst();
-			f.messageString("Returning customer: Customer get haircut.");
+			//f.messageString("Returning customer: Customer get haircut.");
 		} else if(!f.isFull()){
 			f.addReturnToQueue(C);
-			f.messageString("Returning customer: Customer stands in queue.");		
+			//f.messageString("Returning customer: Customer stands in queue.");		
 		}else if(f.isFull()){
 
 			//Kontrollerar ifall hela kön är återkommande. 
@@ -70,7 +71,7 @@ public class CustReturns extends Event {
 			} else {
 				f.removeLast();
 				f.addReturnToQueue(C);
-				f.messageString("Returning customer: Stands in queue. Last customer in queue left.");		
+				//f.messageString("Returning customer: Stands in queue. Last customer in queue left.");		
 //				stat.addDiss();
 			}
 		}
@@ -84,7 +85,7 @@ public class CustReturns extends Event {
 //			Customer getFirst = (Customer) f.getFirst();
 			es.addEvent(new CustLeaves(es.getTime(), f.getFirst(), es, ss, s, sv, f));
 			f.removeFirst();
-			f.messageString("Customer gets a haircut.");
+			//f.messageString("Customer gets a haircut.");
 		} 
 	}
 	

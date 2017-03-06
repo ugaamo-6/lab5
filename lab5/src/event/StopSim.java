@@ -3,9 +3,12 @@ package event;
 import simulator.Event;
 import simulator.State;
 import simulator.Statistics;
+import simulator.EventStore;
 
 public class StopSim extends Event {
 	
+	EventStore es;
+	EventPrint ep;
 	State s;
 	Statistics stat = new Statistics();
 	
@@ -19,6 +22,12 @@ public class StopSim extends Event {
 	}
 	
 	public StopSim(State s){
+		
+		this.s=s;
+	}
+	
+	public void execute() {
+		System.out.println("999,0 STOP----");
 		System.out.println("---- Some Statistics ----");
 		System.out.println("Number of customers cut: ......: "+stat.getCust());
 		System.out.println("Average cutting time...........: "+(stat.getTime()/stat.getCust()));
@@ -28,10 +37,6 @@ public class StopSim extends Event {
 		System.out.println("Dissatisfied customers: .......: " + stat.getDiss());
 		System.out.println("Time chairs were idle: ........: "+stat.getIdle());
 		System.out.println("-------------------------");
-		this.s=s;
-	}
-	
-	public void execute() {
 		s.stop();
 		
 	}

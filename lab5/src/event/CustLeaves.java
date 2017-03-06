@@ -6,6 +6,7 @@ import state.*;
 
 public class CustLeaves extends Event{
 	
+	EventPrint ep;
 	Statistics stat = new Statistics();
 	EventStore es;
 	SalongState ss;
@@ -15,7 +16,7 @@ public class CustLeaves extends Event{
 	Customer C;
 	double time;
 	
-	private String namn = "Customer Leaves";
+	private String namn = "Leaves";
 	public String getName(){
 		return namn;
 	}
@@ -48,6 +49,8 @@ public class CustLeaves extends Event{
 		checkIfSatisfied(C);
 		f.custFinished();
 		getFirst();	
+		
+		ep = new EventPrint(namn, C.getID(), es,ss,f);
 	}
 	
 	public void getFirst(){
@@ -57,15 +60,17 @@ public class CustLeaves extends Event{
 			ss.chairGotBusy();
 			es.addEvent(new CustLeaves(es.getTime(), f.getFirst(), es, ss, s, sv, f));
 			f.removeFirst();
-			f.messageString("Customer gets a haircut.");
+			//f.messageString("Customer gets a haircut.");
 		} 
 	}
 		
 	public void checkIfSatisfied(Customer C){
 		FIFO f = C.getFIFO(); // Kan detta lösas på annat sätt?
 		
+		
+		
 		if(ss.randReturn()<=ss.percentageReturn()){
-			f.messageString("Customer is not happy.");
+			//f.messageString("Customer is not happy.");
 			double returnTime = es.getTime()+ss.returnTime();
 			es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv, f));	
 			C.happy = false;

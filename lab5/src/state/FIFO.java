@@ -94,7 +94,7 @@ public class FIFO extends Observable {
 
 	public void custFinished(){
 		ss.chairGotFree();
-		messageString("Customer is finished, pays and leaves the salon.");
+		//messageString("Customer is finished, pays and leaves the salon.");
 	}
 	
 	public void addReturnToQueue(Customer C){

@@ -34,10 +34,6 @@ public class SalongState {
 		return maxWaitInQueue;
 	}
 	
-	
-	public long getSeed(){
-		return seed;
-	}
 	public void chairGotFree() {
 		freeChairs++;
 	}
