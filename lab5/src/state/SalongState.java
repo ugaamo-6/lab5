@@ -58,6 +58,10 @@ public class SalongState {
 		return lambda;
 	}
 	
+	public long getSeed() {
+		return seed;
+	}
+	
 	public double getHMax(){
 		return haircutMaxTime;
 	}
@@ -70,17 +74,6 @@ public class SalongState {
 	public double getRetMin(){
 		return returnMinTime;
 	}
-//	public Object getFirst(){
-//		return f.getFirst();
-//	}
-//	
-//	public boolean isFull(){
-//		return f.checkFull();
-//	}
-//	
-//	public double currentTime(){
-//		return e.getTime();
-//	}
 
 	public double haircutTime(){
 		uniRand = new UniformRandomStream(haircutMinTime, haircutMaxTime, seed);

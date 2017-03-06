@@ -48,7 +48,7 @@ public class FIFO extends Observable {
 	private ArrayList<Object> queue =  new ArrayList<Object>(); 
 	private int totalVisitors = 0; 
 	private static String message;
-	
+
 	public void addNewCustomerToFIFO(Customer C) {
 		queue.add(C);
 		if(NumWaiting < queueSize()){
@@ -96,9 +96,6 @@ public class FIFO extends Observable {
 		ss.chairGotFree();
 		messageString("Customer is finished, pays and leaves the salon.");
 	}
-
-	
-	
 	
 	public void addReturnToQueue(Customer C){
 		queue.add(returningCustInQueue(), C);
