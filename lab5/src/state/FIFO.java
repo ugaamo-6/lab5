@@ -8,6 +8,7 @@ import event.CustReturns;
 import hairdresser.SalongView;
 import simulator.EventStore;
 import simulator.State;
+import event.CustLeaves;
 
 import state.SalongState;
 /**
@@ -34,6 +35,7 @@ public class FIFO extends Observable {
 	private State s;
 	private SalongView sv;
 	private FIFO f;
+	private CustLeaves cl;
 	
 	private int NumWaiting = 0; //max customers in queue at once 
 	
@@ -51,6 +53,7 @@ public class FIFO extends Observable {
 
 	public void addNewCustomerToFIFO(Customer C) {
 		queue.add(C);
+		C.queueTime = es.getTime();
 		if(NumWaiting < queueSize()){
 			stat.maxSize(queueSize());
 			NumWaiting = queueSize();
@@ -99,6 +102,7 @@ public class FIFO extends Observable {
 	
 	public void addReturnToQueue(Customer C){
 		queue.add(returningCustInQueue(), C);
+		C.queueTime = es.getTime();
 		if(isFull() && stat.getGoing()){
 			stat.setTime1(es.getTime());
 			stat.idleCalc();
@@ -116,6 +120,8 @@ public class FIFO extends Observable {
 	}
 	
 	public void removeFirst() {
+		stat.qTime(qTimeCalc(getFirst()));
+		stat.lastCustTime(es.getTime());
 		queue.remove(0);
 		if(!isFull() && !stat.getGoing()){
 			stat.goingTrue();
@@ -139,6 +145,9 @@ public class FIFO extends Observable {
 
 	public int getTotalVisitors(){
 		return totalVisitors;
+	}
+	private double qTimeCalc(Customer C){
+		return es.getTime()-C.queueTime;
 	}
 
 }
