@@ -35,7 +35,9 @@ public class SalongState {
 	}
 	
 	
-	
+	public long getSeed(){
+		return seed;
+	}
 	public void chairGotFree() {
 		freeChairs++;
 	}

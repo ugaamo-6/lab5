@@ -49,87 +49,21 @@ public class FIFO extends Observable {
 	private int totalVisitors = 0; 
 	private static String message;
 	
-	public void add(Customer C){//Lägg till input i form av kund
-		if(isFull() && s.opened() && ss.getFreeChairs() != 0){
-			messageString("The queue is full, customer leaves");
-			stat.addLeave();
-		}
-
-		else if(ss.getFreeChairs() != 0 && isEmpty() && ss.getFreeChairs() != 0){
-			messageString("Customer gets a haircut!");
-			ss.chairGotBusy();	
-			es.addEvent(new CustLeaves(es.getTime() , C, es, ss, s, sv, f	));
-			
-		}
-		else if(isFull()){
-			messageString("Customer leaves, waiting room full!");	
-			stat.addLeave();
-		} 
-		
-		else {
-			queue.add(C);
-			C.queueTime = es.getTime();
-			messageString("Customer wait.");
-			if(isFull()){
-				stat.setTime1(es.getTime());
-				stat.idleCalc();
-				
-			}
-			if(NumWaiting < queueSize()){
-				stat.maxSize(queueSize());
-				NumWaiting = queueSize();
-		}
-		
-		
-		}
-		
-	}
-
-//	
-//	public void add(Customer C){
-//		if(isFull()){
-//			messageString("The queue is full, customer leaves");
-//			stat.addLeave();
-//			stat.setTime1(es.getTime());
-//			stat.idleCalc();
-//		}
-//		else if(ss.freeChairs() != 0 && isEmpty()){
-//			queue.add(C);
-//			getFirst();
-//		} else if(ss.freeChairs() != 0 && isEmpty() && ss.freeChairs() != 0){
-//			messageString("Customer gets a haircut!");
-//			ss.chairGotBusy();	
-//			es.addEvent(new CustLeaves(es.getTime() , C, es, ss, s, sv));
-//		} else {
-//			queue.add(C);
-//			C.queueTime = es.getTime();
-//			messageString("Customer wait.");
-//		}
-//
-//		if(isFull()){
-//				
-//			}
-//		
-//		
-//		if(NumWaiting < queueSize()){
-//			stat.maxSize(queueSize());
-//			NumWaiting = queueSize();
-//		}
-//		
-//		
-//
-//	}
 	public void addNewCustomerToFIFO(Customer C) {
 		queue.add(C);
-
-		if(NumWaiting < queueSize()){
-
-
 		if(NumWaiting < queueSize()){
 			stat.maxSize(queueSize());
 			NumWaiting = queueSize();
 		}
-	}
+		if(isFull()){
+			stat.addLeave();
+		}
+		if(isFull() && stat.getGoing()){
+			stat.setTime1(es.getTime());
+			stat.idleCalc();
+			stat.goingFalse();
+		}
+	
 }
 	public void messageString(String s){
 		message = s;
@@ -158,18 +92,9 @@ public class FIFO extends Observable {
 		return count;
 	}
 
-	
-
-	
-
 	public void custFinished(){
 		ss.chairGotFree();
 		messageString("Customer is finished, pays and leaves the salon.");
-
-		if(!isFull() && !stat.getGoing()){
-			stat.setTime2(es.getTime());
-			stat.goingTrue();
-		}
 	}
 
 	
@@ -177,14 +102,28 @@ public class FIFO extends Observable {
 	
 	public void addReturnToQueue(Customer C){
 		queue.add(returningCustInQueue(), C);
+		if(isFull() && stat.getGoing()){
+			stat.setTime1(es.getTime());
+			stat.idleCalc();
+			stat.goingFalse();
+		}
+		
 	}
 
 	public void removeLast(){
 		queue.remove(queue.size()-1);
+		if(!isFull() && !stat.getGoing()){
+			stat.goingTrue();
+			stat.setTime2(es.getTime());
+		}
 	}
 	
 	public void removeFirst() {
 		queue.remove(0);
+		if(!isFull() && !stat.getGoing()){
+			stat.goingTrue();
+			stat.setTime2(es.getTime());
+		}
 	}
 	
 	public Customer getFirst() {

@@ -24,6 +24,7 @@ public class Statistics {
 	}
 	public void addLeave(){
 		leave++;
+		//System.out.println("--- addLeave");
 		}
 	public void qTime(double waitTime){
 		totalQtime += waitTime;
@@ -45,6 +46,9 @@ public class Statistics {
 	}
 	public void goingTrue(){
 		going = true;
+	}
+	public void goingFalse(){
+		going = false;
 	}
 	public void idleCalc(){
 		double timeDiff = temp1 - temp2;
