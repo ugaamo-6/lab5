@@ -46,9 +46,6 @@ public class EventStore {
 		}
 	}
 	
-	
-//	Dessa två metoder får inte finnas i simulatorn!!
-	
 	public boolean compareTime(Event A, Event B){
 		return A.getTime() < B.getTime();
 		

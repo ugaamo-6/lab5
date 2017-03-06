@@ -5,6 +5,8 @@ import state.SalongState;
 public abstract class View {
 	SalongState ss = new SalongState();
 	public void beginInfoPrint(){	
+		
+		//Detta är inte generellt för en simulator, utan specifikt för simulering av frisörsalong, det behöver läggas under SalongView.
 		System.out.println("Opened.");
 		System.out.println("--- Information ---");
 		System.out.println("Closing time of the day ..............: "+ss.getCloseTime());

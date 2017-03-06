@@ -69,7 +69,7 @@ public class CustArrives extends Event {
 		if(!f.isEmpty()){
 			ss.chairGotBusy();
 			es.addEvent(new CustLeaves(es.getTime(), f.getFirst(), es, ss, s, sv, f));
-			f.removeFirst();;
+			f.removeFirst();
 			//f.messageString("Customer gets a haircut.");
 		} 
 	}
