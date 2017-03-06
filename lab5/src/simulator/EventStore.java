@@ -28,7 +28,6 @@ public class EventStore {
 
 	public void addEvent(Event addEvent){
 		
-//		Alla print-satser ska bort.
 		
 		if (queue.size() == 0) {
 			queue.add(addEvent);
@@ -37,24 +36,9 @@ public class EventStore {
 				for(int i=0; i < queue.size(); i++){
 					if (compareTime(addEvent, queue.get(i))){
 						queue.add(i,addEvent);
-<<<<<<< HEAD
-=======
-//						System.out.println("--- Time of event: "+getTime());
-//						System.out.println("--- Event type/name: "+addEvent.getName());
-//						System.out.println("--- Customer ID: "+addEvent.getCustomerID());
-//						System.out.println("--- Free Chairs: ");
-
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 						break;
 					} else if (i+1 == queue.size()){
 						queue.add(addEvent);
-<<<<<<< HEAD
-=======
-//						System.out.println("--- Time of event: "+getTime());
-//						System.out.println("--- Event type/name: "+addEvent.getName());
-//						System.out.println("--- Customer ID: "+addEvent.getCustomerID());
-//						System.out.println("--- Free Chairs: ");
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 						break;
 					}
 				}
@@ -63,15 +47,6 @@ public class EventStore {
 	
 	
 //	Dessa två metoder får inte finnas i simulatorn!!
-	
-	public int getIdleCut(){
-		//return ss.freeChairs();
-		return 2;
-	}
-	public int getIdleQueue(){
-		//return f.getMax() - f.queueSize();
-		return 1;
-	}
 	
 	public boolean compareTime(Event A, Event B){
 		return A.getTime() < B.getTime();

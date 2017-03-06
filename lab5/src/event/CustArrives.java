@@ -51,10 +51,10 @@ public class CustArrives extends Event {
 //			stat.setTime1(es.getTime());
 //			stat.idleCalc();
 		}
-		else if(ss.freeChairs() != 0 && f.isEmpty()){
+		else if(ss.getFreeChairs() != 0 && f.isEmpty()){
 			f.addNewCustomerToFIFO((Customer) C);
 			getFirst();
-		} else if(ss.freeChairs() != 0 && f.isEmpty() && ss.freeChairs() != 0){
+		} else if(ss.getFreeChairs() != 0 && f.isEmpty() && ss.getFreeChairs() != 0){
 			f.messageString("Customer gets a haircut!");
 			ss.chairGotBusy();	
 			es.addEvent(new CustLeaves(es.getTime() , C, es, ss, s, sv, f));

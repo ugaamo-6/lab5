@@ -52,7 +52,7 @@ public class CustReturns extends Event {
 	public void addReturnCust(Customer C){
 		f = (FIFO) C.getFIFO();
 	
-		if (ss.freeChairs() == ss.totalChairs()) {
+		if (ss.getFreeChairs() == ss.totalChairs()) {
 			f.addReturnToQueue(C);
 			getFirst();
 			f.messageString("Returning customer: Customer get haircut.");
