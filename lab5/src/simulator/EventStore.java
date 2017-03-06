@@ -13,7 +13,7 @@ public class EventStore {
 	ArrayList<Event> queue = new ArrayList<Event>();
 	private double currentTime;
 	private State s; 
-	private SalongState ss;
+	private SalongState ss = new SalongState();
 	private FIFO f;
 	private Statistics stat;
 
@@ -32,15 +32,12 @@ public class EventStore {
 		
 		if (queue.size() == 0) {
 			queue.add(addEvent);
-//			System.out.println("--- Time of event: "+getTime());
-//			System.out.println("--- Event type/name: "+addEvent.getName());
-//			System.out.println("--- Customer ID: "+addEvent.getCustomerID());
-//			System.out.println("--- "+ss.freeChairs());
 
 		} else {	
 				for(int i=0; i < queue.size(); i++){
 					if (compareTime(addEvent, queue.get(i))){
 						queue.add(i,addEvent);
+
 //						System.out.println("--- Time of event: "+getTime());
 //						System.out.println("--- Event type/name: "+addEvent.getName());
 //						System.out.println("--- Customer ID: "+addEvent.getCustomerID());
@@ -49,6 +46,7 @@ public class EventStore {
 						break;
 					} else if (i+1 == queue.size()){
 						queue.add(addEvent);
+
 //						System.out.println("--- Time of event: "+getTime());
 //						System.out.println("--- Event type/name: "+addEvent.getName());
 //						System.out.println("--- Customer ID: "+addEvent.getCustomerID());

@@ -52,7 +52,7 @@ public class CustReturns extends Event {
 	public void addReturnCust(Customer C){
 		f = (FIFO) C.getFIFO();
 	
-		if (ss.freeChairs() == ss.totalChairs()) {
+		if (ss.getFreeChairs() == ss.totalChairs()) {
 			f.addReturnToQueue(C);
 			getFirst();
 			f.messageString("Returning customer: Customer get haircut.");
@@ -81,8 +81,8 @@ public class CustReturns extends Event {
 		if(!f.isEmpty()){
 			
 			ss.chairGotBusy();
-			Customer getFirst = (Customer) f.getFirst2();
-			es.addEvent(new CustLeaves(es.getTime(), getFirst, es, ss, s, sv, f));
+//			Customer getFirst = (Customer) f.getFirst();
+			es.addEvent(new CustLeaves(es.getTime(), f.getFirst(), es, ss, s, sv, f));
 			f.removeFirst();
 			f.messageString("Customer gets a haircut.");
 		} 

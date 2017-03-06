@@ -49,6 +49,7 @@ public class FIFO extends Observable {
 	private int totalVisitors = 0; 
 	private static String message;
 	
+	
 	public void addNewCustomerToFIFO(Customer C) {
 		queue.add(C);
 	}
@@ -89,7 +90,7 @@ public class FIFO extends Observable {
 			stat.goingTrue();
 		}
 	}
-
+	
 	public void addReturnToQueue(Customer C){
 		queue.add(returningCustInQueue(), C);
 	}
@@ -102,7 +103,7 @@ public class FIFO extends Observable {
 		queue.remove(0);
 	}
 	
-	public Customer getFirst2() {
+	public Customer getFirst() {
 		return (Customer) queue.get(0);
 	}
 	
@@ -114,7 +115,7 @@ public class FIFO extends Observable {
 	
 	public int queueSize(){
 		return queue.size();
-	}	
+	}
 	
 	public int getTotalVisitors(){
 		return totalVisitors;

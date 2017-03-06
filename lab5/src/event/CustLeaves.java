@@ -55,8 +55,7 @@ public class CustLeaves extends Event{
 		if(!f.isEmpty()){
 			
 			ss.chairGotBusy();
-			Customer getFirst = (Customer) f.getFirst2();
-			es.addEvent(new CustLeaves(es.getTime(), getFirst, es, ss, s, sv, f));
+			es.addEvent(new CustLeaves(es.getTime(), f.getFirst(), es, ss, s, sv, f));
 			f.removeFirst();
 			f.messageString("Customer gets a haircut.");
 		} 
