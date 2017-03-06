@@ -32,6 +32,11 @@ public class StartSim extends Event {
 	
 	public void execute() {		
 		es.setTime(0.0);
+
+		s.start();
+
+		
+//		Ha inte printsatser här, använd vår view-klass.
 		s.start();
 		Event arrive = new CustArrives(time, es, ss, s, sv, f);
 		es.addEvent(arrive);
