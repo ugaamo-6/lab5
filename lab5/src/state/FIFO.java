@@ -1,6 +1,7 @@
 package state;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Observable;
 import simulator.Statistics;
 import event.CustLeaves;
@@ -30,7 +31,7 @@ import state.SalongState;
 public class FIFO extends Observable {
 
 	private EventStore es;
-	private SalongState ss;
+	private SalongState ss = new SalongState();
 	private State s;
 	private SalongView sv;
 	private FIFO f;
@@ -45,34 +46,37 @@ public class FIFO extends Observable {
 	}
 
 	private Statistics stat = new Statistics();
-	private ArrayList<Object> queue =  new ArrayList<Object>(); 
-	private int totalVisitors = 0; 
+	private int hairdressSeats = ss.getFreeChairs(); //The number of seats available
+	private final int maxWait = 10;
+	private ArrayList<Object> queue =  new ArrayList<Object>(); //The queue for the salon
+	private int totalVisitors = 0; //total visitors of the day
 	private static String message;
 	
-	public void add(Customer C){
-		if(isFull()){
+	public void add(Customer C){//Lägg till input i form av kund
+		if(isFull() && s.opened() && ss.getFreeChairs() != 0){
 			messageString("The queue is full, customer leaves");
 			stat.addLeave();
-			stat.setTime1(es.getTime());
-			stat.idleCalc();
 		}
-		else if(ss.freeChairs() != 0 && isEmpty()){
-			queue.add(C);
-			getFirst();
-		} else if(ss.freeChairs() != 0 && isEmpty() && ss.freeChairs() != 0){
+
+		else if(hairdressSeats != 0 && isEmpty() && ss.getFreeChairs() != 0){
 			messageString("Customer gets a haircut!");
 			ss.chairGotBusy();	
 			es.addEvent(new CustLeaves(es.getTime() , C, es, ss, s, sv));
-		} else {
+			
+		}
+		else if(isFull()){
+			messageString("Customer leaves, waiting room full!");	
+		} 
+		
+		else {
 			queue.add(C);
 			C.queueTime = es.getTime();
 			messageString("Customer wait.");
-		}
-
-		if(isFull()){
-				
+			if(isFull()){
+				stat.setTime1(es.getTime());
+				stat.idleCalc();
 			}
-		
+		}
 		
 		if(maximus < queueSize()){
 			stat.maxSize(queueSize());
@@ -94,7 +98,7 @@ public class FIFO extends Observable {
 	}
 	
 	public boolean isFull(){
-		if(queueSize() >= ss.maxWaitInQueue()){
+		if(queueSize() >= maxWait){
 			return true;
 		}
 		return false;
@@ -111,24 +115,15 @@ public class FIFO extends Observable {
 	}
 	
 	public void custFinished(){
-<<<<<<< HEAD
 		messageString("Customer is finished, pays and leaves the salon.");
 		//ss.chairGotFree();
-=======
-		ss.chairGotFree();
-		messageString("Customer is finished, pays and leaves the salon.");
-
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 		if(!isFull() && !stat.getGoing()){
 			stat.setTime2(es.getTime());
 			stat.goingTrue();
 		}
 	}
-//		System.out.println(ss.freeChairs());
-//		System.out.println(queueSize());
 	
 	public void addReturnCust(Customer C){
-<<<<<<< HEAD
 		if(isEmpty()){
 			messageString("Returning customer: Queue is empty, gets haircut directly.");
 		}else if(isFull()){
@@ -153,44 +148,12 @@ public class FIFO extends Observable {
 			ss.chairGotBusy();
 		}
 	}
-=======
-		
-			if (ss.freeChairs() == ss.totalChairs()) {
-				queue.add(returningCustInQueue(), C);
-				getFirst();
-				messageString("Returning customer: Customer get haircut.");
-			} else if(!isFull()){
-				queue.add(returningCustInQueue(), C);
-				messageString("Returning customer: Customer stands in queue.");		
-//				System.out.println(ss.freeChairs());
-//				System.out.println(queueSize());
-			}else if(isFull()){
-				
-
-				//Kontrollerar ifall hela kön är återkommande. 
-				if (returningCustInQueue() == ss.maxWaitInQueue()) {
-					double returnTime = es.getTime()+ss.returnTime();
-					es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv));	
-					messageString("Queue full with dissatisfied customers, gets a walk and come back later.");
-//					System.out.println(ss.freeChairs());
-//					System.out.println(queueSize());
-				} else {
-					removeLast();
-					queue.add(returningCustInQueue(), C);
-					messageString("Returning customer: Stands in queue. Last customer in queue left.");		
-					stat.addDiss();
-//					System.out.println(ss.freeChairs());
-//					System.out.println(queueSize());
-				}
-			}
-		}
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 
 	public void removeLast(){
 		queue.remove(queue.size()-1);
 	}
 	
-	public boolean isEmpty(){
+	public boolean isEmpty(){//Fixa denna, den kan gå till negativa tal.
 		if(queueSize() == 0){
 			return true;
 		}return false;
@@ -200,33 +163,28 @@ public class FIFO extends Observable {
 		return queue.size();
 	}
 
-	public void getFirst(){
-		
+	public Customer getFirst(){
 		if(!isEmpty()){
-			ss.chairGotBusy();
+			messageString("Customer leaves queue and gets a haircut.");
 			Customer getFirst = (Customer) queue.get(0);
 			es.addEvent(new CustLeaves(es.getTime(), getFirst, es, ss, s, sv));
 			queue.remove(0);
-			messageString("Customer gets a haircut.");
-			System.out.println(ss.freeChairs());
-			System.out.println(queueSize());
-		} 
-		
-		
+			return getFirst;
+		}
+		return null;
 	}
 	
 	public void checkIfSatisfied(Customer C){
 		if(ss.randReturn()<=ss.percentageReturn()){
 			messageString("Customer is not happy.");
-			System.out.println(ss.freeChairs());
-			System.out.println(queueSize());
 			double returnTime = es.getTime()+ss.returnTime();
 			es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv));	
-			C.happy = false;
-		} else { C.happy = true; }
-		
+		}
 	}
-
+	
+	public int getMax(){
+		return maxWait;
+	}
 	public int getTotalVisitors(){
 		return totalVisitors;
 	}

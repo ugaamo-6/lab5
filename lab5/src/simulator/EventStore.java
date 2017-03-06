@@ -13,7 +13,7 @@ public class EventStore {
 	ArrayList<Event> queue = new ArrayList<Event>();
 	private double currentTime = 0;
 	private State s; 
-	private SalongState ss;
+	private SalongState ss = new SalongState();
 	private FIFO f;
 	private Statistics stat;
 
@@ -30,34 +30,14 @@ public class EventStore {
 		
 		if (queue.size() == 0) {//Ska vi verkligen ha alla dessa print-satser här?
 			queue.add(addEvent);
-//			System.out.println("--- Time of event: "+getTime());
-//			System.out.println("--- Event type/name: "+addEvent.getName());
-//			System.out.println("--- Customer ID: "+addEvent.getCustomerID());
-//			System.out.println("--- "+ss.freeChairs());
 
 		} else {	
 				for(int i=0; i < queue.size(); i++){
 					if (compareTime(addEvent, queue.get(i))){
 						queue.add(i,addEvent);
-//						System.out.println("--- Time of event: "+getTime());
-//						System.out.println("--- Event type/name: "+addEvent.getName());
-//						System.out.println("--- Customer ID: "+addEvent.getCustomerID());
-//						System.out.println("--- Free Chairs: ");
-						System.out.println("--- Time of event: "+getTime());
-						System.out.println("--- Event type/name: "+addEvent.getName());
-						System.out.println("--- Customer ID: "+addEvent.getCustomerID());
-						System.out.println("--- "+ss.freeChairs);
 						break;
 					} else if (i+1 == queue.size()){
 						queue.add(addEvent);
-//						System.out.println("--- Time of event: "+getTime());
-//						System.out.println("--- Event type/name: "+addEvent.getName());
-//						System.out.println("--- Customer ID: "+addEvent.getCustomerID());
-//						System.out.println("--- Free Chairs: ");
-						System.out.println("--- Time of event: "+getTime());
-						System.out.println("--- Event type/name: "+addEvent.getName());
-						System.out.println("--- Customer ID: "+addEvent.getCustomerID());
-						System.out.println("--- "+ss.freeChairs);
 						break;
 					}
 				}

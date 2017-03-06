@@ -20,14 +20,13 @@ public class StopSim extends Event {
 	
 	public StopSim(State s){
 		System.out.println("---- Some Statistics ----");
-		System.out.println("Total Customers: "+stat.getCust());
-		System.out.println("Average haircut time: "+(stat.getTime()/stat.getCust()));
-		System.out.println("Total leaves: "+stat.getLeave());
-		System.out.println("Average queue time: " + (stat.getQtime()/stat.getCust()));
-		System.out.println("Max customers at the same time in queue: "+ stat.getMax());
-		System.out.println("Amount of disssatisfied customers: " + stat.getDiss());
-		System.out.println("Last customer left at: "+stat.getLast());
-		System.out.println("Chair idle time: "+stat.getIdle());
+		System.out.println("Number of customers cut: ......: "+stat.getCust());
+		System.out.println("Average cutting time...........: "+(stat.getTime()/stat.getCust()));
+		System.out.println("Average queueing time: ........: "+(stat.getQtime()/stat.getCust()));
+		System.out.println("Largest queue (max NumWaiting) : "+ stat.getMax());
+		System.out.println("Customers not cut (NumLost) ...: "+stat.getLeave());
+		System.out.println("Dissatisfied customers: .......: " + stat.getDiss());
+		System.out.println("Time chairs were idle: ........: "+stat.getIdle());
 		System.out.println("-------------------------");
 		this.s=s;
 	}

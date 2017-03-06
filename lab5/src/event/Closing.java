@@ -51,7 +51,7 @@ public class Closing extends Event implements Observer{
 	}
 
 	public void update(Observable arg0, Object arg) {
-		if (ss.totalChairs() == ss.freeChairs() && !s.opened()) {
+		if (ss.totalChairs() == ss.getFreeChairs() && !s.opened()) {
 			/*if (f.isEmpty()){
 				es.allEventDone(true);
 			}*/
