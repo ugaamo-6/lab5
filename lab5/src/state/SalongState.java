@@ -35,9 +35,7 @@ public class SalongState {
 	}
 	
 	
-	public long getSeed(){
-		return seed;
-	}
+	
 	public void chairGotFree() {
 		freeChairs++;
 	}
@@ -118,6 +116,7 @@ public class SalongState {
 	public double getCloseTime() {
 		return closeTime;
 	}
+
 	
 
 

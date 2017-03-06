@@ -48,10 +48,14 @@ public class FIFO extends Observable {
 	private ArrayList<Object> queue =  new ArrayList<Object>(); 
 	private int totalVisitors = 0; 
 	private static String message;
-	
-	
+
 	public void addNewCustomerToFIFO(Customer C) {
 		queue.add(C);
+
+		if(maximus < queueSize()){
+			stat.maxSize(queueSize());
+			maximus = queueSize();
+		}
 	}
 	
 	public void messageString(String s){
@@ -80,7 +84,11 @@ public class FIFO extends Observable {
 		}
 		return count;
 	}
+
 	
+
+	
+
 	public void custFinished(){
 		ss.chairGotFree();
 		messageString("Customer is finished, pays and leaves the salon.");
@@ -90,6 +98,7 @@ public class FIFO extends Observable {
 			stat.goingTrue();
 		}
 	}
+	
 	
 	public void addReturnToQueue(Customer C){
 		queue.add(returningCustInQueue(), C);
@@ -117,6 +126,10 @@ public class FIFO extends Observable {
 		return queue.size();
 	}
 	
+	public int getMax(){
+		return maxWait;
+	}
+
 	public int getTotalVisitors(){
 		return totalVisitors;
 	}
