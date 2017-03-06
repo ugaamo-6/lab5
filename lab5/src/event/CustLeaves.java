@@ -68,8 +68,9 @@ public class CustLeaves extends Event{
 		if(ss.randReturn()<=ss.percentageReturn()){
 			f.messageString("Customer is not happy.");
 			double returnTime = es.getTime()+ss.returnTime();
-			es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv,f));	
+			es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv, f));	
 			C.happy = false;
+			stat.addDiss(); //if customer not happy, add 1 to counter in stat.
 		} else { C.happy = true; }
 		
 }

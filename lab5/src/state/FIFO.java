@@ -36,7 +36,7 @@ public class FIFO extends Observable {
 	private SalongView sv;
 	private FIFO f;
 	
-	private int maximus = 0; //max customers in queue at once 
+	private int NumWaiting = 0; //max customers in queue at once 
 	
 	public FIFO(EventStore es, SalongState ss, State s){
 		this.es=es;
@@ -66,6 +66,7 @@ public class FIFO extends Observable {
 		}
 		else if(isFull()){
 			messageString("Customer leaves, waiting room full!");	
+			stat.addLeave();
 		} 
 		
 		else {
@@ -77,9 +78,9 @@ public class FIFO extends Observable {
 				stat.idleCalc();
 				
 			}
-			if(maximus < queueSize()){
+			if(NumWaiting < queueSize()){
 				stat.maxSize(queueSize());
-				maximus = queueSize();
+				NumWaiting = queueSize();
 		}
 		
 		
@@ -113,9 +114,9 @@ public class FIFO extends Observable {
 //			}
 //		
 //		
-//		if(maximus < queueSize()){
+//		if(NumWaiting < queueSize()){
 //			stat.maxSize(queueSize());
-//			maximus = queueSize();
+//			NumWaiting = queueSize();
 //		}
 //		
 //		
@@ -124,9 +125,9 @@ public class FIFO extends Observable {
 	
 	public void addNewCustomerToFIFO(Customer C) {
 		queue.add(C);
-		if(maximus < queueSize()){
+		if(NumWaiting < queueSize()){
 			stat.maxSize(queueSize());
-			maximus = queueSize();
+			NumWaiting = queueSize();
 		}
 	}
 	
@@ -178,29 +179,27 @@ public class FIFO extends Observable {
 			removeLast();
 			queue.add(C);
 			Collections.rotate(queue, (hairdressSeats-1));
-			stat.addDiss();
 			ss.chairGotBusy();
-			if(maximus < queueSize()){
+			if(NumWaiting < queueSize()){
 				stat.maxSize(queueSize());
-				maximus = queueSize();
+				NumWaiting = queueSize();
 			}
 		}else if(!isFull()){
 			messageString("Returning customer: Customer stands in queue.");
 			queue.add(returningCustInQueue(), C);
 			ss.chairGotBusy();
-			if(maximus < queueSize()){
+			if(NumWaiting < queueSize()){
 				stat.maxSize(queueSize());
-				maximus = queueSize();
+				NumWaiting = queueSize();
 			}
 		}else{
 			queue.add(C);
 			Collections.rotate(queue, (hairdressSeats-1));
-			stat.addDiss();
 			queue.add(returningCustInQueue(), C);
 			ss.chairGotBusy();
-			if(maximus < queueSize()){
+			if(NumWaiting < queueSize()){
 				stat.maxSize(queueSize());
-				maximus = queueSize();
+				NumWaiting = queueSize();
 			}
 		}
 	}
