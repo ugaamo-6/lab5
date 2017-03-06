@@ -6,9 +6,7 @@ import random.*;
 public class SalongState {
 		
 	private Statistics s = new Statistics();
-	
 	private double closeTime = 7.0;
-	
 	private double haircutMinTime = 1.0;
 	private double haircutMaxTime = 2.0;
 	private double returnMinTime = 1.0;
@@ -16,7 +14,7 @@ public class SalongState {
 	private final int maxWaitInQueue = 2;
 	private int freeChairs = 2;
 	private final int totalChairs = 2;
-	private double percentageReturn=0.5;
+	private double percentageReturn=0.5; 
 	private double lambda = 1.2;
 	private long seed = 1116; //System.currentTimeMillis();
 	

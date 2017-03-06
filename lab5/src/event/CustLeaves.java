@@ -1,5 +1,7 @@
 package event;
 
+import java.util.ArrayList;
+
 import hairdresser.SalongView;
 import simulator.*;
 import state.*;
@@ -15,6 +17,9 @@ public class CustLeaves extends Event{
 	FIFO f;
 	Customer C;
 	double time;
+	
+	static ArrayList<Integer> dissatisfied = new ArrayList<Integer>();
+	static ArrayList<Integer> oldCustomers = new ArrayList<Integer>();
 	
 	private String namn = "Leaves";
 	public String getName(){
@@ -40,9 +45,14 @@ public class CustLeaves extends Event{
 	
 	public void execute() {
 		
-		stat.custCountAdd();
-		stat.qTime(qTimeCalc(C));
-		stat.lastCustTime(es.getTime());
+		
+		if(!oldCustomers.contains(C.getID())){
+			stat.custCountAdd();
+			oldCustomers.add(C.getID());
+			stat.qTime(qTimeCalc(C));
+			stat.lastCustTime(es.getTime());
+		}
+		
 		
 		FIFO f = C.getFIFO();
 		
@@ -74,7 +84,15 @@ public class CustLeaves extends Event{
 			double returnTime = es.getTime()+ss.returnTime();
 			es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv, f));	
 			C.happy = false;
-			stat.addDiss(); //if customer not happy, add 1 to counter in stat.
+			if(!dissatisfied.contains(C.getID())){
+				//System.out.println("--- Dissatisfied contains: "+C.getID());
+				stat.addDiss(); //if customer not happy, add 1 to counter in stat.
+				dissatisfied.add(C.getID());
+				//System.out.println("--- "+dissatisfied);
+				//System.out.println("--- Added: "+C.getID());
+			}
+			
+			
 		} else { C.happy = true; }
 		
 }

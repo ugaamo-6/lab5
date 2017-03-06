@@ -29,7 +29,7 @@ public class StopSim extends Event {
 	public void execute() {
 		System.out.println("999,0 STOP----");
 		System.out.println("---- Some Statistics ----");
-		System.out.println("Number of customers cut: ......: "+stat.getCust());
+		System.out.println("Number of customers cut: ......: "+(int)stat.getCust());
 		System.out.println("Average cutting time...........: "+(stat.getTime()/stat.getCust()));
 		System.out.println("Average queueing time: ........: "+(stat.getQtime()/stat.getCust()));
 		System.out.println("Largest queue (max NumWaiting) : "+ stat.getMax());
