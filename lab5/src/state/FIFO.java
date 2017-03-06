@@ -124,7 +124,7 @@ public class FIFO extends Observable {
 			stat.goingTrue();
 		}
 	}
-	
+
 	public void addReturnToQueue(Customer C){
 		queue.add(returningCustInQueue(), C);
 	}
@@ -155,6 +155,7 @@ public class FIFO extends Observable {
 //				}
 //			}
 //		}
+
 
 	public void removeLast(){
 		queue.remove(queue.size()-1);

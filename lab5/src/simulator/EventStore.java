@@ -45,6 +45,7 @@ public class EventStore {
 //						System.out.println("--- Event type/name: "+addEvent.getName());
 //						System.out.println("--- Customer ID: "+addEvent.getCustomerID());
 //						System.out.println("--- Free Chairs: ");
+
 						break;
 					} else if (i+1 == queue.size()){
 						queue.add(addEvent);
@@ -52,7 +53,6 @@ public class EventStore {
 //						System.out.println("--- Event type/name: "+addEvent.getName());
 //						System.out.println("--- Customer ID: "+addEvent.getCustomerID());
 //						System.out.println("--- Free Chairs: ");
-
 						break;
 					}
 				}
