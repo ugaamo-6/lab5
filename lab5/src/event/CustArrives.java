@@ -47,9 +47,6 @@ public class CustArrives extends Event {
 	private void addToFIFO(Customer C) {
 		if(f.isFull()){
 			f.messageString("The queue is full, customer leaves");
-//			stat.addLeave();
-//			stat.setTime1(es.getTime());
-//			stat.idleCalc();
 		}
 		else if(ss.getFreeChairs() != 0 && f.isEmpty()){
 			f.addNewCustomerToFIFO((Customer) C);
@@ -74,8 +71,6 @@ public class CustArrives extends Event {
 			f.removeFirst();;
 			f.messageString("Customer gets a haircut.");
 		} 
-		
-		
 	}
 	
 	public double getTime() {
@@ -85,11 +80,4 @@ public class CustArrives extends Event {
 	public double getArrivalTime(){
 		return time;
 	}
-	
-	
-		
-	
-
-
-
 }
