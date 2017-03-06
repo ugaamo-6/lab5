@@ -42,14 +42,13 @@ public class CustLeaves extends Event{
 		stat.lastCustTime(es.getTime());
 		FIFO f = C.getFIFO();
 		
-		f.messageString("Haircut is done, customer leaves.");
-		ss.chairGotFree();
+		
 		
 		f.checkIfSatisfied(C);
-		
-		
+		f.custFinished();
 		f.getFirst();
-
+		
+		
 	}
 	private double qTimeCalc(Customer C){
 		return time-C.queueTime;

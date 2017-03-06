@@ -1,3 +1,10 @@
+//Kika på 6.8, har vi gjort rätt?
+//Kika på 6.9, har vi gjort rätt?
+//Använd private!!
+//Kika på 6.10, har vi gjort rätt?
+//Kika på 6.15, har vi gjort rätt?
+
+
 package simulator;
 
 import event.*;
@@ -39,7 +46,7 @@ public class Simulator {
 		
 		State s = new State();
 		EventStore es = new EventStore(s);
-		SalongState ss = new SalongState(0.5);
+		SalongState ss = new SalongState();
 		FIFO f = new FIFO(es, ss, s);
 		SalongView sv = new SalongView(f);
 		Simulator sim = new Simulator(es, s, sv, ss, f);

@@ -16,6 +16,7 @@ public class EventStore {
 	private SalongState ss;
 	private FIFO f;
 	private Statistics stat;
+
 	
 	public EventStore(State s) {
 		this.s=s;
@@ -27,17 +28,21 @@ public class EventStore {
 
 	public void addEvent(Event addEvent){
 		
-		if (!s.opened() && (addEvent instanceof CustArrives)){
-		} else if (queue.size() == 0) {
+		if (queue.size() == 0) {//Ska vi verkligen ha alla dessa print-satser här?
 			queue.add(addEvent);
-			System.out.println("--- Time of event: "+getTime());
-			System.out.println("--- Event type/name: "+addEvent.getName());
-			System.out.println("--- Customer ID: "+addEvent.getCustomerID());
-			System.out.println("--- "+ss.freeChairs);
+//			System.out.println("--- Time of event: "+getTime());
+//			System.out.println("--- Event type/name: "+addEvent.getName());
+//			System.out.println("--- Customer ID: "+addEvent.getCustomerID());
+//			System.out.println("--- "+ss.freeChairs());
+
 		} else {	
 				for(int i=0; i < queue.size(); i++){
 					if (compareTime(addEvent, queue.get(i))){
 						queue.add(i,addEvent);
+//						System.out.println("--- Time of event: "+getTime());
+//						System.out.println("--- Event type/name: "+addEvent.getName());
+//						System.out.println("--- Customer ID: "+addEvent.getCustomerID());
+//						System.out.println("--- Free Chairs: ");
 						System.out.println("--- Time of event: "+getTime());
 						System.out.println("--- Event type/name: "+addEvent.getName());
 						System.out.println("--- Customer ID: "+addEvent.getCustomerID());
@@ -45,6 +50,10 @@ public class EventStore {
 						break;
 					} else if (i+1 == queue.size()){
 						queue.add(addEvent);
+//						System.out.println("--- Time of event: "+getTime());
+//						System.out.println("--- Event type/name: "+addEvent.getName());
+//						System.out.println("--- Customer ID: "+addEvent.getCustomerID());
+//						System.out.println("--- Free Chairs: ");
 						System.out.println("--- Time of event: "+getTime());
 						System.out.println("--- Event type/name: "+addEvent.getName());
 						System.out.println("--- Customer ID: "+addEvent.getCustomerID());
@@ -70,7 +79,7 @@ public class EventStore {
 	}
 	
 	public Event nextEvent() {
-		if (queue.size() == 0) {
+		if (queue.size() == 0 ) {
 			addEvent(new StopSim(s));
 		} else {
 			setTime(queue.get(0).time);

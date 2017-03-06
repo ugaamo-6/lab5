@@ -1,5 +1,4 @@
 package simulator;
-import state.FIFO;
 public class Statistics {
 	
 	//all variables
