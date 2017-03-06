@@ -1,5 +1,5 @@
 package simulator;
-
+	
 public abstract class View {
 	
 	public void beginInfoPrint(){	

@@ -11,7 +11,5 @@ abstract public class Event {
 	public abstract String getName();
 	
 	public abstract int getCustomerID(); 
-	
-//	public abstract String toString();
-	
+		
 }

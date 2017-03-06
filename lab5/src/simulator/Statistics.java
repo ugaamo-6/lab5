@@ -50,7 +50,7 @@ public class Statistics {
 		double timeDiff = temp1 - temp2;
 		idleTime += timeDiff;
 		going = false;
-		System.out.println("----- "+timeDiff);
+//		System.out.println("----- "+timeDiff);
 	}
 	
 	//get... methods

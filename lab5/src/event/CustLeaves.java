@@ -23,13 +23,14 @@ public class CustLeaves extends Event{
 		return C.getID();
 	}
 	
-	public CustLeaves(double time, Customer C, EventStore es, SalongState ss, State s, SalongView sv){
+	public CustLeaves(double time, Customer C, EventStore es, SalongState ss, State s, SalongView sv, FIFO f){
 		this.time = time + ss.haircutTime();
 		this.C = C;
 		this.es=es;
 		this.ss=ss;
 		this.s=s;
 		this.sv=sv;
+		this.f=f;
 	}
 	
 	public double getTime() {
@@ -37,19 +38,42 @@ public class CustLeaves extends Event{
 	}
 	
 	public void execute() {
+		
 		stat.custCountAdd();
 		stat.qTime(qTimeCalc(C));
 		stat.lastCustTime(es.getTime());
+		
 		FIFO f = C.getFIFO();
 		
-		
-		
-		f.checkIfSatisfied(C);
+		checkIfSatisfied(C);
 		f.custFinished();
-		f.getFirst();
-		
-		
+		getFirst();	
 	}
+	
+	public void getFirst(){
+		FIFO f = C.getFIFO(); // Kan detta lösas på annat sätt?
+		if(!f.isEmpty()){
+			
+			ss.chairGotBusy();
+			Customer getFirst = (Customer) f.getFirst2();
+			es.addEvent(new CustLeaves(es.getTime(), getFirst, es, ss, s, sv, f));
+			f.removeFirst();
+			f.messageString("Customer gets a haircut.");
+		} 
+	}
+		
+	public void checkIfSatisfied(Customer C){
+		FIFO f = C.getFIFO(); // Kan detta lösas på annat sätt?
+		
+		if(ss.randReturn()<=ss.percentageReturn()){
+			f.messageString("Customer is not happy.");
+			double returnTime = es.getTime()+ss.returnTime();
+			es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv,f));	
+			C.happy = false;
+		} else { C.happy = true; }
+		
+}
+	
 	private double qTimeCalc(Customer C){
 		return time-C.queueTime;
 	}

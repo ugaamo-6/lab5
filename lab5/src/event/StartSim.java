@@ -31,7 +31,11 @@ public class StartSim extends Event {
 	}
 	
 	public void execute() {		
+		es.setTime(0.0);
 		s.start();
+		
+//		Ha inte printsatser här, använd vår view-klass.
+		
 		System.out.println("--- Some information about variables ---");
 		System.out.println("The salon closes at: "+ss.getCloseTime());
 		System.out.println("Total chairs available: "+ss.freeChairs());
@@ -43,6 +47,7 @@ public class StartSim extends Event {
 		System.out.println("Return time min: "+ss.getRetMin());
 		System.out.println("Probability for a return: "+ss.percentageReturn());
 		System.out.println("----------------------------------------");
+		
 		Event arrive = new CustArrives(time, es, ss, s, sv, f);
 		es.addEvent(arrive);
 	}

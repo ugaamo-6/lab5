@@ -37,11 +37,46 @@ public class CustArrives extends Event {
 	public void execute() {
 		if (s.opened()) {
 			Customer C = new Customer(es, ss, s, sv, f);
-			f.add(C);
+			addToFIFO(C);
 			double nextCustTime = es.getTime() + ss.nextCustTime();
 			CustArrives nextCust = new CustArrives(nextCustTime, es, ss, s, sv, f);
 			es.addEvent(nextCust);
 		}
+	}
+	
+	private void addToFIFO(Customer C) {
+		if(f.isFull()){
+			f.messageString("The queue is full, customer leaves");
+//			stat.addLeave();
+//			stat.setTime1(es.getTime());
+//			stat.idleCalc();
+		}
+		else if(ss.freeChairs() != 0 && f.isEmpty()){
+			f.addNewCustomerToFIFO((Customer) C);
+			getFirst();
+		} else if(ss.freeChairs() != 0 && f.isEmpty() && ss.freeChairs() != 0){
+			f.messageString("Customer gets a haircut!");
+			ss.chairGotBusy();	
+			es.addEvent(new CustLeaves(es.getTime() , C, es, ss, s, sv, f));
+		} else {
+			f.addNewCustomerToFIFO((Customer) C);
+			C.queueTime = es.getTime();
+			f.messageString("Customer wait.");
+		}
+		
+	}
+		
+	public void getFirst(){
+		
+		if(!f.isEmpty()){
+			ss.chairGotBusy();
+			Customer getFirst = f.getFirst2();
+			es.addEvent(new CustLeaves(es.getTime(), getFirst, es, ss, s, sv, f));
+			f.removeFirst();;
+			f.messageString("Customer gets a haircut.");
+		} 
+		
+		
 	}
 	
 	public double getTime() {
