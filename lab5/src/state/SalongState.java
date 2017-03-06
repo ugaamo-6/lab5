@@ -7,7 +7,7 @@ public class SalongState {
 		
 	private Statistics s = new Statistics();
 	
-	private double closeTime = 3.0;
+	private double closeTime = 1000.0;
 	
 	private double haircutMinTime = 1.0;
 	private double haircutMaxTime = 2.0;
