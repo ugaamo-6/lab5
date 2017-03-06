@@ -49,9 +49,8 @@ public class CustLeaves extends Event{
 		if(!oldCustomers.contains(C.getID())){
 			stat.custCountAdd();
 			oldCustomers.add(C.getID());
-			stat.qTime(qTimeCalc(C));
-			stat.lastCustTime(es.getTime());
 		}
+		
 		
 		
 		FIFO f = C.getFIFO();
@@ -66,7 +65,6 @@ public class CustLeaves extends Event{
 	public void getFirst(){
 		FIFO f = C.getFIFO(); // Kan detta lösas på annat sätt?
 		if(!f.isEmpty()){
-			
 			ss.chairGotBusy();
 			es.addEvent(new CustLeaves(es.getTime(), f.getFirst(), es, ss, s, sv, f));
 			f.removeFirst();
@@ -97,8 +95,6 @@ public class CustLeaves extends Event{
 		
 }
 	
-	private double qTimeCalc(Customer C){
-		return time-C.queueTime;
-	}
+	
 
 }
