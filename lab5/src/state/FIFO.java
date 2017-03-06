@@ -52,6 +52,7 @@ public class FIFO extends Observable {
 	private int totalVisitors = 0; //total visitors of the day
 	private static String message;
 	
+<<<<<<< HEAD
 	public void add(Customer C){//Lägg till input i form av kund
 		if(isFull() && s.opened() && ss.getFreeChairs() != 0){
 			messageString("The queue is full, customer leaves");
@@ -85,6 +86,45 @@ public class FIFO extends Observable {
 		
 		
 
+=======
+//	
+//	public void add(Customer C){
+//		if(isFull()){
+//			messageString("The queue is full, customer leaves");
+//			stat.addLeave();
+//			stat.setTime1(es.getTime());
+//			stat.idleCalc();
+//		}
+//		else if(ss.freeChairs() != 0 && isEmpty()){
+//			queue.add(C);
+//			getFirst();
+//		} else if(ss.freeChairs() != 0 && isEmpty() && ss.freeChairs() != 0){
+//			messageString("Customer gets a haircut!");
+//			ss.chairGotBusy();	
+//			es.addEvent(new CustLeaves(es.getTime() , C, es, ss, s, sv));
+//		} else {
+//			queue.add(C);
+//			C.queueTime = es.getTime();
+//			messageString("Customer wait.");
+//		}
+//
+//		if(isFull()){
+//				
+//			}
+//		
+//		
+//		if(maximus < queueSize()){
+//			stat.maxSize(queueSize());
+//			maximus = queueSize();
+//		}
+//		
+//		
+//
+//	}
+	
+	public void addNewCustomerToFIFO(Customer C) {
+		queue.add(C);
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	}
 	
 	public void messageString(String s){
@@ -114,14 +154,22 @@ public class FIFO extends Observable {
 		return count;
 	}
 	
+<<<<<<< HEAD
 	public void custFinished(){
 		messageString("Customer is finished, pays and leaves the salon.");
 		//ss.chairGotFree();
+=======
+	public void custFinished(){
+		ss.chairGotFree();
+		messageString("Customer is finished, pays and leaves the salon.");
+
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 		if(!isFull() && !stat.getGoing()){
 			stat.setTime2(es.getTime());
 			stat.goingTrue();
 		}
 	}
+<<<<<<< HEAD
 	
 	public void addReturnCust(Customer C){
 		if(isEmpty()){
@@ -147,10 +195,54 @@ public class FIFO extends Observable {
 			queue.add(returningCustInQueue(), C);
 			ss.chairGotBusy();
 		}
+=======
+
+	public void addReturnToQueue(Customer C){
+		queue.add(returningCustInQueue(), C);
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	}
+<<<<<<< HEAD
+=======
+//	
+//	public void addReturnCust(Customer C){
+//		
+//			if (ss.freeChairs() == ss.totalChairs()) {
+//				queue.add(returningCustInQueue(), C);
+//				getFirst();
+//				messageString("Returning customer: Customer get haircut.");
+//			} else if(!isFull()){
+//				queue.add(returningCustInQueue(), C);
+//				messageString("Returning customer: Customer stands in queue.");		
+//			}else if(isFull()){
+//				
+//
+//				//Kontrollerar ifall hela kön är återkommande. 
+//				if (returningCustInQueue() == ss.maxWaitInQueue()) {
+//					double returnTime = es.getTime()+ss.returnTime();
+//					es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv, f));	
+//					messageString("Queue full with dissatisfied customers, gets a walk and come back later.");
+//
+//				} else {
+//					removeLast();
+//					queue.add(returningCustInQueue(), C);
+//					messageString("Returning customer: Stands in queue. Last customer in queue left.");		
+//					stat.addDiss();
+//				}
+//			}
+//		}
+
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 
 	public void removeLast(){
 		queue.remove(queue.size()-1);
+	}
+	
+	public void removeFirst() {
+		queue.remove(0);
+	}
+	
+	public Customer getFirst2() {
+		return (Customer) queue.get(0);
 	}
 	
 	public boolean isEmpty(){//Fixa denna, den kan gå till negativa tal.
@@ -163,17 +255,30 @@ public class FIFO extends Observable {
 		return queue.size();
 	}
 
+<<<<<<< HEAD
 	public Customer getFirst(){
+=======
+public void getFirst(){
+		
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 		if(!isEmpty()){
 			messageString("Customer leaves queue and gets a haircut.");
 			Customer getFirst = (Customer) queue.get(0);
-			es.addEvent(new CustLeaves(es.getTime(), getFirst, es, ss, s, sv));
+			es.addEvent(new CustLeaves(es.getTime(), getFirst, es, ss, s, sv, f));
 			queue.remove(0);
+<<<<<<< HEAD
 			return getFirst;
 		}
 		return null;
+=======
+			messageString("Customer gets a haircut.");
+		} 
+		
+		
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	}
 	
+<<<<<<< HEAD
 	public void checkIfSatisfied(Customer C){
 		if(ss.randReturn()<=ss.percentageReturn()){
 			messageString("Customer is not happy.");
@@ -185,6 +290,20 @@ public class FIFO extends Observable {
 	public int getMax(){
 		return maxWait;
 	}
+=======
+//	public void checkIfSatisfied(Customer C){
+//		if(ss.randReturn()<=ss.percentageReturn()){
+//			messageString("Customer is not happy.");
+//			double returnTime = es.getTime()+ss.returnTime();
+//			es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv));	
+//			C.happy = false;
+//		} else { C.happy = true; }
+//		
+//	}
+
+	
+	
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	public int getTotalVisitors(){
 		return totalVisitors;
 	}

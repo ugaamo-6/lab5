@@ -1,5 +1,9 @@
 package simulator;
+<<<<<<< HEAD
 import state.SalongState;
+=======
+	
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 public abstract class View {
 	SalongState ss = new SalongState();
 	public void beginInfoPrint(){	

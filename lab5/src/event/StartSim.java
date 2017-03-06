@@ -31,7 +31,26 @@ public class StartSim extends Event {
 	}
 	
 	public void execute() {		
+		es.setTime(0.0);
 		s.start();
+<<<<<<< HEAD
+=======
+		
+//		Ha inte printsatser här, använd vår view-klass.
+		
+		System.out.println("--- Some information about variables ---");
+		System.out.println("The salon closes at: "+ss.getCloseTime());
+		System.out.println("Total chairs available: "+ss.freeChairs());
+		System.out.println("Chairs in the waiting room: "+ss.maxWaitInQueue());
+		System.out.println("Points when a customer enters: "+ss.getLambda());
+		System.out.println("Haircut time max: "+ss.getHMax());
+		System.out.println("Haircut time min: "+ss.getHMin());
+		System.out.println("Return time max: "+ss.getRetMax());
+		System.out.println("Return time min: "+ss.getRetMin());
+		System.out.println("Probability for a return: "+ss.percentageReturn());
+		System.out.println("----------------------------------------");
+		
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 		Event arrive = new CustArrives(time, es, ss, s, sv, f);
 		es.addEvent(arrive);
 	}
