@@ -59,7 +59,7 @@ public class CustReturns extends Event {
 			//f.messageString("Returning customer: Customer get haircut.");
 		} else if(!f.isFull()){
 			f.addReturnToQueue(C);
-			f.messageString("Returning customer: Customer stands in queue.");		
+			//f.messageString("Returning customer: Customer stands in queue.");		
 		}else if(f.isFull()){
 
 			//Kontrollerar ifall hela kön är återkommande. 
