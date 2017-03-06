@@ -18,7 +18,7 @@ public class CustLeaves extends Event{
 	Customer C;
 	double time;
 	
-	ArrayList<Integer> dissatisfied = new ArrayList<Integer>();
+	static ArrayList<Integer> dissatisfied = new ArrayList<Integer>();
 	
 	private String namn = "Leaves";
 	public String getName(){
@@ -82,6 +82,8 @@ public class CustLeaves extends Event{
 				//System.out.println("--- Dissatisfied contains: "+C.getID());
 				stat.addDiss(); //if customer not happy, add 1 to counter in stat.
 				dissatisfied.add(C.getID());
+				//System.out.println("--- "+dissatisfied);
+				//System.out.println("--- Added: "+C.getID());
 			}
 			
 			
