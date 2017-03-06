@@ -16,7 +16,7 @@ public class SalongState {
 	private final int maxWaitInQueue = 2;
 	private int freeChairs = 2;
 	private final int totalChairs = 2;
-	private double percentageReturn=0.9; 
+	private double percentageReturn=0.5; 
 	private double lambda = 1.2;
 	private long seed = 1116; //System.currentTimeMillis();
 	

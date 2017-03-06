@@ -19,6 +19,7 @@ public class CustLeaves extends Event{
 	double time;
 	
 	static ArrayList<Integer> dissatisfied = new ArrayList<Integer>();
+	static ArrayList<Integer> oldCustomers = new ArrayList<Integer>();
 	
 	private String namn = "Leaves";
 	public String getName(){
@@ -44,9 +45,14 @@ public class CustLeaves extends Event{
 	
 	public void execute() {
 		
-		stat.custCountAdd();
-		stat.qTime(qTimeCalc(C));
-		stat.lastCustTime(es.getTime());
+		
+		if(!oldCustomers.contains(C.getID())){
+			stat.custCountAdd();
+			oldCustomers.add(C.getID());
+			stat.qTime(qTimeCalc(C));
+			stat.lastCustTime(es.getTime());
+		}
+		
 		
 		FIFO f = C.getFIFO();
 		
