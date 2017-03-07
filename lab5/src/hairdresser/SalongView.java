@@ -38,7 +38,7 @@ public class SalongView extends View implements Observer {
 	
 	
 	
-	private void runningInfoPrint() {
+	public void runningInfoPrint() {
 		System.out.println("Opened.");
 		System.out.println("--- Information ---");
 		System.out.println("Closing time of the day ..............: "+salongState.getCloseTime());

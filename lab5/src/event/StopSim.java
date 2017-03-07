@@ -10,14 +10,10 @@ public class StopSim extends Event {
 //	private EventStore es;
 //	private EventPrint ep;
 	
-<<<<<<< HEAD
-	
 	EventPrint ep;
-	State s;
-=======
+	private State s;
 	private State state;
 	
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	Statistics stat = new Statistics();
 	EventStore es = new EventStore(s);
 	
@@ -26,12 +22,7 @@ public class StopSim extends Event {
 	
 	
 	public StopSim(State s){
-		
 		this.state=s;
-	}
-	
-	public void execute() {
-		state.stop();
 	}
 	
 	//Måste implementeras
@@ -46,12 +37,6 @@ public class StopSim extends Event {
 	}
 	public int getCustomerID(){
 		return C;
-	}
-<<<<<<< HEAD
-	
-	public StopSim(State s){
-		
-		this.s=s;
 	}
 	
 	public void execute() {
@@ -72,9 +57,6 @@ public class StopSim extends Event {
 		s.stop();
 		
 	}
-	@Override
-=======
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	public double getTime() {
 		return time;
 	}
