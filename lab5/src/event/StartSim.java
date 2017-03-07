@@ -6,24 +6,19 @@ import state.*;
 
 public class StartSim extends Event {
 	
-	EventPrint ep;
-	EventStore es;
-	SalongState ss;
-	State s;
-	SalongView sv;
-	FIFO f;
+	private EventPrint ep;
+	private EventStore eventStore;
+	private SalongState ss;
+	private State s;
+	private SalongView sv;
+	private FIFO f;
 	
 	private int C;
-	private String namn = "Start Simulation";
-	public String getName(){
-		return namn;
-	}
-	public int getCustomerID(){
-		return C;
-	}
+	private String toString = "Start Simulation";
+
 	
 	public StartSim(EventStore es, SalongState ss, State s, SalongView sv, FIFO f){
-		this.es=es;
+		this.eventStore=es;
 		this.ss=ss;
 		this.s=s;
 		this.sv=sv;
@@ -32,27 +27,36 @@ public class StartSim extends Event {
 	}
 	
 	public void execute() {		
-		es.setTime(0.0);
+		eventStore.setTime(0.0);
 
 		s.start();
 
 		
-//		Ha inte printsatser här, använd vår view-klass.
+//		Ha inte printsatser hï¿½r, anvï¿½nd vï¿½r view-klass.
 		s.start();
-		Event arrive = new CustArrives(time, es, ss, s, sv, f);
-		es.addEvent(arrive);
+		Event arrive = new CustArrives(time, eventStore, ss, s, sv, f);
+		eventStore.addEvent(arrive);
 		
-		System.out.println(es.getTime()+"   START----");
+		System.out.println(eventStore.getTime()+"   START----");
 	}
 	
+	//MÃ¥ste ha pga extend
 	public double getTime() {
 		return time;
 	}
+	
+
+	
+	//AnvÃ¤nds ej
+	public int getCustomerID(){
+		return C;
+	}
 
 //	@Override
-//	public String toString() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	public String toString() {
+		return toString;
+	}
+
+
 
 }

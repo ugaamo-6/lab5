@@ -1,6 +1,8 @@
 package simulator;
 
-abstract public class Event {
+import java.util.Observable;
+
+abstract public class Event{
 	
 	public double time;
 	
@@ -8,7 +10,7 @@ abstract public class Event {
 	
 	public abstract double getTime();
 	
-	public abstract String getName();
+	public abstract String toString();
 	
 	public abstract int getCustomerID(); 
 		

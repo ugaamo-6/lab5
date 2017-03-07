@@ -68,15 +68,20 @@ public class FIFO extends Observable {
 		}
 	
 }
-	public void messageString(String s){
+	
+	
+	/**Ändrar message strängen till något*/
+	private void messageString(String s){
 		message = s;
 		setChanged();
 		notifyObservers();
 	}
-	
+	/**Hämtar message strängen*/
 	public String getMessageString(){
 		return message;
 	}
+	
+	
 	
 	public boolean isFull(){
 		if(queueSize() >= ss.maxWaitInQueue()){
@@ -84,7 +89,8 @@ public class FIFO extends Observable {
 		}
 		return false;
 	} 
-	
+	/**Räknar upp antal missnöjda kunder
+	 * @return missnöjda kunder*/
 	public int returningCustInQueue(){
 		int count=0;
 		for (int i=0;i<queue.size();i++){
@@ -110,7 +116,7 @@ public class FIFO extends Observable {
 		}
 		
 	}
-
+	/**Tar bort sista kunden*/
 	public void removeLast(){
 		queue.remove(queue.size()-1);
 		if(!isFull() && !stat.getGoing()){
@@ -118,7 +124,7 @@ public class FIFO extends Observable {
 			stat.setTime2(es.getTime());
 		}
 	}
-	
+	/**Tar bort första kunden*/
 	public void removeFirst() {
 		stat.qTime(qTimeCalc(getFirst()));
 		stat.lastCustTime(es.getTime());
@@ -128,24 +134,25 @@ public class FIFO extends Observable {
 			stat.setTime2(es.getTime());
 		}
 	}
-	
+	/**Hämtar första kunden*/
 	public Customer getFirst() {
 		return (Customer) queue.get(0);
 	}
-	
+	/**Kollar om kön är tom*/
 	public boolean isEmpty(){
 		if(queueSize() == 0){
 			return true;
 		}return false;
 	}
-	
+	/**Hämtan kö storleken.*/
 	public int queueSize(){
 		return queue.size();
 	}
-
+	/**Hämtar totala vistelse kunder*/
 	public int getTotalVisitors(){
 		return totalVisitors;
 	}
+	/**Hämtar eventStore tid subtraherat med en kund kö tid.*/
 	private double qTimeCalc(Customer C){
 		return es.getTime()-C.queueTime;
 	}

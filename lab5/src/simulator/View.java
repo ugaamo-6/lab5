@@ -1,16 +1,18 @@
 
 package simulator;
 import state.SalongState;
-
+//Gör om till interface istället?
 public abstract class View {
-	SalongState ss = new SalongState();
-	public void beginInfoPrint(){	
-	}
+	private SalongState salonState = new SalongState();
 	
-	public void endInfoPrint() {
-		System.out.println("Closed.");
+	public void beginInfoPrint()
+	{
 		
 	}
 	
-	public abstract void runningInfoPrint();
+	public void endInfoPrint() {
+		System.out.println("Closed.");	
+	}
+	
+//	private abstract void runningInfoPrint();
 }
