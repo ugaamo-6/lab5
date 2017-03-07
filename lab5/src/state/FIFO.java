@@ -3,12 +3,8 @@ package state;
 import java.util.ArrayList;
 import java.util.Observable;
 import simulator.Statistics;
-import event.CustLeaves;
-import event.CustReturns;
-import hairdresser.SalongView;
 import simulator.EventStore;
 import simulator.State;
-import event.CustLeaves;
 
 import state.SalongState;
 /**
@@ -32,37 +28,31 @@ public class FIFO extends Observable {
 
 	private EventStore es;
 	private SalongState ss;
-	private State s;
-	private SalongView sv;
-	private FIFO f;
-	private CustLeaves cl;
-	
-	private int NumWaiting = 0; //max customers in queue at once 
-	public static double lastEventTime = 0;
-	
 
 	
+	private int NumWaiting = 0; //customer in the queue 
+	public static double lastEventTime = 0;
 	
-	public FIFO(EventStore es, SalongState ss, State s){
+	private Statistics stat = new Statistics();
+	private ArrayList<Object> queue =  new ArrayList<Object>();	 
+	private int totalVisitors = 0; 
+	private static String message;
+	
+	
+	public FIFO(EventStore es, SalongState ss){
 		this.es=es;
 		this.ss=ss;
-		this.s=s;
 		
 	}
 
-	private Statistics stat = new Statistics();
-	private ArrayList<Object> queue =  new ArrayList<Object>(); 
-	private int totalVisitors = 0; 
-	private static String message;
-
+	/**
+	 * Adds a new customer to the queue.
+	 * */
 	public void addNewCustomerToFIFO(Customer C) {
 
 		if(ss.getFreeChairs() == 0){
-//			timeDiffCalc(queueSize());
 			queue.add(C);
 			lastEventTime = es.getTime();
-//			stat.qTime(qTimeCalc(getFirst()));
-//			stat.lastCustTime(es.getTime());
 		}else{
 			queue.add(C);
 		}
@@ -71,27 +61,25 @@ public class FIFO extends Observable {
 				stat.maxSize(queueSize());
 				NumWaiting = queueSize();
 			}
-	
-}
+	}
 	
 	
 	/**
-	 * Check if the FIFO queue is full.
-	 * @return True in full, false if not. 
+	 * Changes last event time to the parameter time.
 	 */
-	
 	public void setLET(double time){
 		lastEventTime = time;
 	}
-	
+	/**Checks if queue is full
+	 * @return true if full, false if not*/
 	public boolean isFull(){
 		if(queueSize() >= ss.maxWaitInQueue()){
 			return true;
 		}
 		return false;
 	} 
-	/**Räknar upp antal missnöjda kunder
-	 * @return missnöjda kunder*/
+	/**Counts the amount of disappointed customers
+	 * @return disappointed customers*/
 	public int returningCustInQueue(){
 		int count=0;
 		for (int i=0;i<queue.size();i++){
@@ -101,27 +89,42 @@ public class FIFO extends Observable {
 		}
 		return count;
 	}
-
+	
+	/**
+	 * Empties hairdresschair.
+	 * */
 	public void custFinished(){
-		//System.out.println("--- FINISHED");
 		ss.chairGotFree();
 	}
+
+	/**
+	 * Returning customer is placed behind the rest of all the returning customers.
+	 * @param C, in inserted in the queue.
+	 */
 	public void addReturnToQueue(Customer C){
 			queue.add(returningCustInQueue(), C);		
 		}
-	/**Tar bort sista kunden*/
+
+	/**
+	 * Removes the last customer from the queue
+	 *Tar bort sista kunden*/
 	public void removeLast(){
 		queue.remove(queue.size()-1);
 	}
-	/**Tar bort första kunden*/
+	/**
+	 * Removes customer who is first in queue 
+	 * */
 	public void removeFirst() {
 		queue.remove(0);
 	}
-	/**Hämtar första kunden*/
+	/**
+	 * Retrieves the first customer from the queue
+	 * */
 	public Customer getFirst() {
 		return (Customer) queue.get(0);
 	}
-	/**Kollar om kön är tom*/
+	/**Checks if 
+	 * @return */
 	public boolean isEmpty(){
 		if(queueSize() == 0){
 			return true;
@@ -135,24 +138,22 @@ public class FIFO extends Observable {
 	 * H�mtar totala vistelse kunder
 	 * @return totalVisitor
 	 */
+
 	public int getTotalVisitors(){
 		return totalVisitors;
 	}
+
 	/**
-	 * H�mtar eventStore tid subtraherat med en kund k� tid.
-	 * @param C, Customer
-	 * @return ????????????????????????????
-	 */
-	private double qTimeCalc(Customer C){
-		return es.getTime()-C.queueTime;
-	}
-	
+	 * Subtracts current time with lastEventTime and records */
 	public void timeDiffCalc(int i){
 		double diff = es.getTime() - lastEventTime;
 		for(int j = 1; j<=i; j++){
-		stat.qTime(diff);}	
+			stat.qTime(diff);}	
 	}	
 	
+	/**
+	 * Creates a message string describing an event with cocurrent and relevant statistic.
+	 * */
 	public void toString(String name,int ID)
 	{
 		String b = String.format("%-5.2f %-10s %-10d %-10d %-10f %-10.2f %-7d %-7d %-7d %-10d ",
@@ -163,6 +164,7 @@ public class FIFO extends Observable {
 		notifyObservers();
 	}
 	
+	/**Retrieves a string with information*/
 	public String getMessageString(){
 		return message;
 	}

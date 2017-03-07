@@ -2,7 +2,6 @@ package event;
 
 import java.util.ArrayList;
 
-import hairdresser.SalongView;
 import simulator.*;
 import state.*;
 public class CustReturns extends Event {

@@ -49,6 +49,7 @@ public class Statistics {
 	public void addLeave(){
 		leave++;
 		}
+	/**Increases the total wait time with additional wait time.*/
 	public void qTime(double waitTime){
 		totalQtime += waitTime;
 	}

@@ -1,9 +1,5 @@
 package event;
 
-import java.util.Observable;
-import java.util.Observer;
-
-import hairdresser.*;
 import simulator.*;
 import state.*;
 
@@ -16,7 +12,6 @@ public class StartSim extends Event {
 	private FIFO f;
 	private Statistics stat = new Statistics();
 	
-	private int C;
 	private String toString = "Start Simulation";
 
 	
@@ -33,18 +28,16 @@ public class StartSim extends Event {
 	 * Executes the event.
 	 */
 	public void execute() {	
+		sv.variableInfoPrint();		
 		eventStore.setTime(0.0);
 		ss.tempTime = eventStore.getTime();
 		stat.goingTrue();
 		s.start();
 
-		
-//		Ha inte printsatser h�r, anv�nd v�r view-klass.
-		s.start();
 		Event arrive = new CustArrives(ss.nextCustTime(), eventStore, ss, s, sv, f);
 		eventStore.addEvent(arrive);
 		
-		System.out.println(eventStore.getTime()+"   START----");
+		sv.startInfoPrint();
 	}
 
 	/**
