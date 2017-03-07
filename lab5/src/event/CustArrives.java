@@ -54,6 +54,7 @@ public class CustArrives extends Event {
 		} else {
 			fifo.addNewCustomerToFIFO((Customer) C);
 			C.queueTime = eventStore.getTime();
+
 			//f.messageString("Customer wait.");
 		}
 		
