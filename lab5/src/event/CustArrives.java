@@ -55,15 +55,12 @@ public class CustArrives extends Event {
 			getFirst();
 			fifo.setLET(eventStore.getTime());
 		} else if(salongState.getFreeChairs() != 0 && fifo.isEmpty() && salongState.getFreeChairs() != 0){
-			//f.messageString("Customer gets a haircut!");
 			salongState.chairGotBusy();	
 			eventStore.addEvent(new CustLeaves(eventStore.getTime() , C, eventStore, salongState, state, sv, fifo));
 			fifo.setLET(eventStore.getTime());
 		} else {
 			fifo.addNewCustomerToFIFO((Customer) C);
-			//C.queueTime = es.getTime();
 			C.queueTime = eventStore.getTime();
-			//f.messageString("Customer wait.");
 			fifo.setLET(eventStore.getTime());
 		}
 		
@@ -75,7 +72,6 @@ public class CustArrives extends Event {
 			salongState.chairGotBusy();
 			eventStore.addEvent(new CustLeaves(eventStore.getTime(), fifo.getFirst(), eventStore, salongState, state, sv, fifo));
 			fifo.removeFirst();
-			//f.messageString("Customer gets a haircut.");
 		} 
 	}
 	

@@ -45,31 +45,26 @@ public class CustReturns extends Event {
 			f.addReturnToQueue(C);
 			getFirst();
 		} else if(!f.isFull()){
-
 			f.timeDiffCalc(f.queueSize());
 			f.addReturnToQueue(C);
 			f.lastEventTime = es.getTime();
-
-		
-			f.addReturnToQueue(C);	
 		}else if(f.isFull()){
 
 			//Kontrollerar ifall hela k�n �r �terkommande. 
 			if (f.returningCustInQueue() == ss.maxWaitInQueue()) {
-				f.timeDiffCalc(f.queueSize());
 				double returnTime = es.getTime()+ss.randReturnTime();
-				es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv, f));	
+				f.timeDiffCalc(f.queueSize());
+				es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv, f));
 				f.lastEventTime = es.getTime();
-			} else {
+				} else {
 				f.timeDiffCalc(f.queueSize());
 				f.removeLast();
 				f.addReturnToQueue(C);
 				f.lastEventTime = es.getTime();
-				
-
+			} 
 			}
 		}
-	}
+	
 	
 	public void getFirst(){
 		FIFO f = C.getFIFO(); // Kan detta l�sas p� annat s�tt?
@@ -96,3 +91,4 @@ public class CustReturns extends Event {
 	}
 
 }
+

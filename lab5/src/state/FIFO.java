@@ -76,13 +76,13 @@ public class FIFO extends Observable {
 }
 	
 	
-	/**Ändrar message strängen till något*/
+	/**Ã„ndrar message strÃ¤ngen till nÃ¥got*/
 	private void messageString(String s){
 		message = s;
 		setChanged();
 		notifyObservers();
 	}
-	/**Hämtar message strängen*/
+	/**HÃ¤mtar message strÃ¤ngen*/
 	public String getMessageString(){
 		return message;
 	}
@@ -95,8 +95,8 @@ public class FIFO extends Observable {
 		}
 		return false;
 	} 
-	/**Räknar upp antal missnöjda kunder
-	 * @return missnöjda kunder*/
+	/**RÃ¤knar upp antal missnÃ¶jda kunder
+	 * @return missnÃ¶jda kunder*/
 	public int returningCustInQueue(){
 		int count=0;
 		for (int i=0;i<queue.size();i++){
@@ -122,29 +122,29 @@ public class FIFO extends Observable {
 	public void removeLast(){
 		queue.remove(queue.size()-1);
 	}
-	/**Tar bort första kunden*/
+	/**Tar bort fÃ¶rsta kunden*/
 	public void removeFirst() {
 		queue.remove(0);
 	}
-	/**Hämtar första kunden*/
+	/**HÃ¤mtar fÃ¶rsta kunden*/
 	public Customer getFirst() {
 		return (Customer) queue.get(0);
 	}
-	/**Kollar om kön är tom*/
+	/**Kollar om kÃ¶n Ã¤r tom*/
 	public boolean isEmpty(){
 		if(queueSize() == 0){
 			return true;
 		}return false;
 	}
-	/**Hämtan kö storleken.*/
+	/**HÃ¤mtan kÃ¶ storleken.*/
 	public int queueSize(){
 		return queue.size();
 	}
-	/**Hämtar totala vistelse kunder*/
+	/**HÃ¤mtar totala vistelse kunder*/
 	public int getTotalVisitors(){
 		return totalVisitors;
 	}
-	/**Hämtar eventStore tid subtraherat med en kund kö tid.*/
+	/**HÃ¤mtar eventStore tid subtraherat med en kund kÃ¶ tid.*/
 	private double qTimeCalc(Customer C){
 		return es.getTime()-C.queueTime;
 	}
@@ -157,3 +157,4 @@ public class FIFO extends Observable {
 	}
 
 }
+
