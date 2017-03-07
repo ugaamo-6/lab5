@@ -20,6 +20,7 @@ public class Statistics {
 	public void addQcust(){
 		totalQcust++;
 	}
+	
 	public void custStatAddTime(double waitTime){
 		totalTime += waitTime;
 	}

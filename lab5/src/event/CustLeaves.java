@@ -35,18 +35,22 @@ public class CustLeaves extends Event{
 
 	
 	public void execute() {
+		f.timeDiffCalc(f.queueSize());
+		f.setLET(eventStore.getTime());
+		
 		f.toString(namn, C.getID());
+		
 		if(!oldCustomers.contains(C.getID())){
 			stat.custCountAdd();
 			oldCustomers.add(C.getID());
 		}
-		f.timeDiffCalc(f.queueSize());
+		
 		FIFO f = C.getFIFO();
 		
 		checkIfSatisfied(C);
 		f.custFinished();
 		getFirst();	
-		f.setLET(eventStore.getTime());
+				
 		if(ss.getFreeChairs() != 0 && !stat.getGoing()){
 			stat.setTime1(eventStore.getTime());
 			stat.goingTrue();

@@ -39,9 +39,8 @@ public class FIFO extends Observable {
 	
 	private int NumWaiting = 0; //max customers in queue at once 
 	public static double lastEventTime = 0;
-	public void setLET(double time){
-		lastEventTime = time;
-	}
+	
+
 	
 	
 	public FIFO(EventStore es, SalongState ss, State s){
@@ -59,7 +58,7 @@ public class FIFO extends Observable {
 	public void addNewCustomerToFIFO(Customer C) {
 
 		if(ss.getFreeChairs() == 0){
-			timeDiffCalc(queueSize());
+//			timeDiffCalc(queueSize());
 			queue.add(C);
 			lastEventTime = es.getTime();
 //			stat.qTime(qTimeCalc(getFirst()));
@@ -80,6 +79,11 @@ public class FIFO extends Observable {
 	 * Check if the FIFO queue is full.
 	 * @return True in full, false if not. 
 	 */
+	
+	public void setLET(double time){
+		lastEventTime = time;
+	}
+	
 	public boolean isFull(){
 		if(queueSize() >= ss.maxWaitInQueue()){
 			return true;
@@ -147,7 +151,7 @@ public class FIFO extends Observable {
 	public void timeDiffCalc(int i){
 		double diff = es.getTime() - lastEventTime;
 		for(int j = 1; j<=i; j++){
-		stat.qTime(diff);}	
+			stat.qTime(diff);}	
 	}
 
 	public void toString(String name,int ID)

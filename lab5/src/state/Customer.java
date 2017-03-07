@@ -14,11 +14,7 @@ import simulator.State;
  * */
 public class Customer {
 	
-//	private EventStore es;
-//	private SalongState ss;
-//	private State s;
-//	private SalongView sv;
-	private FIFO fifon;
+	private FIFO fifo;
 		
 	static int id_counter = -1;
 	
@@ -30,7 +26,7 @@ public class Customer {
 	public Customer(FIFO f){
 
 		
-		this.fifon=f;
+		this.fifo=f;
 		id = id_counter + 1; //Det finns inte ett id nummer som är 0 om detta gäller.
 		happy = true;
 		id_counter++;
@@ -47,7 +43,7 @@ public class Customer {
 	}
 	/**Hämtar kön från en kund*/
 	public FIFO getFIFO(){
-		return fifon;
+		return fifo;
 	}
 }
 
