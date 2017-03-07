@@ -103,22 +103,12 @@ public class FIFO extends Observable {
 	}
 
 	public void custFinished(){
-		System.out.println("--- FINISHED");
+		//System.out.println("--- FINISHED");
 		ss.chairGotFree();
 	}
-
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	public void addReturnToQueue(Customer C){
 			queue.add(returningCustInQueue(), C);		
 		}
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	/**Tar bort sista kunden*/
 	public void removeLast(){
 		queue.remove(queue.size()-1);
@@ -160,24 +150,18 @@ public class FIFO extends Observable {
 	public void timeDiffCalc(int i){
 		double diff = es.getTime() - lastEventTime;
 		for(int j = 1; j<=i; j++){
-<<<<<<< HEAD
 		stat.qTime(diff);}	
-=======
-			stat.qTime(diff);}	
-	}
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
-
-<<<<<<< HEAD
-	}
+	}	
 	
-=======
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	public void toString(String name,int ID)
 	{
-		String b = String.format("%-5.2f %-10s %-10d %-10d %-10.2f %-7d %-7d  %-7d %-10d",
+		String b = String.format("%-5.2f %-10s %-10d %-10d %-10.2f %-7d %-7d  %-7d %-10d %-10f",
 					es.getTime(),name,ID,ss.getFreeChairs(),stat.getQtime(),queueSize(),(int)stat.getCust(),             
 					stat.getLeave(),                 
-					stat.getDiss());
+					stat.getDiss(),
+					stat.getIdle()
+					
+				);
 		message = b;
 		setChanged();
 		notifyObservers();

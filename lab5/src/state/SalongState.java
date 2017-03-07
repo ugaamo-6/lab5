@@ -49,21 +49,7 @@ public class SalongState {
 	 */
 	public void chairGotFree() {
 		freeChairs++;
-		System.out.println("--- PLUS");
-		if((freeChairs > 0) && !stat.getGoing()){
-			//System.out.println("--- FREE");
-			tempTime = es.getTime();
-			stat.goingTrue();
-		}else if((freeChairs > 0) && stat.getGoing()){
-			double temp = es.getTime() - tempTime;
-			System.out.println(temp);
-			for(int i = 1; i<=getFreeChairs(); i++){
-				stat.addIdletime(temp);
-				//System.out.println(getFreeChairs());
-				//System.out.println(stat.getIdle());	
-			}
-			tempTime = es.getTime();
-		}
+		//System.out.println("--- PLUS");
 	}
 	/**
 	 * 
@@ -71,18 +57,18 @@ public class SalongState {
 	 */
 	public void chairGotBusy() {
 		freeChairs--;
-		System.out.println("--- MINUS");
-//		//System.out.println("--- BUSY");
-		if((freeChairs == 0) && stat.getGoing()){
-			double temp = es.getTime() - tempTime;
-			for(int i = 1; i<=getFreeChairs();i++){
-				stat.addIdletime(temp);
-				//System.out.println(stat.getIdle());
-			}
-			stat.goingFalse();
-		}
+	
 	}
 	
+	static double oldChairTime = 0;
+	public void idleCounter(){
+		double diff = es.getTime() - oldChairTime;
+		for(int i = 1; i <= getFreeChairs(); i++){
+			stat.addIdletime(diff);
+		} 
+		oldChairTime = es.getTime();
+		
+	}
 	/**
 	 * Return the number of free hairdress seats.
 	 *@return Number of hairdress chairs that is not busy.

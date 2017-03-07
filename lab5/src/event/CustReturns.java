@@ -38,6 +38,7 @@ public class CustReturns extends Event {
 	 * 
 	 */
 	public void execute() {
+		ss.idleCounter();
 		f.timeDiffCalc(f.queueSize());
 		f.setLET(es.getTime());
 		

@@ -36,6 +36,7 @@ public class CustArrives extends Event {
 		
 		if (state.opened()) {
 			Customer C = new Customer(fifo);
+			salongState.idleCounter();
 			fifo.timeDiffCalc(fifo.queueSize());
 			fifo.setLET(eventStore.getTime());
 
@@ -79,7 +80,6 @@ public class CustArrives extends Event {
 	public void getFirst(){
 		if(!fifo.isEmpty()){
 			salongState.chairGotBusy();
-			System.out.println("--- NIgga=?");
 			eventStore.addEvent(new CustLeaves(eventStore.getTime(), fifo.getFirst(), eventStore, salongState, state, sv, fifo));
 			fifo.removeFirst();
 		} 
