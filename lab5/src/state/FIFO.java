@@ -76,15 +76,6 @@ public class FIFO extends Observable {
 }
 	
 	
-//	/**Ändrar message strängen till något*/
-//	private void messageString(String s){
-//		message = s;
-//
-//	}
-//	/**Hämtar message strängen*/
-
-	
-	
 	/**
 	 * Check if the FIFO queue is full.
 	 * @return True in full, false if not. 
@@ -112,12 +103,11 @@ public class FIFO extends Observable {
 	}
 
 	public void addReturnToQueue(Customer C){
-//if(ss.getFreeChairs() == 0){
-//timeDiffCalc(queueSize());
-			queue.add(returningCustInQueue(), C);
-			
-		//messageString("Customer is finished, pays and leaves the salon.");
-	}
+//		if(ss.getFreeChairs() == 0){
+		//timeDiffCalc(queueSize());
+			queue.add(returningCustInQueue(), C);	
+
+		}
 	/**Tar bort sista kunden*/
 	public void removeLast(){
 		queue.remove(queue.size()-1);
@@ -159,17 +149,12 @@ public class FIFO extends Observable {
 	public void timeDiffCalc(int i){
 		double diff = es.getTime() - lastEventTime;
 		for(int j = 1; j<=i; j++){
-		stat.qTime(diff);}
-		
+		stat.qTime(diff);}	
 	}
-<<<<<<< HEAD
 
-
-=======
-	
 	public void toString(String name,int ID)
 	{
-		String b = String.format("%-5.1f %-10s %-10d %-10d %-10.1f %-7d %-7d  %-7d %-10d",
+		String b = String.format("%-5.2f %-10s %-10d %-10d %-10.2f %-7d %-7d  %-7d %-10d",
 					es.getTime(),name,ID,ss.getFreeChairs(),stat.getQtime(),queueSize(),(int)stat.getCust(),             
 					stat.getLeave(),                 
 					stat.getDiss());
@@ -182,6 +167,5 @@ public class FIFO extends Observable {
 		return message;
 	}
 	
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 }
 

@@ -7,11 +7,6 @@ import state.*;
 
 public class CustReturns extends Event {
 	
-<<<<<<< HEAD
-	private Statistics stat = new Statistics();
-	private EventPrint ep; //Fortfarande vart?
-=======
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	private EventStore es;
 	private SalongState ss;
 	private State s;
@@ -50,11 +45,7 @@ public class CustReturns extends Event {
 		if (ss.getFreeChairs() == ss.totalChairs()) {
 			f.addReturnToQueue(C);
 			getFirst();
-		} else if(!f.isFull()){
-			f.timeDiffCalc(f.queueSize());
-			f.addReturnToQueue(C);
-			f.lastEventTime = es.getTime();
-		}else if(f.isFull()){
+		} else if(f.isFull()){
 
 			//Kontrollerar ifall hela k�n �r �terkommande. 
 			if (f.returningCustInQueue() == ss.maxWaitInQueue()) {
@@ -68,7 +59,17 @@ public class CustReturns extends Event {
 				f.addReturnToQueue(C);
 				f.lastEventTime = es.getTime();
 			} 
-			}
+		} else if (ss.getFreeChairs() != ss.totalChairs() && ss.getFreeChairs() != 0 ) {
+			f.addReturnToQueue(C);
+			getFirst();
+			
+		} else if(!f.isFull()){
+			f.timeDiffCalc(f.queueSize());
+			f.addReturnToQueue(C);
+			f.lastEventTime = es.getTime();
+		}
+			
+		
 		}
 	
 	/**

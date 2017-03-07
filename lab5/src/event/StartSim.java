@@ -34,11 +34,8 @@ public class StartSim extends Event {
 	 */
 	public void execute() {		
 		eventStore.setTime(0.0);
-<<<<<<< HEAD
 		ss.tempTime = eventStore.getTime();
 		stat.goingTrue();
-=======
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 		s.start();
 
 		
