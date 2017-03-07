@@ -46,6 +46,7 @@ public class Closing extends Event implements Observer{
 		String toString = es.getTime() +"   CLOSING-------"; 
 		return toString;
 	}
+	
 	public int getCustomerID(){
 		return C;
 	}
