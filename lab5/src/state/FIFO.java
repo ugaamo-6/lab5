@@ -118,6 +118,7 @@ public class FIFO extends Observable {
 			
 		//messageString("Customer is finished, pays and leaves the salon.");
 	}
+	
 	/**Tar bort sista kunden*/
 	public void removeLast(){
 		queue.remove(queue.size()-1);
@@ -162,11 +163,6 @@ public class FIFO extends Observable {
 		stat.qTime(diff);}
 		
 	}
-<<<<<<< HEAD
-
-
-=======
-	
 	public void toString(String name,int ID)
 	{
 		String b = String.format("%-5.1f %-10s %-10d %-10d %-10.1f %-7d %-7d  %-7d %-10d",
@@ -181,7 +177,5 @@ public class FIFO extends Observable {
 	public String getMessageString(){
 		return message;
 	}
-	
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 }
 

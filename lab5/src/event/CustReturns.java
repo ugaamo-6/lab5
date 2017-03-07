@@ -6,12 +6,6 @@ import state.*;
 
 
 public class CustReturns extends Event {
-	
-<<<<<<< HEAD
-	private Statistics stat = new Statistics();
-	private EventPrint ep; //Fortfarande vart?
-=======
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	private EventStore es;
 	private SalongState ss;
 	private State s;
