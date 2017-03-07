@@ -18,11 +18,7 @@ public class EventStore extends Observable{
 
 	ArrayList<Event> eventQueue = new ArrayList<Event>();
 	private State state; 
-//	private SalongState ss = new SalongState();
-//	private FIFO f;
-//	private Statistics stat;
 
-	
 	public EventStore(State s) {
 		this.state=s;
 	}

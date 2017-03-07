@@ -34,8 +34,6 @@ public class CustReturns extends Event {
 	
 	public void execute() {
 		f = (FIFO) C.getFIFO();
-//		f.custFinished();
-//		f.checkIfSatisfied(C);
 		addReturnCust(C);
 		ep = new EventPrint(namn, C.getID(), es,ss,f);
 	}
@@ -46,26 +44,18 @@ public class CustReturns extends Event {
 		if (ss.getFreeChairs() == ss.totalChairs()) {
 			f.addReturnToQueue(C);
 			getFirst();
-			//f.messageString("Returning customer: Customer get haircut.");
 		} else if(!f.isFull()){
-			f.addReturnToQueue(C);
-			//f.messageString("Returning customer: Customer stands in queue.");		
+			f.addReturnToQueue(C);	
 		}else if(f.isFull()){
 
 			//Kontrollerar ifall hela k�n �r �terkommande. 
 			if (f.returningCustInQueue() == ss.maxWaitInQueue()) {
-				double returnTime = es.getTime()+ss.returnTime();
+				double returnTime = es.getTime()+ss.randReturnTime();
 				es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv, f));	
-				//f.messageString("Queue full with dissatisfied customers, gets a walk and come back later.");
-
-//				f.messageString("Queue full with dissatisfied customers, gets a walk and come back later.");
 
 			} else {
 				f.removeLast();
 				f.addReturnToQueue(C);
-				//f.messageString("Returning customer: Stands in queue. Last customer in queue left.");		
-//				f.messageString("Returning customer: Stands in queue. Last customer in queue left.");		
-//				stat.addDiss();
 			}
 		}
 	}
@@ -75,10 +65,8 @@ public class CustReturns extends Event {
 		if(!f.isEmpty()){
 			
 			ss.chairGotBusy();
-//			Customer getFirst = (Customer) f.getFirst();
 			es.addEvent(new CustLeaves(es.getTime(), f.getFirst(), es, ss, s, sv, f));
 			f.removeFirst();
-			//f.messageString("Customer gets a haircut.");
 		} 
 	}
 	

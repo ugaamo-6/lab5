@@ -29,15 +29,22 @@ public class SalongState {
 	private UniformRandomStream haircuttimeUniRand = new UniformRandomStream(haircutMinTime, haircutMaxTime, seed);
 
 	
-	public SalongState(/*double percentageReturn*/EventStore es){
+	public SalongState(EventStore es){
 		this.es = es;
-		/*this.percentageReturn=percentageReturn;*/
 	}
 	
+	/** 
+	 * returns the maximum number of customers i queue.
+	 * 
+	 * @return maxWaitInQueue maximum number of people in queue.
+	 * */
 	public int maxWaitInQueue() {
 		return maxWaitInQueue;
 	}
-	
+	/**
+	 * 
+	 * A customer left hairdress chair.
+	 */
 	public void chairGotFree() {
 		freeChairs++;
 		if((freeChairs != 0) && !stat.getGoing()){
@@ -45,8 +52,10 @@ public class SalongState {
 			stat.setTime2(es.getTime());
 		}
 	}
-	
-	
+	/**
+	 * 
+	 * A customer sits down in a hairdress chair.
+	 */
 	public void chairGotBusy() {
 		freeChairs--;
 		if((freeChairs == 0) && stat.getGoing()){
@@ -56,67 +65,118 @@ public class SalongState {
 		}
 	}
 	
+	/**
+	 * Return the number of free hairdress seats.
+	 *@return Number of hairdress chairs that is not busy.
+	 */
 	public int getFreeChairs() {
 		return freeChairs;
 	}
 	
+	/**
+	 * returns the total number of hairdress chairs.
+	 * @return Total number of hairdress chairs in the saloon.
+	 */
 	public int totalChairs() {
 		return totalChairs;
 	}
 
+	/**
+	 * Returns Lambda used in Exponential random method.
+	 * @return Lambda.
+	 */
 	public double getLambda(){
 		return lambda;
 	}
-	
+	/**
+	 * Returns the seed used in random methods.
+	 * @return Seed.
+	 */
 	public long getSeed() {
 		return seed;
 	}
 	
+	/**
+	 * Returns the maximum amount of time a customer can be cut.
+	 * @return Maximum haircut time.
+	 */
 	public double getHMax(){
 		return haircutMaxTime;
 	}
+	
+	/**
+	 * Returns the minimum amount of time a customer can be cut.
+	 * @return Minimum haircut time.
+	 */
 	public double getHMin(){
 		return haircutMinTime;
 	}
+	
+	/**
+	 * Returns the maximum time it can take for a customer to returns.
+	 * @return Maximum returning time.
+	 */
 	public double getRetMax(){
 		return returnMaxTime;
 	}
+	
+	/**
+	 * Returns the maximum time it can take for a customer to returns.
+	 * @return Minimum returning time.
+	 */
 	public double getRetMin(){
 		return returnMinTime;
 	}
 
-	public double haircutTime(){
-		
+	/**
+	 * Returns the time it takes to cut hair for customer.
+	 * @return Haircut time.
+	 */
+	public double haircutTime(){		
 		double rand = haircuttimeUniRand.next();
-//		System.out.println("----- "+rand);
 		stat.custStatAddTime(rand);
 		return rand;
 	}
 	
+	/**
+	 * The time it takes for a customer to return.
+	 * @return Time to return.
+	 */
 	public double randReturn() {
 		double rand = pRand.next();
-//		System.out.println("----- "+rand);
 		return rand;
 	}
 	
-	
+	/**
+	 * Returns the chance of getting dissatisfied and returning. Double between 0-1. Ex: 0.2 = 20% chacne.
+	 * @return Chance of return. 
+	 */
 	public double percentageReturn() {
 		return percentageReturn;
 	}
 	
-	public double returnTime(){
-		
+	/**
+	 * Random time to return for a returning customer.
+	 * @return Random time of return.
+	 */
+	public double randReturnTime(){
 		double rand = returntimeUniRand.next();
 		return rand;
-		
 	}
 	
-	public double nextCustTime(){//FÅ KOLL PÅ DENNA.
-		
+	/**
+	 * Generates a random time for the next customer to arrive.
+	 * @return Random time for next customer to arrive.
+	 */
+	public double nextCustTime(){
 		double rand = expRand.next();
 		return rand;
 	}
 	
+	/**
+	 * Returns the closing time of the salon.
+	 * @return Closing time of the salon.
+	 */
 	public double getCloseTime() {
 		return closeTime;
 	}

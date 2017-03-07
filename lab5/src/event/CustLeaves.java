@@ -58,16 +58,12 @@ public class CustLeaves extends Event{
 		FIFO f = C.getFIFO(); // Kan detta l�sas p� annat s�tt?
 		
 		if(ss.randReturn()<=ss.percentageReturn()){
-			//f.messageString("Customer is not happy.");
-			double returnTime = eventStore.getTime()+ss.returnTime();
+			double returnTime = eventStore.getTime()+ss.randReturnTime();
 			eventStore.addEvent(new CustReturns(returnTime, C, eventStore, ss, s, sv, f));	
 			C.happy = false;
 			if(!dissatisfied.contains(C.getID())){
-				//System.out.println("--- Dissatisfied contains: "+C.getID());
 				stat.addDiss(); //if customer not happy, add 1 to counter in stat.
 				dissatisfied.add(C.getID());
-				//System.out.println("--- "+dissatisfied);
-				//System.out.println("--- Added: "+C.getID());
 			}
 			
 		} else {
@@ -91,7 +87,6 @@ public class CustLeaves extends Event{
 			ss.chairGotBusy();
 			eventStore.addEvent(new CustLeaves(eventStore.getTime(), f.getFirst(), eventStore, ss, s, sv, f));
 			f.removeFirst();
-			//f.messageString("Customer gets a haircut.");
 		} 
 	}
 	
