@@ -45,6 +45,7 @@ public class CustArrives extends Event {
 	private void addToFIFO(Customer C) {
 		if(fifo.isFull()){
 			stat.addLeave();
+			fifo.timeDiffCalc();
 			//f.messageString("The queue is full, customer leaves");
 		}
 		else if(salongState.getFreeChairs() != 0 && fifo.isEmpty()){

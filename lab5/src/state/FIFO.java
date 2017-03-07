@@ -39,6 +39,7 @@ public class FIFO extends Observable {
 	
 	private int NumWaiting = 0; //max customers in queue at once 
 	
+	
 	public FIFO(EventStore es, SalongState ss, State s){
 		this.es=es;
 		this.ss=ss;
@@ -52,7 +53,14 @@ public class FIFO extends Observable {
 	private static String message;
 
 	public void addNewCustomerToFIFO(Customer C) {
-		queue.add(C);
+		if(ss.getFreeChairs() == 0){
+			queue.add(C);
+			stat.qTime(qTimeCalc(getFirst()));
+			stat.lastCustTime(es.getTime());
+		}else{
+			queue.add(C);
+		}
+		
 		C.queueTime = es.getTime();
 		if(NumWaiting < queueSize()){
 			stat.maxSize(queueSize());
@@ -100,7 +108,13 @@ public class FIFO extends Observable {
 	}
 	
 	public void addReturnToQueue(Customer C){
-		queue.add(returningCustInQueue(), C);
+		if(ss.getFreeChairs() == 0){
+			queue.add(returningCustInQueue(), C);
+			timeDiffCalc();
+		}else{
+			queue.add(returningCustInQueue(), C);
+		}
+		
 		C.queueTime = es.getTime();
 		stat.addQcust();
 		
@@ -112,8 +126,6 @@ public class FIFO extends Observable {
 	}
 	/**Tar bort första kunden*/
 	public void removeFirst() {
-		stat.qTime(qTimeCalc(getFirst()));
-		stat.lastCustTime(es.getTime());
 		queue.remove(0);
 	}
 	/**Hämtar första kunden*/
@@ -137,6 +149,12 @@ public class FIFO extends Observable {
 	/**Hämtar eventStore tid subtraherat med en kund kö tid.*/
 	private double qTimeCalc(Customer C){
 		return es.getTime()-C.queueTime;
+	}
+	
+	public void timeDiffCalc(){
+		double temp = es.getTime() - stat.getQtime();
+		stat.qTime(temp);
+		
 	}
 
 }

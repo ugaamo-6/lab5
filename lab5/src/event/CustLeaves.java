@@ -47,6 +47,7 @@ public class CustLeaves extends Event{
 		checkIfSatisfied(C);
 		f.custFinished();
 		getFirst();	
+		f.timeDiffCalc();
 		
 		ep = new EventPrint(namn, C.getID(), eventStore,ss,f);
 	}
