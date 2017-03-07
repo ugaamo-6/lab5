@@ -46,7 +46,7 @@ public class Simulator {
 		
 		State s = new State();
 		EventStore es = new EventStore(s);
-		SalongState ss = new SalongState();
+		SalongState ss = new SalongState(es);
 		FIFO f = new FIFO(es, ss, s);
 		Simulator sim = new Simulator(es, s, ss, f);
 		sim.Run();

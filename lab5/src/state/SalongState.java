@@ -1,13 +1,22 @@
 package state;
 
 import simulator.Statistics;
+import simulator.EventStore;
 import random.*;
 
 public class SalongState {
 		
+<<<<<<< HEAD
+	private Statistics stat = new Statistics();
+	private EventStore es;
+	
+	private double closeTime = 10.0;
+	
+=======
 	private Statistics s = new Statistics();
 	private double closeTime = 7.0;
 	
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	private double haircutMinTime = 1.0;
 	private double haircutMaxTime = 2.0;
 	private double returnMinTime = 1.0;
@@ -26,7 +35,8 @@ public class SalongState {
 	private UniformRandomStream pRand = new UniformRandomStream(0,1);
 	private UniformRandomStream haircuttimeUniRand = new UniformRandomStream(haircutMinTime, haircutMaxTime, seed);
 	
-	public SalongState(/*double percentageReturn*/){
+	public SalongState(/*double percentageReturn*/EventStore es){
+		this.es = es;
 		/*this.percentageReturn=percentageReturn;*/
 	}
 	
@@ -36,10 +46,20 @@ public class SalongState {
 	
 	public void chairGotFree() {
 		freeChairs++;
+		if((freeChairs != 0) && !stat.getGoing()){
+			stat.goingTrue();
+			stat.setTime2(es.getTime());
+		}
 	}
+	
 	
 	public void chairGotBusy() {
 		freeChairs--;
+		if((freeChairs == 0) && stat.getGoing()){
+			stat.setTime1(es.getTime());
+			stat.idleCalc();
+			stat.goingFalse();
+		}
 	}
 	
 	public int getFreeChairs() {
@@ -75,7 +95,7 @@ public class SalongState {
 		
 		double rand = haircuttimeUniRand.next();
 //		System.out.println("----- "+rand);
-		s.custStatAddTime(rand);
+		stat.custStatAddTime(rand);
 		return rand;
 	}
 	
