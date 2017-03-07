@@ -35,7 +35,7 @@ public class Main {
 		
 		//Creates two events, one staring and one closing.
 		es.addEvent(new StartSim(es, ss, s, sv, f));
-		es.addEvent(new Closing(ss.getCloseTime(),es,s,sv));
+		es.addEvent(new Closing(ss.getCloseTime(),s,sv));
 		
 		Simulator sim = new Simulator(es, s, v);
 		sim.Run();

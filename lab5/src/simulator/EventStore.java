@@ -3,12 +3,15 @@ package simulator;
 import java.util.ArrayList;
 import java.util.Observable;
 
-import event.CustArrives;
 import event.StopSim;
-import state.SalongState;
-import state.FIFO;
-import simulator.Statistics;
 
+/**
+ * Consist of a queue of events, sorting events with execution-time.
+ * 
+ * @author Johan Br�tendal
+ * @author Gustav Mattsson
+ * @author Jonas Jarnh�ll Sj�man
+ */
 public class EventStore extends Observable{
 	
 	//This array-list keep track of the queue of Events
@@ -24,7 +27,9 @@ public class EventStore extends Observable{
 	}
 
 	
-	/**Lägger till ett event*/
+	/**Lägger till ett event
+	 * @param Event, event we will add.
+	 * */
 	public void addEvent(Event addEvent){
 		
 		if (eventQueue.size() == 0) { //Basfallet
@@ -44,7 +49,9 @@ public class EventStore extends Observable{
 	}
 	
 
-	/**Hämtar ut ett event från index 0*/
+	/**Hämtar ut ett event från index 0
+	 * @return Next event.
+	 * */
 	public Event nextEvent() {
 		if (eventQueue.size() == 0 ) { 	//Basfall om eventlistan är tom lägg in Stop eventet
 			addEvent(new StopSim(state));
@@ -60,19 +67,27 @@ public class EventStore extends Observable{
 	
 	
 
-	/**När event poppas och denna metod används får nuvarande tid en ny tid*/
+	/**När event poppas och denna metod används får nuvarande tid en ny tid
+	 * @param double time, the time we set as the current time.
+	 * */
 	public void setTime(double time) {
 		currentTime = time; 
 	}
 	
-	/**Hämtar nuvarande tid*/
+	/**Hämtar nuvarande tid
+	 * @return Current Time.
+	 * */
 	public double getTime() { 
 		return currentTime; 
 	}
 	
 	
 	
-	/**Hjälpmetod jämför storleken/olikheten mellan två element*/
+	/**Hjälpmetod jämför storleken/olikheten mellan två element
+	 * @return If B is larger than A.
+	 * @param Event A, event to compare.
+	 * @param Event B, event to compare.
+	 * */
 	private boolean compareTime(Event A, Event B){
 		return A.getTime() < B.getTime();
 		

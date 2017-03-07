@@ -1,12 +1,13 @@
-//Kika pï¿½ 6.8, har vi gjort rï¿½tt?
-//Kika pï¿½ 6.9, har vi gjort rï¿½tt?
-//Anvï¿½nd private!!
-//Kika pï¿½ 6.10, har vi gjort rï¿½tt?
-//Kika pï¿½ 6.15, har vi gjort rï¿½tt?
-
 
 package simulator;
 
+/**
+ * Simulator calling future events.
+ * 
+ * @author Johan Bråtendal
+ * @author Gustav Mattsson
+ * @author Jonas Jarnhäll Sjöman
+ */
 public class Simulator {
 	private EventStore eventStore;
 	private State state;
@@ -18,7 +19,7 @@ public class Simulator {
 		this.v=v;
 	}
 	/**
-	 * Kör ett program.
+	 * Executes a program.
 	 */
 	public void Run() {
 		state.start();

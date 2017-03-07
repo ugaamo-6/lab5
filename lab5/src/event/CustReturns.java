@@ -4,9 +4,15 @@ import java.util.ArrayList;
 
 import simulator.*;
 import state.*;
-public class CustReturns extends Event {
 
-	
+/**
+ * A subclass to event, creating a returning customer.
+ * 
+ * @author Johan Bråtendal
+ * @author Gustav Mattsson
+ * @author Jonas Jarnhäll Sjöman
+ */
+public class CustReturns extends Event {	
 
 	Statistics stat = new Statistics();	
 	private EventStore es;
@@ -34,7 +40,7 @@ public class CustReturns extends Event {
 	
 	
 	/**
-	 * 
+	 * Make a customer return to the salon.
 	 */
 	public void execute() {
 		ss.idleCounter();
@@ -51,6 +57,10 @@ public class CustReturns extends Event {
 		}
 	}
 	
+	/**
+	 * Add a returning customer to FIFO-queue.
+	 * @param C, is the customer added to the queue.
+	 */
 	public void addReturnCust(Customer C){
 		f = (FIFO) C.getFIFO();
 	

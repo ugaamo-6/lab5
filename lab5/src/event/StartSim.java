@@ -3,6 +3,13 @@ package event;
 import simulator.*;
 import state.*;
 
+/**
+ * A subclass to event, starting the simulation.
+ * 
+ * @author Johan Bråtendal
+ * @author Gustav Mattsson
+ * @author Jonas Jarnhäll Sjöman
+ */
 public class StartSim extends Event {
 	
 	private EventStore eventStore;

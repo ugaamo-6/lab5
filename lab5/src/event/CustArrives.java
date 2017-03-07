@@ -1,10 +1,15 @@
 package event;
 
-
-
 import simulator.*;
 import state.*;
 
+/**
+ * A subclass to event, creating arriving customer.
+ * 
+ * @author Johan Bråtendal
+ * @author Gustav Mattsson
+ * @author Jonas Jarnhäll Sjöman
+ */
 public class CustArrives extends Event {
 	
 	private EventStore eventStore;

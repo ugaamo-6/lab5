@@ -8,6 +8,13 @@ import state.SalongState;
 import state.SalongView;
 import state.FIFO;
 
+/**
+ * A subclass to event, stopping the simulation.
+ * 
+ * @author Johan Bråtendal
+ * @author Gustav Mattsson
+ * @author Jonas Jarnhäll Sjöman
+ */
 public class StopSim extends Event {
 
 	State s;
@@ -20,21 +27,23 @@ public class StopSim extends Event {
 	FIFO f = new FIFO(es, ss);
 	SalongView sv = new SalongView(f, ss, es);
 	
-	private int C;
-	
-	
 	public StopSim(State s){
 		this.state=s;
 	}
-	public int getCustomerID(){
-		return C;
-	}
 	
+	/**
+	 * Make the simulation stop.
+	 */
 	public void execute() {
 		sv.summaryInfoPrint();
 		state.stop();
 		
 	}
+	
+	/**
+	 * Returns the time when the event is executed, with other words the the customer arrives.
+	 * @return Time when executed.
+	 */
 	public double getTime() {
 		return time;
 	}

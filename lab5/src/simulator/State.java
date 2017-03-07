@@ -1,30 +1,40 @@
 package simulator;
 
-
+/**
+ * Keep track of the general state of the simulation.
+ * 
+ * @author Johan Br�tendal
+ * @author Gustav Mattsson
+ * @author Jonas Jarnh�ll Sj�man
+ */
 public class State {
-	private boolean running = false; //Butik kör
-	private boolean open = false; //Butik öppen
+	private boolean running = false; //simulation is running or not.
+	private boolean open = false; //opens salon
 	
 	
-	/**Butiken öppnar och är aktiv*/
+	/**Start the simulation and opens the simulated store
+	 * */
 	public void start(){
 	 	running = true; 
 	 	open = true;
 	}
 	
-	/**Butik blir inaktiv*/
+	/**Stop the simulation
+	 * */
 	public void stop(){
 		running = false;
 	}
-	/**Butik stänger*/
+	/**stop the salon*/
 	public void closing(){
 		open = false;
 	}
-	/**Hämta värdet för open*/
+	/**Returns if salon is open or not.
+	 * @return True if open, false if not.*/
 	public boolean opened(){
 		return open;
 	}
-	/**Hämta värdet för running*/
+	/**Check if simulation is running.
+	 * @return true if running false if not.*/
 	public boolean running(){
 		return running;
 	}

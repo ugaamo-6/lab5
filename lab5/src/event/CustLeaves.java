@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import simulator.*;
 import state.*;
 
+/**
+ * A subclass to event, creating a leaving customer.
+ * 
+ * @author Johan Bråtendal
+ * @author Gustav Mattsson
+ * @author Jonas Jarnhäll Sjöman
+ */
 public class CustLeaves extends Event{
 	
 	Statistics stat = new Statistics();
@@ -32,7 +39,9 @@ public class CustLeaves extends Event{
 	}
 	
 
-	
+	/**
+	 * Makes a customer leave.
+	 */
 	public void execute() {
 		ss.idleCounter();
 		f.timeDiffCalc(f.queueSize());
@@ -66,14 +75,9 @@ public class CustLeaves extends Event{
 			C.happy = true; 
 		}	
 }
-	
-	public String toString(){
-		return namn;
-	}
-	public int getCustomerID(){
-		return C.getID();
-	}
-	
+	/**
+	 * Seats the first customer in FIFO-queue in hairdress-chair.
+	 */
 	public void getFirst(){
 		FIFO f = C.getFIFO(); // Kan detta lï¿½sas pï¿½ annat sï¿½tt?
 		if(!f.isEmpty()){
@@ -83,6 +87,10 @@ public class CustLeaves extends Event{
 		} 
 	}
 	
+	/**
+	 * Returns the time when the event is executed, with other words the the customer arrives.
+	 * @return Time when executed.
+	 */
 	public double getTime() {
 		return this.time;
 	}

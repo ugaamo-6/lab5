@@ -1,46 +1,40 @@
 package event;
 
 
-import simulator.Event;
-import simulator.EventStore;
-import simulator.State;
-import state.SalongState;
+import simulator.*;
 import state.SalongView;
-import simulator.Statistics;
-
+/**
+ * A subclass to event, closing the salon.
+ * 
+ * @author Johan Bråtendal
+ * @author Gustav Mattsson
+ * @author Jonas Jarnhäll Sjöman
+ */
 public class Closing extends Event {
 	
-	
-	static Statistics stat = new Statistics();
 	private State state;
-	private EventStore es;
 	private SalongView sv;
-	
-	private int C;	
-	
-	public Closing(double time, EventStore es, State s, SalongView sv) {
+		
+	public Closing(double time, State s, SalongView sv) {
 		this.time=time;
-		this.es=es;
 		this.state=s;
 		this.sv=sv;
 	}
-
+	/**
+	 *Closing the store. 
+	 */
 	public void execute() {
 		state.closing();
 		sv.closingInfoPrint();
 	}
 	
+	/**
+	 * Returns the time when the event will happen. 
+	 * @return Time when event happens.
+	 */
 	public double getTime() {
 		return time;
 	}
-
-	public String toString(){
-		String toString = es.getTime() +"   CLOSING-------"; 
-		return toString;
-	}
 	
-	public int getCustomerID(){
-		return C;
-	}
 
 }

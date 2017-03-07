@@ -37,9 +37,11 @@ public class Statistics {
 	private static boolean going = false;
 	
 	//addition methods
+	
 	public void addQcust(){
 		totalQcust++;
 	}
+	
 	public void custStatAddTime(double waitTime){
 		totalTime += waitTime;
 	}
