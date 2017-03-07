@@ -6,7 +6,6 @@ import hairdresser.SalongView;
 import simulator.*;
 import state.*;
 
-
 public class CustReturns extends Event {
 
 	
@@ -85,7 +84,6 @@ public class CustReturns extends Event {
 	public void getFirst(){
 		FIFO f = C.getFIFO(); // Kan detta l�sas p� annat s�tt?
 		if(!f.isEmpty()){
-			
 			ss.chairGotBusy();
 			es.addEvent(new CustLeaves(es.getTime(), f.getFirst(), es, ss, s, sv, f));
 			f.removeFirst();
