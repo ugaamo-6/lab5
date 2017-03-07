@@ -7,6 +7,7 @@ import simulator.*;
 import state.*;
 
 public class CustLeaves extends Event{
+	
 	Statistics stat = new Statistics();
 	private EventStore eventStore;
 	private SalongState ss;
@@ -34,16 +35,26 @@ public class CustLeaves extends Event{
 
 	
 	public void execute() {
+		f.timeDiffCalc(f.queueSize());
+		f.setLET(eventStore.getTime());
+		
+		f.toString(namn, C.getID());
+		
 		if(!oldCustomers.contains(C.getID())){
 			stat.custCountAdd();
 			oldCustomers.add(C.getID());
 		}
-		f.timeDiffCalc(f.queueSize());
+		
 		FIFO f = C.getFIFO();
 		
 		checkIfSatisfied(C);
 		f.custFinished();
 		getFirst();	
+				
+		if(ss.getFreeChairs() != 0 && !stat.getGoing()){
+			stat.setTime1(eventStore.getTime());
+			stat.goingTrue();
+		}
 	}
 	
 	/**Kollar om kunden är nöjd
@@ -74,7 +85,7 @@ public class CustLeaves extends Event{
 	public void getFirst(){
 		FIFO f = C.getFIFO(); // Kan detta l�sas p� annat s�tt?
 		if(!f.isEmpty()){
-			//ss.chairGotBusy();
+			ss.chairGotBusy();
 			eventStore.addEvent(new CustLeaves(eventStore.getTime(), f.getFirst(), eventStore, ss, s, sv, f));
 			f.removeFirst();
 		} 

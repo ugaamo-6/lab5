@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import hairdresser.SalongView;
 import simulator.*;
 import state.*;
-
 public class CustReturns extends Event {
 
 	
+
 	Statistics stat = new Statistics();	
 	private EventStore es;
 	private SalongState ss;
@@ -38,6 +38,9 @@ public class CustReturns extends Event {
 	 * 
 	 */
 	public void execute() {
+		f.timeDiffCalc(f.queueSize());
+		f.setLET(es.getTime());
+		
 		f = (FIFO) C.getFIFO();
 		f.toString(namn, C.getID());
 		addReturnCust(C);
@@ -59,23 +62,17 @@ public class CustReturns extends Event {
 			//Kontrollerar ifall hela k�n �r �terkommande. 
 			if (f.returningCustInQueue() == ss.maxWaitInQueue()) {
 				double returnTime = es.getTime()+ss.randReturnTime();
-				f.timeDiffCalc(f.queueSize());
 				es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv, f));
-				f.lastEventTime = es.getTime();
 				} else {
-				f.timeDiffCalc(f.queueSize());
 				f.removeLast();
 				f.addReturnToQueue(C);
-				f.lastEventTime = es.getTime();
 			} 
 		} else if (ss.getFreeChairs() != ss.totalChairs() && ss.getFreeChairs() != 0 ) {
 			f.addReturnToQueue(C);
 			getFirst();
 			
 		} else if(!f.isFull()){
-			f.timeDiffCalc(f.queueSize());
 			f.addReturnToQueue(C);
-			f.lastEventTime = es.getTime();
 		}
 			
 		

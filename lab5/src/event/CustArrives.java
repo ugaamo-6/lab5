@@ -36,11 +36,18 @@ public class CustArrives extends Event {
 		
 		if (state.opened()) {
 			Customer C = new Customer(fifo);
+			fifo.timeDiffCalc(fifo.queueSize());
+			fifo.setLET(eventStore.getTime());
+
 			fifo.toString(namn, C.getID());
+			
 			addToFIFO(C);
+			
 			double nextCustTime = eventStore.getTime() + salongState.nextCustTime();
 			CustArrives nextCust = new CustArrives(nextCustTime, eventStore, salongState, state, sv, fifo);
 			eventStore.addEvent(nextCust);
+			
+
 		}
 	}
 	
@@ -50,25 +57,18 @@ public class CustArrives extends Event {
 	 */
 	private void addToFIFO(Customer C) {
 		if(fifo.isFull()){	
-			fifo.timeDiffCalc(fifo.queueSize());
 			stat.addLeave();
-			
-			fifo.setLET(eventStore.getTime());
 		}
 		else if(salongState.getFreeChairs() != 0 && fifo.isEmpty()){
 			
 			fifo.addNewCustomerToFIFO((Customer) C);
 			getFirst();
-			fifo.setLET(eventStore.getTime());
 		} else if(salongState.getFreeChairs() != 0 && fifo.isEmpty() && salongState.getFreeChairs() != 0){
 			salongState.chairGotBusy();	
 			System.out.println("---- heluuuuuuuu");
 			eventStore.addEvent(new CustLeaves(eventStore.getTime() , C, eventStore, salongState, state, sv, fifo));
-			fifo.setLET(eventStore.getTime());
 		} else {
 			fifo.addNewCustomerToFIFO((Customer) C);
-			C.queueTime = eventStore.getTime();
-			fifo.setLET(eventStore.getTime());
 		}
 		
 	}

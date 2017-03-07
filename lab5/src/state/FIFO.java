@@ -39,9 +39,8 @@ public class FIFO extends Observable {
 	
 	private int NumWaiting = 0; //max customers in queue at once 
 	public static double lastEventTime = 0;
-	public void setLET(double time){
-		lastEventTime = time;
-	}
+	
+
 	
 	
 	public FIFO(EventStore es, SalongState ss, State s){
@@ -59,7 +58,7 @@ public class FIFO extends Observable {
 	public void addNewCustomerToFIFO(Customer C) {
 
 		if(ss.getFreeChairs() == 0){
-			timeDiffCalc(queueSize());
+//			timeDiffCalc(queueSize());
 			queue.add(C);
 			lastEventTime = es.getTime();
 //			stat.qTime(qTimeCalc(getFirst()));
@@ -80,6 +79,11 @@ public class FIFO extends Observable {
 	 * Check if the FIFO queue is full.
 	 * @return True in full, false if not. 
 	 */
+	
+	public void setLET(double time){
+		lastEventTime = time;
+	}
+	
 	public boolean isFull(){
 		if(queueSize() >= ss.maxWaitInQueue()){
 			return true;
@@ -103,11 +107,18 @@ public class FIFO extends Observable {
 		ss.chairGotFree();
 	}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	public void addReturnToQueue(Customer C){
 			queue.add(returningCustInQueue(), C);		
 		}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	/**Tar bort sista kunden*/
 	public void removeLast(){
 		queue.remove(queue.size()-1);
@@ -149,10 +160,18 @@ public class FIFO extends Observable {
 	public void timeDiffCalc(int i){
 		double diff = es.getTime() - lastEventTime;
 		for(int j = 1; j<=i; j++){
+<<<<<<< HEAD
 		stat.qTime(diff);}	
+=======
+			stat.qTime(diff);}	
+	}
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 
+<<<<<<< HEAD
 	}
 	
+=======
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	public void toString(String name,int ID)
 	{
 		String b = String.format("%-5.2f %-10s %-10d %-10d %-10.2f %-7d %-7d  %-7d %-10d",
