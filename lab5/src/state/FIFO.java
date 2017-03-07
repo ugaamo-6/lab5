@@ -102,6 +102,7 @@ public class FIFO extends Observable {
 		ss.chairGotFree();
 	}
 
+<<<<<<< HEAD
 	public void addReturnToQueue(Customer C){
 //if(ss.getFreeChairs() == 0){
 //timeDiffCalc(queueSize());
@@ -110,6 +111,12 @@ public class FIFO extends Observable {
 		//messageString("Customer is finished, pays and leaves the salon.");
 	}
 
+=======
+	public void addReturnToQueue(Customer C){
+			queue.add(returningCustInQueue(), C);		
+		}
+
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	/**Tar bort sista kunden*/
 	public void removeLast(){
 		queue.remove(queue.size()-1);
@@ -152,7 +159,12 @@ public class FIFO extends Observable {
 		double diff = es.getTime() - lastEventTime;
 		for(int j = 1; j<=i; j++){
 		stat.qTime(diff);}	
+<<<<<<< HEAD
 	}
+=======
+	}
+
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	public void toString(String name,int ID)
 	{
 		String b = String.format("%-5.2f %-10s %-10d %-10d %-10.2f %-7d %-7d  %-7d %-10d",

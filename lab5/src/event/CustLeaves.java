@@ -16,7 +16,7 @@ public class CustLeaves extends Event{
 	private Customer C;
 	private double time;
 	
-	static ArrayList<Integer> dissatisfied = new ArrayList<Integer>();
+
 	static ArrayList<Integer> oldCustomers = new ArrayList<Integer>();
 	
 	private String namn = "Leaves";
@@ -46,7 +46,7 @@ public class CustLeaves extends Event{
 		getFirst();	
 		f.setLET(eventStore.getTime());
 		if(ss.getFreeChairs() != 0 && !stat.getGoing()){
-			ss.tempTime = eventStore.getTime();
+			stat.setTime1(eventStore.getTime());
 			stat.goingTrue();
 		}
 	}
@@ -60,10 +60,6 @@ public class CustLeaves extends Event{
 			double returnTime = eventStore.getTime()+ss.randReturnTime();
 			eventStore.addEvent(new CustReturns(returnTime, C, eventStore, ss, s, sv, f));	
 			C.happy = false;
-			if(!dissatisfied.contains(C.getID())){
-				stat.addDiss(); //if customer not happy, add 1 to counter in stat.
-				dissatisfied.add(C.getID());
-			}
 			
 		} else {
 			C.happy = true; 
