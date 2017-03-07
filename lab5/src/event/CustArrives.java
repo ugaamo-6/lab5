@@ -15,6 +15,7 @@ public class CustArrives extends Event {
 	private SalongView sv;
 	private FIFO fifo;
 	private double time;
+	private Statistics stat = new Statistics();
 	
 	private int C;
 	private String namn = "Arrives";
@@ -27,6 +28,7 @@ public class CustArrives extends Event {
 		this.state=s;
 		this.sv=sv;
 		this.fifo=f;
+		
 	}
 	
 	public void execute() {
@@ -42,6 +44,7 @@ public class CustArrives extends Event {
 	
 	private void addToFIFO(Customer C) {
 		if(fifo.isFull()){
+			stat.addLeave();
 			//f.messageString("The queue is full, customer leaves");
 		}
 		else if(salongState.getFreeChairs() != 0 && fifo.isEmpty()){
@@ -53,8 +56,8 @@ public class CustArrives extends Event {
 			eventStore.addEvent(new CustLeaves(eventStore.getTime() , C, eventStore, salongState, state, sv, fifo));
 		} else {
 			fifo.addNewCustomerToFIFO((Customer) C);
+			//C.queueTime = es.getTime();
 			C.queueTime = eventStore.getTime();
-
 			//f.messageString("Customer wait.");
 		}
 		

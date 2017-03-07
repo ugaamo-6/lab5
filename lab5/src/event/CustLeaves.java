@@ -77,10 +77,9 @@ public class CustLeaves extends Event{
 	
 	
 	
-//	public String toString(){
-//		return namn;
-//	}
-	
+	public String toString(){
+		return namn;
+	}
 	public int getCustomerID(){
 		return C.getID();
 	}
@@ -97,13 +96,5 @@ public class CustLeaves extends Event{
 	
 	public double getTime() {
 		return this.time;
-	}
-
-
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

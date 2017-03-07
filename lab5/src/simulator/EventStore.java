@@ -19,12 +19,15 @@ public class EventStore extends Observable{
 	private FIFO f;
 	private Statistics stat;
 
-
-
 	ArrayList<Event> eventQueue = new ArrayList<Event>();
+	private State state; 
+//	private SalongState ss = new SalongState();
+//	private FIFO f;
+//	private Statistics stat;
 
+	
 	public EventStore(State s) {
-		this.s=s;
+		this.state=s;
 	}
 
 	
@@ -51,16 +54,16 @@ public class EventStore extends Observable{
 	/**Hämtar ut ett event från index 0*/
 	public Event nextEvent() {
 		if (eventQueue.size() == 0 ) { 	//Basfall om eventlistan är tom lägg in Stop eventet
-			addEvent(new StopSim(s));
+			addEvent(new StopSim(state));
 		} else {
 			setTime(eventQueue.get(0).time);
 			currentTime = eventQueue.get(0).getTime();//Hämtar ett event och dess tid
 		}
 			//nedan följer pop av eventet
 			Event sendEvent = eventQueue.get(0);
-//			String info = sendEvent.toString();
-//			setChanged();
-//			notifyObservers(info);
+			String info = sendEvent.toString();
+			setChanged();
+			notifyObservers(info);
 			eventQueue.remove(0);
 			return sendEvent;
 		}
