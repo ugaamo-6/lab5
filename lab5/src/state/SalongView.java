@@ -19,22 +19,22 @@ public class SalongView extends View implements Observer {
 		this.eventStore=es;
 		f.addObserver(this);
 	}
-	/*
-	 * Text printed when simulator starts
+	/**
+	 * @param Text printed when simulator starts
 	 */
 	public void startInfoPrint(){
 		System.out.println(eventStore.getTime() + "   START------");
 	}
 	
-	/*
-	 * Text printing when the simlutator i closing.
+	/**
+	 * @param Text printing when the simlutator i closing.
 	 */
 	public void closingInfoPrint(){
 		System.out.println(eventStore.getTime() + "   CLOSING------");
 	}
 	
-	/*
-	 * Pints variable-information about the simulation
+	/**
+	 * @param Pints variable-information about the simulation
 	 */
 	public void variableInfoPrint() {
 		System.out.println("Opened.");
@@ -48,12 +48,12 @@ public class SalongView extends View implements Observer {
 		System.out.println("Risk dissatisfied returns: ...........: "+salongState.percentageReturn());
 		System.out.println("Seed used in pseudo random generator .: "+salongState.getSeed());
 		System.out.println("-------------------");
-		System.out.println("Time " + " Event " + "     ID "+"        Idle "+"     TWait " + "     InQ"+
+		System.out.println("Time " + " Event " + "     ID "+"        Idle "+"      TIdle"+"     TWait " + "     InQ"+
 		"     Cut"+"      Lost"+"     Ret");
 	}
 	
-	/*
-	 * Print a summary of the statistics.
+	/**
+	 * @param Print a summary of the statistics.
 	 */
 	public void summaryInfoPrint() {
 		Statistics stat = new Statistics();
