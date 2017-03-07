@@ -13,8 +13,12 @@ import state.SalongView;
  */
 
 /**
+ * 
+ * This class starts the whole simulation. It starts by creating every class needed, then adds a customer
+ * and to really start it creates a new simulator and uses the method run thta starts the simulation.
+ * 
  * @author Johan Bråtendal
- * @author
+ * @author Gustav Mattsson
  * @author
  *
  */

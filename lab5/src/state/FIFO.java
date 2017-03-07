@@ -22,6 +22,7 @@ import state.SalongState;
  * @param getFirst picks the first customer in the queue
  * @param totalVisitors counts the total customers who have gotten a haircut
  * 
+ * 
  * */
 
 public class FIFO extends Observable {
