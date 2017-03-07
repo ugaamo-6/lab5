@@ -6,7 +6,6 @@ public class State {
 	private boolean open = false; //Butik öppen
 	
 	
-	
 	/**Butiken öppnar och är aktiv*/
 	public void start(){
 	 	running = true; 

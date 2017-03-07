@@ -34,8 +34,6 @@ public class CustReturns extends Event {
 	
 	public void execute() {
 		f = (FIFO) C.getFIFO();
-//		f.custFinished();
-//		f.checkIfSatisfied(C);
 		addReturnCust(C);
 		ep = new EventPrint(namn, C.getID(), es,ss,f);
 	}
@@ -47,25 +45,41 @@ public class CustReturns extends Event {
 			f.addReturnToQueue(C);
 			getFirst();
 		} else if(!f.isFull()){
+<<<<<<< HEAD
 			f.timeDiffCalc(f.queueSize());
 			f.addReturnToQueue(C);
 			f.lastEventTime = es.getTime();
 
 			
+=======
+			f.addReturnToQueue(C);	
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 		}else if(f.isFull()){
 
 			//Kontrollerar ifall hela k�n �r �terkommande. 
 			if (f.returningCustInQueue() == ss.maxWaitInQueue()) {
+<<<<<<< HEAD
 				double returnTime = es.getTime()+ss.returnTime();
 				f.timeDiffCalc(f.queueSize());
+=======
+				double returnTime = es.getTime()+ss.randReturnTime();
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 				es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv, f));	
+<<<<<<< HEAD
 				f.lastEventTime = es.getTime();
 				} else {
 				f.timeDiffCalc(f.queueSize());
+=======
+
+			} else {
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 				f.removeLast();
 				f.addReturnToQueue(C);
+<<<<<<< HEAD
 				f.lastEventTime = es.getTime();
 
+=======
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 			}
 		}
 	}
@@ -75,10 +89,8 @@ public class CustReturns extends Event {
 		if(!f.isEmpty()){
 			
 			ss.chairGotBusy();
-//			Customer getFirst = (Customer) f.getFirst();
 			es.addEvent(new CustLeaves(es.getTime(), f.getFirst(), es, ss, s, sv, f));
 			f.removeFirst();
-			//f.messageString("Customer gets a haircut.");
 		} 
 	}
 	
