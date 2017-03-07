@@ -37,7 +37,7 @@ public class StartSim extends Event {
 		
 //		Ha inte printsatser h�r, anv�nd v�r view-klass.
 		s.start();
-		Event arrive = new CustArrives(time, eventStore, ss, s, sv, f);
+		Event arrive = new CustArrives(ss.nextCustTime(), eventStore, ss, s, sv, f);
 		eventStore.addEvent(arrive);
 		
 		System.out.println(eventStore.getTime()+"   START----");

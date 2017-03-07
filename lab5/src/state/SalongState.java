@@ -24,7 +24,7 @@ public class SalongState {
 	
 	
 	private UniformRandomStream returntimeUniRand = new UniformRandomStream(returnMinTime, returnMaxTime, seed);
-	private UniformRandomStream pRand = new UniformRandomStream(0,1);
+	private UniformRandomStream pRand = new UniformRandomStream(0,1, seed);
 	private ExponentialRandomStream expRand = new ExponentialRandomStream(lambda, seed);
 	private UniformRandomStream haircuttimeUniRand = new UniformRandomStream(haircutMinTime, haircutMaxTime, seed);
 

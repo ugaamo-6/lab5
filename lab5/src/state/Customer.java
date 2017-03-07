@@ -20,7 +20,7 @@ public class Customer {
 //	private SalongView sv;
 	private FIFO fifon;
 		
-	static int id_counter = 0;
+	static int id_counter = -1;
 	
 	public double queueTime = 0;
 	
