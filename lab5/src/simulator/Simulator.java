@@ -40,13 +40,13 @@ public class Simulator {
 		
 		State s = new State();
 		EventStore es = new EventStore(s);
-		
+		View v = new View();		
 		
 		SalongState ss = new SalongState(es);
 		FIFO f = new FIFO(es, ss, s);
 		SalongView sv = new SalongView(f, ss, es);
 		
-		View v = new View();
+
 		
 		es.addEvent(new StartSim(es, ss, s, sv, f));
 		es.addEvent(new Closing(ss.getCloseTime(),es,ss,s,sv,f));

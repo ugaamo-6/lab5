@@ -62,43 +62,27 @@ public class FIFO extends Observable {
 			timeDiffCalc(queueSize());
 			queue.add(C);
 			lastEventTime = es.getTime();
-			
 //			stat.qTime(qTimeCalc(getFirst()));
 //			stat.lastCustTime(es.getTime());
 		}else{
 			queue.add(C);
 		}
-<<<<<<< HEAD
-=======
-		
 		C.queueTime = es.getTime();
 		if(NumWaiting < queueSize()){
-
-		queue.add(C);
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
-		C.queueTime = es.getTime();
-<<<<<<< HEAD
-		if(NumWaiting < queueSize()){
-			stat.maxSize(queueSize());
-			NumWaiting = queueSize();
-=======
-			if(NumWaiting < queueSize()){
 				stat.maxSize(queueSize());
 				NumWaiting = queueSize();
 			}
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
-		}
 	
 }
 	
 	
-	/**Ã„ndrar message strÃ¤ngen till nÃ¥got*/
+	/**Ändrar message strängen till något*/
 	private void messageString(String s){
 		message = s;
 		setChanged();
 		notifyObservers();
 	}
-	/**HÃ¤mtar message strÃ¤ngen*/
+	/**Hämtar message strängen*/
 	public String getMessageString(){
 		return message;
 	}
@@ -111,8 +95,8 @@ public class FIFO extends Observable {
 		}
 		return false;
 	} 
-	/**RÃ¤knar upp antal missnÃ¶jda kunder
-	 * @return missnÃ¶jda kunder*/
+	/**Räknar upp antal missnöjda kunder
+	 * @return missnöjda kunder*/
 	public int returningCustInQueue(){
 		int count=0;
 		for (int i=0;i<queue.size();i++){
@@ -125,56 +109,42 @@ public class FIFO extends Observable {
 
 	public void custFinished(){
 		ss.chairGotFree();
-<<<<<<< HEAD
-		//messageString("Customer is finished, pays and leaves the salon.");
-=======
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	}
 
 	public void addReturnToQueue(Customer C){
-		if(ss.getFreeChairs() == 0){
-//			timeDiffCalc(queueSize());
+//if(ss.getFreeChairs() == 0){
+//timeDiffCalc(queueSize());
 			queue.add(returningCustInQueue(), C);
 			
-		}else{
-			queue.add(returningCustInQueue(), C);
-<<<<<<< HEAD
-		}
 		//messageString("Customer is finished, pays and leaves the salon.");
 	}
-	
-=======
-		}	
-		
-	}
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	/**Tar bort sista kunden*/
 	public void removeLast(){
 		queue.remove(queue.size()-1);
 	}
-	/**Tar bort fÃ¶rsta kunden*/
+	/**Tar bort första kunden*/
 	public void removeFirst() {
 		queue.remove(0);
 	}
-	/**HÃ¤mtar fÃ¶rsta kunden*/
+	/**Hämtar första kunden*/
 	public Customer getFirst() {
 		return (Customer) queue.get(0);
 	}
-	/**Kollar om kÃ¶n Ã¤r tom*/
+	/**Kollar om kön är tom*/
 	public boolean isEmpty(){
 		if(queueSize() == 0){
 			return true;
 		}return false;
 	}
-	/**HÃ¤mtan kÃ¶ storleken.*/
+	/**Hämtan kö storleken.*/
 	public int queueSize(){
 		return queue.size();
 	}
-	/**HÃ¤mtar totala vistelse kunder*/
+	/**Hämtar totala vistelse kunder*/
 	public int getTotalVisitors(){
 		return totalVisitors;
 	}
-	/**HÃ¤mtar eventStore tid subtraherat med en kund kÃ¶ tid.*/
+	/**Hämtar eventStore tid subtraherat med en kund kö tid.*/
 	private double qTimeCalc(Customer C){
 		return es.getTime()-C.queueTime;
 	}
@@ -187,4 +157,3 @@ public class FIFO extends Observable {
 	}
 
 }
-

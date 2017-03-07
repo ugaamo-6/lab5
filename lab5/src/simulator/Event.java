@@ -1,7 +1,5 @@
 package simulator;
 
-import java.util.Observable;
-
 abstract public class Event{
 	
 	public double time;
