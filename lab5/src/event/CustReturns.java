@@ -7,7 +7,6 @@ import state.*;
 
 public class CustReturns extends Event {
 	
-	private EventPrint ep; //Fortfarande vart?
 	private EventStore es;
 	private SalongState ss;
 	private State s;
@@ -36,7 +35,7 @@ public class CustReturns extends Event {
 	 */
 	public void execute() {
 		f = (FIFO) C.getFIFO();
-		ep = new EventPrint(namn, C.getID(), es,ss,f);
+		f.toString(namn, C.getID());
 		addReturnCust(C);
 	}
 	
@@ -87,12 +86,6 @@ public class CustReturns extends Event {
 	public double getTime() {
 		return time;
 	}
-
-	public String toString() {//ANVÄNDS EJ ÄNNU
-		// TODO Auto-generated method stub
-		return namn;
-	}
 	
-
 }
 

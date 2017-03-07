@@ -8,7 +8,6 @@ import state.*;
 
 public class CustLeaves extends Event{
 	
-	private EventPrint ep;
 	Statistics stat = new Statistics();
 	private EventStore eventStore;
 	private SalongState ss;
@@ -36,7 +35,7 @@ public class CustLeaves extends Event{
 
 	
 	public void execute() {
-		ep = new EventPrint(namn, C.getID(), eventStore,ss,f);
+		f.toString(namn, C.getID());
 		if(!oldCustomers.contains(C.getID())){
 			stat.custCountAdd();
 			oldCustomers.add(C.getID());

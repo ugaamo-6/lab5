@@ -8,7 +8,6 @@ import state.*;
 
 public class CustArrives extends Event {
 	
-	private EventPrint ep; //?? Typen vartifrån?
 	private EventStore eventStore;
 	private SalongState salongState;
 	private State state;
@@ -34,9 +33,10 @@ public class CustArrives extends Event {
 	 * Executes the event.
 	 */
 	public void execute() {
+		
 		if (state.opened()) {
 			Customer C = new Customer(fifo);
-			ep = new EventPrint(namn, C.getID(), eventStore,salongState,fifo);
+			fifo.toString(namn, C.getID());
 			addToFIFO(C);
 			double nextCustTime = eventStore.getTime() + salongState.nextCustTime();
 			CustArrives nextCust = new CustArrives(nextCustTime, eventStore, salongState, state, sv, fifo);
@@ -52,7 +52,6 @@ public class CustArrives extends Event {
 		if(fifo.isFull()){	
 			fifo.timeDiffCalc(fifo.queueSize());
 			stat.addLeave();
-			//f.messageString("The queue is full, customer leaves");
 			
 			fifo.setLET(eventStore.getTime());
 		}
@@ -96,11 +95,5 @@ public class CustArrives extends Event {
 		return time;
 	}
 
-	/**Returns a string that describes the event.
-	 * @return String describing event. 
-	 */
-	public String toString() {
-		// TODO Auto-generated method stub
-		return namn;
-	}
 }
+

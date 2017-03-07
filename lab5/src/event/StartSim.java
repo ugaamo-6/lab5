@@ -9,7 +9,6 @@ import state.*;
 
 public class StartSim extends Event {
 	
-	private EventPrint ep;
 	private EventStore eventStore;
 	private SalongState ss;
 	private State s;

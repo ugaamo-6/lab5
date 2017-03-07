@@ -54,9 +54,6 @@ public class EventStore extends Observable{
 		}
 			//nedan följer pop av eventet
 			Event sendEvent = eventQueue.get(0);
-			String info = sendEvent.toString();
-			setChanged();
-			notifyObservers(info);
 			eventQueue.remove(0);
 			return sendEvent;
 		}

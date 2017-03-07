@@ -8,6 +8,6 @@ abstract public class Event{
 	
 	public abstract double getTime();
 	
-	public abstract String toString();
+//	public abstract String toString();
 		
 }
