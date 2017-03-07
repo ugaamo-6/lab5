@@ -58,9 +58,7 @@ public class FIFO extends Observable {
 			stat.maxSize(queueSize());
 			NumWaiting = queueSize();
 		}
-		if(isFull()){
-			stat.addLeave();
-		}
+		
 	
 }
 	

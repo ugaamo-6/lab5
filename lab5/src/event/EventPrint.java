@@ -30,13 +30,13 @@ public class EventPrint extends Observable{
 		System.out.format("%-5.1f %-10s %-10d %-10d %-10.1f %-7d %-7d  %-7d %-10d\n",
 				es.getTime(),                //eventStore tid
 				name,                        //name
-				ID,                          //c
-				ss.getFreeChairs(),      	 //d
-				s.getQtime(),          		 //e
-				f.queueSize(),        		 //f
-				(int)s.getCust(),                 //g
-				s.getLeave(),                 //h
-				s.getDiss()
+				ID,                          //customer ID
+				ss.getFreeChairs(),      	 //fria klippstolar
+				s.getQtime(),          		 //Hur länga alla har suttit i kö
+				f.queueSize(),        		 //fifo köns storlek
+				(int)s.getCust(),            //totala antalet kunder
+				s.getLeave(),                //hur många som är förlorade
+				s.getDiss()					 //hur många som blev missnöjda.
 				);
 	}
 	
