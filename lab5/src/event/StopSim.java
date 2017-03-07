@@ -13,7 +13,6 @@ public class StopSim extends Event {
 
 	
 	EventPrint ep;
-	State s;
 
 	private State state;
 	
@@ -60,8 +59,8 @@ public class StopSim extends Event {
 //		System.out.println("Dissatisfied customers: .......: " + stat.getDiss());
 //		System.out.println("Time chairs were idle: ........: "+stat.getIdle());
 //		System.out.println("-------------------------");
-		
-		s.stop();
+//		
+		state.stop();
 		
 	}
 	public double getTime() {
