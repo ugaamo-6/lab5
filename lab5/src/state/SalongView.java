@@ -1,13 +1,8 @@
-package hairdresser;
+package state;
 
 import simulator.EventStore;
 import simulator.Statistics;
 import simulator.View;
-import state.FIFO;
-import state.SalongState;
-
-
-
 
 import java.util.Observable;
 import java.util.Observer;

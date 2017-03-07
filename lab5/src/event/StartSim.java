@@ -1,9 +1,5 @@
 package event;
 
-import java.util.Observable;
-import java.util.Observer;
-
-import hairdresser.*;
 import simulator.*;
 import state.*;
 
@@ -16,7 +12,6 @@ public class StartSim extends Event {
 	private FIFO f;
 	private Statistics stat = new Statistics();
 	
-	private int C;
 	private String toString = "Start Simulation";
 
 	

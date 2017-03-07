@@ -7,23 +7,19 @@
 
 package simulator;
 
-import event.*;
-import hairdresser.SalongView;
-import state.*;
-
 public class Simulator {
 	private EventStore eventStore;
 	private State state;
 	private View v;
 
-	//Ha en main utanför. ALLTSÅ SKAPA EN MAIN klass som har en main metod som kör denna.
-	
 	public Simulator(EventStore es, State s, View v){
 		this.eventStore = es;
 		this.state = s;
 		this.v=v;
 	}
-	/**Kör ett program.*/
+	/**
+	 * K�r ett program.
+	 */
 	public void Run() {
 		state.start();
 		v.beginInfoPrint();
@@ -33,29 +29,6 @@ public class Simulator {
 		}
 		v.endInfoPrint();
 			
-	}
-
-
-	public static void main(String args[]){
-		
-		State s = new State();
-		EventStore es = new EventStore(s);
-		View v = new View();		
-		
-		SalongState ss = new SalongState(es);
-		FIFO f = new FIFO(es, ss);
-		SalongView sv = new SalongView(f, ss, es);
-		
-
-		
-		es.addEvent(new StartSim(es, ss, s, sv, f));
-		es.addEvent(new Closing(ss.getCloseTime(),es,ss,s,sv));
-		
-		Simulator sim = new Simulator(es, s, v);
-		sim.Run();
-	
-		
-		
 	}
 
 }

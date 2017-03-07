@@ -2,7 +2,6 @@ package event;
 
 import java.util.ArrayList;
 
-import hairdresser.SalongView;
 import simulator.*;
 import state.*;
 
@@ -70,11 +69,8 @@ public class CustLeaves extends Event{
 			
 		} else {
 			C.happy = true; 
-		}
-		
+		}	
 }
-	
-	
 	
 	public String toString(){
 		return namn;

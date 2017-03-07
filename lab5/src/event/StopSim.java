@@ -1,19 +1,17 @@
 package event;
 
-import hairdresser.SalongView;
 import simulator.Event;
 import simulator.State;
 import simulator.Statistics;
 import simulator.EventStore;
 import state.SalongState;
+import state.SalongView;
 import state.FIFO;
 
 public class StopSim extends Event {
 
 	State s;
 	private State state;
-	
-	
 	
 	//To be able to create a SalongView object.
 	Statistics stat = new Statistics();

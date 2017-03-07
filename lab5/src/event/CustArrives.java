@@ -2,7 +2,6 @@ package event;
 
 
 
-import hairdresser.SalongView;
 import simulator.*;
 import state.*;
 
@@ -15,7 +14,6 @@ public class CustArrives extends Event {
 	private FIFO fifo;
 	private double time;
 	private Statistics stat = new Statistics();
-	private int C;
 	private String namn = "Arrives";
 	
 	
@@ -84,9 +82,6 @@ public class CustArrives extends Event {
 			fifo.removeFirst();
 		} 
 	}
-	
-	
-	//Get metoder nedan.
 	
 	/**
 	 * Returns the time when the event is executed, with other words the the customer arrives.

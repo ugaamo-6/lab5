@@ -1,6 +1,5 @@
 package state;
 
-import hairdresser.SalongView;
 import simulator.EventStore;
 import simulator.State;
 
