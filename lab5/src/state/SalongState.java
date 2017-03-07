@@ -21,9 +21,10 @@ public class SalongState {
 	
 	
 	
-	private UniformRandomStream uniRand;
-	private ExponentialRandomStream expRand;
-
+	private UniformRandomStream returntimeUniRand = new UniformRandomStream(returnMinTime, returnMaxTime, seed);
+	private ExponentialRandomStream expRand = new ExponentialRandomStream(lambda, seed);
+	private UniformRandomStream pRand = new UniformRandomStream(0,1);
+	private UniformRandomStream haircuttimeUniRand = new UniformRandomStream(haircutMinTime, haircutMaxTime, seed);
 	
 	public SalongState(/*double percentageReturn*/){
 		/*this.percentageReturn=percentageReturn;*/
@@ -71,15 +72,15 @@ public class SalongState {
 	}
 
 	public double haircutTime(){
-		uniRand = new UniformRandomStream(haircutMinTime, haircutMaxTime, seed);
-		double rand = uniRand.next();
+		
+		double rand = haircuttimeUniRand.next();
 //		System.out.println("----- "+rand);
 		s.custStatAddTime(rand);
 		return rand;
 	}
 	
 	public double randReturn() {
-		UniformRandomStream pRand = new UniformRandomStream(0,1);
+		
 		double rand = pRand.next();
 //		System.out.println("----- "+rand);
 		return rand;
@@ -91,14 +92,13 @@ public class SalongState {
 	}
 	
 	public double returnTime(){
-		uniRand = new UniformRandomStream(returnMinTime, returnMaxTime, seed);
-		double rand = uniRand.next();
+		
+		double rand = returntimeUniRand.next();
 		return rand;
 		
 	}
 	
 	public double nextCustTime(){//FÅ KOLL PÅ DENNA.
-		expRand = new ExponentialRandomStream(lambda, seed);
 		double rand = expRand.next();
 		return rand;
 	}
