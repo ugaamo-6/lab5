@@ -31,9 +31,7 @@ public class SalongView extends View implements Observer {
 
 	
 	
-	public void endInfoPrint() {
-		System.out.println("Closed.");	
-	}
+	
 
 	
 	

@@ -1,8 +1,11 @@
 package simulator;
 
+
 public class State {
 	private boolean running = false; //Butik kör
 	private boolean open = false; //Butik öppen
+	
+	
 	
 	/**Butiken öppnar och är aktiv*/
 	public void start(){

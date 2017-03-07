@@ -14,10 +14,7 @@ public class EventStore extends Observable{
 	//This array-list keep track of the queue of Events
 	ArrayList<Event> queue = new ArrayList<Event>();
 	private double currentTime;
-	private State s; 
-	private SalongState ss = new SalongState(this);
-	private FIFO f;
-	private Statistics stat;
+
 
 	ArrayList<Event> eventQueue = new ArrayList<Event>();
 	private State state; 

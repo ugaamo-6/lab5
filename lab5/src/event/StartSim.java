@@ -1,5 +1,8 @@
 package event;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import hairdresser.*;
 import simulator.*;
 import state.*;
@@ -56,6 +59,8 @@ public class StartSim extends Event {
 	public String toString() {
 		return toString;
 	}
+	
+	
 
 
 

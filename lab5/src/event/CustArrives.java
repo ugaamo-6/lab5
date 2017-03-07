@@ -16,7 +16,6 @@ public class CustArrives extends Event {
 	private FIFO fifo;
 	private double time;
 	private Statistics stat = new Statistics();
-	
 	private int C;
 	private String namn = "Arrives";
 	

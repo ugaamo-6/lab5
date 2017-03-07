@@ -14,7 +14,6 @@ public class StopSim extends Event {
 	
 	EventPrint ep;
 	State s;
-
 	private State state;
 	
 
