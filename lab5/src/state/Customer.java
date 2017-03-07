@@ -27,11 +27,8 @@ public class Customer {
 	private int id;
 	public boolean happy;
 	
-	public Customer(EventStore es, SalongState ss, State s, SalongView sv, FIFO f){
-//		this.es=es;
-//		this.ss=ss;
-//		this.s=s;
-//		this.sv=sv;
+	public Customer(FIFO f){
+
 		
 		this.fifon=f;
 		id = id_counter + 1; //Det finns inte ett id nummer som är 0 om detta gäller.
@@ -44,6 +41,7 @@ public class Customer {
 	public int getID(){
 		return id;
 	}
+
 	public boolean get_happy(){
 		return happy;
 	}
