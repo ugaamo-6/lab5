@@ -17,7 +17,7 @@ public class CustLeaves extends Event{
 	private Customer C;
 	private double time;
 	
-
+	
 	static ArrayList<Integer> oldCustomers = new ArrayList<Integer>();
 	
 	private String namn = "Leaves";
@@ -35,6 +35,7 @@ public class CustLeaves extends Event{
 
 	
 	public void execute() {
+		ss.idleCounter();
 		f.timeDiffCalc(f.queueSize());
 		f.setLET(eventStore.getTime());
 		

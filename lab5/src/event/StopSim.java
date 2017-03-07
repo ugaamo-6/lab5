@@ -1,5 +1,6 @@
 package event;
 
+import hairdresser.SalongView;
 import simulator.Event;
 import simulator.State;
 import simulator.Statistics;
@@ -14,11 +15,13 @@ public class StopSim extends Event {
 	
 	
 	
-
+	//To be able to create a SalongView object.
 	Statistics stat = new Statistics();
 	EventStore es ;
 	SalongState ss = new SalongState(es);
-	FIFO f = new FIFO(es,ss,s);
+	FIFO f = new FIFO(es, ss);
+	SalongView sv = new SalongView(f, ss, es);
+	
 	private int C;
 	
 	
@@ -34,15 +37,7 @@ public class StopSim extends Event {
 			stat.setTime1(getTime());
 			stat.idleCalc();
 		}
-		
-		//Byt plats?
-		System.out.println("999,0 STOP----" + "\n" +"---- Some Statistics ----"
-				 + "\n" +"Number of customers cut: ......: "+(int)stat.getCust() +"\n" +
-				 "Average cutting time...........: "+(stat.getTime()/stat.getCust()) + "\n" +	"Average queueing time: ........: "+(stat.getQtime()/stat.getCust())
-				 + "\n" + "Largest queue (max NumWaiting) : "+ stat.getMax()
-				 + "\n" +	"Customers not cut (NumLost) ...: "+stat.getLeave()	 + "\n" +	"Dissatisfied customers: .......: " + stat.getDiss()
-				 + "\n" +	"Time chairs were idle: ........: "+stat.getIdle() + "\n" + "-------------------------");
-
+		sv.summaryInfoPrint();
 		state.stop();
 		
 	}

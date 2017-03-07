@@ -3,12 +3,8 @@ package state;
 import java.util.ArrayList;
 import java.util.Observable;
 import simulator.Statistics;
-import event.CustLeaves;
-import event.CustReturns;
-import hairdresser.SalongView;
 import simulator.EventStore;
 import simulator.State;
-import event.CustLeaves;
 
 import state.SalongState;
 /**
@@ -32,10 +28,7 @@ public class FIFO extends Observable {
 
 	private EventStore es;
 	private SalongState ss;
-	private State s;
-	private SalongView sv;
-	private FIFO f;
-	private CustLeaves cl;
+
 	
 	private int NumWaiting = 0; //customer in the queue 
 	public static double lastEventTime = 0;
@@ -46,10 +39,9 @@ public class FIFO extends Observable {
 	private static String message;
 	
 	
-	public FIFO(EventStore es, SalongState ss, State s){
+	public FIFO(EventStore es, SalongState ss){
 		this.es=es;
 		this.ss=ss;
-		this.s=s;
 		
 	}
 
@@ -59,11 +51,8 @@ public class FIFO extends Observable {
 	public void addNewCustomerToFIFO(Customer C) {
 
 		if(ss.getFreeChairs() == 0){
-//			timeDiffCalc(queueSize());
 			queue.add(C);
 			lastEventTime = es.getTime();
-//			stat.qTime(qTimeCalc(getFirst()));
-//			stat.lastCustTime(es.getTime());
 		}else{
 			queue.add(C);
 		}
@@ -72,8 +61,7 @@ public class FIFO extends Observable {
 				stat.maxSize(queueSize());
 				NumWaiting = queueSize();
 			}
-	
-}
+	}
 	
 	
 	/**
@@ -108,14 +96,18 @@ public class FIFO extends Observable {
 	public void custFinished(){
 		ss.chairGotFree();
 	}
-	
+
+	/**
+	 * Returning customer is placed behind the rest of all the returning customers.
+	 * @param C, in inserted in the queue.
+	 */
 	public void addReturnToQueue(Customer C){
 			queue.add(returningCustInQueue(), C);		
 		}
 
 	/**
 	 * Removes the last customer from the queue
-	 * */
+	 *Tar bort sista kunden*/
 	public void removeLast(){
 		queue.remove(queue.size()-1);
 	}
@@ -146,40 +138,36 @@ public class FIFO extends Observable {
 	 * Hämtar totala vistelse kunder
 	 * @return totalVisitor
 	 */
+
 	public int getTotalVisitors(){
 		return totalVisitors;
 	}
-	/**
-	 * Hämtar eventStore tid subtraherat med en kund kö tid.
-	 * @param C, Customer
-	 * @return ????????????????????????????
-	 */
-	private double qTimeCalc(Customer C){
-		return es.getTime()-C.queueTime;
-	}
+
 	/**
 	 * Subtracts current time with lastEventTime and records */
 	public void timeDiffCalc(int i){
 		double diff = es.getTime() - lastEventTime;
 		for(int j = 1; j<=i; j++){
 			stat.qTime(diff);}	
-	}
-	
-	
+	}	
 	
 	/**
 	 * Creates a message string describing an event with cocurrent and relevant statistic.
 	 * */
 	public void toString(String name,int ID)
 	{
-		String b = String.format("%-5.2f %-10s %-10d %-10d %-10.2f %-7d %-7d  %-7d %-10d",
+		String b = String.format("%-5.2f %-10s %-10d %-10d %-10.2f %-7d %-7d  %-7d %-10d %-10f",
 					es.getTime(),name,ID,ss.getFreeChairs(),stat.getQtime(),queueSize(),(int)stat.getCust(),             
 					stat.getLeave(),                 
-					stat.getDiss());
+					stat.getDiss(),
+					stat.getIdle()
+					
+				);
 		message = b;
 		setChanged();
 		notifyObservers();
 	}
+	
 	/**Retrieves a string with information*/
 	public String getMessageString(){
 		return message;

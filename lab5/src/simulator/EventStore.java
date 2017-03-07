@@ -13,7 +13,7 @@ public class EventStore extends Observable{
 	
 	//This array-list keep track of the queue of Events
 	ArrayList<Event> queue = new ArrayList<Event>();
-	private double currentTime;
+	private double currentTime = 0.00;
 
 
 	ArrayList<Event> eventQueue = new ArrayList<Event>();

@@ -33,18 +33,16 @@ public class StartSim extends Event {
 	 * Executes the event.
 	 */
 	public void execute() {	
+		sv.variableInfoPrint();		
 		eventStore.setTime(0.0);
 		ss.tempTime = eventStore.getTime();
 		stat.goingTrue();
 		s.start();
 
-		
-//		Ha inte printsatser h�r, anv�nd v�r view-klass.
-		s.start();
 		Event arrive = new CustArrives(ss.nextCustTime(), eventStore, ss, s, sv, f);
 		eventStore.addEvent(arrive);
 		
-		System.out.println(eventStore.getTime()+"   START----");
+		sv.startInfoPrint();
 	}
 
 	/**

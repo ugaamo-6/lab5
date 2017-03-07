@@ -1,41 +1,35 @@
 package event;
 
-import java.util.Observable;
-import java.util.Observer;
 
 import hairdresser.SalongView;
 import simulator.Event;
 import simulator.EventStore;
 import simulator.State;
-import state.FIFO;
 import state.SalongState;
 import simulator.Statistics;
 
-public class Closing extends Event implements Observer{
+public class Closing extends Event {
 	
 	
 	static Statistics stat = new Statistics();
 	private State state;
 	private EventStore es;
 	private SalongState ss;
+	private SalongView sv;
 	
-	private int C;
-	private String namn = "CustArrives";
+	private int C;	
 	
-	
-	public Closing(double time, EventStore es, SalongState ss, State s, SalongView sv, FIFO f) {
+	public Closing(double time, EventStore es, SalongState ss, State s, SalongView sv) {
 		this.time=time;
 		this.es=es;
 		this.ss=ss;
 		this.state=s;
-//		this.sv=sv;
-//		this.f=f;
-		f.addObserver(this);
+		this.sv=sv;
 	}
 
 	public void execute() {
 		state.closing();
-		System.out.println(es.getTime()+"   CLOSING-------");
+		sv.closingInfoPrint();
 	}
 	
 	public double getTime() {
@@ -49,18 +43,6 @@ public class Closing extends Event implements Observer{
 	
 	public int getCustomerID(){
 		return C;
-	}
-	
-	
-	
-	public void update(Observable arg0, Object arg) {
-		if (ss.totalChairs() == ss.getFreeChairs() && !state.opened()) {
-			/*if (f.isEmpty()){
-				es.allEventDone(true);
-			}*/
-			
-//			f.getFirst();
-		}
 	}
 
 }

@@ -64,9 +64,9 @@ public class Statistics {
 		idleTime += diff;
 	}
 	
-	public int gQcust(){
-		return totalQcust;
-	}
+//	public int gQcust(){
+//		return totalQcust;
+//	}
 	public double getCust(){
 		return totalCust;
 	}

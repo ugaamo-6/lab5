@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import hairdresser.SalongView;
 import simulator.*;
 import state.*;
-
 public class CustReturns extends Event {
 
 	
+
 	Statistics stat = new Statistics();	
 	private EventStore es;
 	private SalongState ss;
@@ -38,6 +38,7 @@ public class CustReturns extends Event {
 	 * 
 	 */
 	public void execute() {
+		ss.idleCounter();
 		f.timeDiffCalc(f.queueSize());
 		f.setLET(es.getTime());
 		
