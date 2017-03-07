@@ -1,5 +1,7 @@
 package event;
 
+import java.util.ArrayList;
+
 import hairdresser.SalongView;
 import simulator.*;
 import state.*;
@@ -7,6 +9,7 @@ import state.*;
 
 public class CustReturns extends Event {
 	
+	Statistics stat = new Statistics();
 	private EventStore es;
 	private SalongState ss;
 	private State s;
@@ -18,6 +21,7 @@ public class CustReturns extends Event {
 	
 	private String namn = "Returns";
 	
+	static ArrayList<Integer> dissatisfied = new ArrayList<Integer>();
 	
 	public CustReturns(double time, Customer C, EventStore es, SalongState ss, State s, SalongView sv, FIFO f){
 		this.time = time;
@@ -37,6 +41,11 @@ public class CustReturns extends Event {
 		f = (FIFO) C.getFIFO();
 		f.toString(namn, C.getID());
 		addReturnCust(C);
+		
+		if(!dissatisfied.contains(C.getID())){
+			stat.addDiss(); //if customer not happy, add 1 to counter in stat.
+			dissatisfied.add(C.getID());
+		}
 	}
 	
 	public void addReturnCust(Customer C){
