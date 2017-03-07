@@ -37,10 +37,13 @@ public class FIFO extends Observable {
 	private FIFO f;
 	private CustLeaves cl;
 	
-	private int NumWaiting = 0; //max customers in queue at once 
+	private int NumWaiting = 0; //customer in the queue 
 	public static double lastEventTime = 0;
 	
-
+	private Statistics stat = new Statistics();
+	private ArrayList<Object> queue =  new ArrayList<Object>();	 
+	private int totalVisitors = 0; 
+	private static String message;
 	
 	
 	public FIFO(EventStore es, SalongState ss, State s){
@@ -50,11 +53,9 @@ public class FIFO extends Observable {
 		
 	}
 
-	private Statistics stat = new Statistics();
-	private ArrayList<Object> queue =  new ArrayList<Object>(); 
-	private int totalVisitors = 0; 
-	private static String message;
-
+	/**
+	 * Adds a new customer to the queue.
+	 * */
 	public void addNewCustomerToFIFO(Customer C) {
 
 		if(ss.getFreeChairs() == 0){
@@ -76,22 +77,21 @@ public class FIFO extends Observable {
 	
 	
 	/**
-	 * Check if the FIFO queue is full.
-	 * @return True in full, false if not. 
+	 * Changes last event time to the parameter time.
 	 */
-	
 	public void setLET(double time){
 		lastEventTime = time;
 	}
-	
+	/**Checks if queue is full
+	 * @return true if full, false if not*/
 	public boolean isFull(){
 		if(queueSize() >= ss.maxWaitInQueue()){
 			return true;
 		}
 		return false;
 	} 
-	/**Räknar upp antal missnöjda kunder
-	 * @return missnöjda kunder*/
+	/**Counts the amount of disappointed customers
+	 * @return disappointed customers*/
 	public int returningCustInQueue(){
 		int count=0;
 		for (int i=0;i<queue.size();i++){
@@ -101,28 +101,38 @@ public class FIFO extends Observable {
 		}
 		return count;
 	}
-
+	
+	/**
+	 * Empties hairdresschair.
+	 * */
 	public void custFinished(){
 		ss.chairGotFree();
 	}
-
+	
 	public void addReturnToQueue(Customer C){
 			queue.add(returningCustInQueue(), C);		
 		}
 
-	/**Tar bort sista kunden*/
+	/**
+	 * Removes the last customer from the queue
+	 * */
 	public void removeLast(){
 		queue.remove(queue.size()-1);
 	}
-	/**Tar bort första kunden*/
+	/**
+	 * Removes customer who is first in queue 
+	 * */
 	public void removeFirst() {
 		queue.remove(0);
 	}
-	/**Hämtar första kunden*/
+	/**
+	 * Retrieves the first customer from the queue
+	 * */
 	public Customer getFirst() {
 		return (Customer) queue.get(0);
 	}
-	/**Kollar om kön är tom*/
+	/**Checks if 
+	 * @return */
 	public boolean isEmpty(){
 		if(queueSize() == 0){
 			return true;
@@ -147,13 +157,19 @@ public class FIFO extends Observable {
 	private double qTimeCalc(Customer C){
 		return es.getTime()-C.queueTime;
 	}
-	
+	/**
+	 * Subtracts current time with lastEventTime and records */
 	public void timeDiffCalc(int i){
 		double diff = es.getTime() - lastEventTime;
 		for(int j = 1; j<=i; j++){
 			stat.qTime(diff);}	
 	}
-
+	
+	
+	
+	/**
+	 * Creates a message string describing an event with cocurrent and relevant statistic.
+	 * */
 	public void toString(String name,int ID)
 	{
 		String b = String.format("%-5.2f %-10s %-10d %-10d %-10.2f %-7d %-7d  %-7d %-10d",
@@ -164,7 +180,7 @@ public class FIFO extends Observable {
 		setChanged();
 		notifyObservers();
 	}
-	
+	/**Retrieves a string with information*/
 	public String getMessageString(){
 		return message;
 	}
