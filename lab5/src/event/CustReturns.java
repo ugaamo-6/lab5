@@ -5,12 +5,8 @@ import simulator.*;
 import state.*;
 
 
-<<<<<<< HEAD
+
 public class CustReturns extends Event {
-=======
-public class CustReturns extends Event {
-	
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	private EventStore es;
 	private SalongState ss;
 	private State s;
@@ -82,7 +78,6 @@ public class CustReturns extends Event {
 	public void getFirst(){
 		FIFO f = C.getFIFO(); // Kan detta l�sas p� annat s�tt?
 		if(!f.isEmpty()){
-			
 			ss.chairGotBusy();
 			es.addEvent(new CustLeaves(es.getTime(), f.getFirst(), es, ss, s, sv, f));
 			f.removeFirst();

@@ -7,7 +7,6 @@ import simulator.*;
 import state.*;
 
 public class CustLeaves extends Event{
-	
 	Statistics stat = new Statistics();
 	private EventStore eventStore;
 	private SalongState ss;
@@ -35,7 +34,6 @@ public class CustLeaves extends Event{
 
 	
 	public void execute() {
-		f.toString(namn, C.getID());
 		if(!oldCustomers.contains(C.getID())){
 			stat.custCountAdd();
 			oldCustomers.add(C.getID());
@@ -60,7 +58,7 @@ public class CustLeaves extends Event{
 		
 		if(ss.randReturn()<=ss.percentageReturn()){
 			double returnTime = eventStore.getTime()+ss.randReturnTime();
-			eventStore.addEvent(new CustReturns());	
+			eventStore.addEvent(new CustReturns(returnTime, C, eventStore, ss, s, sv, f));	
 			C.happy = false;
 			if(!dissatisfied.contains(C.getID())){
 				stat.addDiss(); //if customer not happy, add 1 to counter in stat.
@@ -85,7 +83,7 @@ public class CustLeaves extends Event{
 	public void getFirst(){
 		FIFO f = C.getFIFO(); // Kan detta l�sas p� annat s�tt?
 		if(!f.isEmpty()){
-			ss.chairGotBusy();
+			//ss.chairGotBusy();
 			eventStore.addEvent(new CustLeaves(eventStore.getTime(), f.getFirst(), eventStore, ss, s, sv, f));
 			f.removeFirst();
 		} 

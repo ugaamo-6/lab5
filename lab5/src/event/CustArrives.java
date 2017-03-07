@@ -76,7 +76,6 @@ public class CustArrives extends Event {
 	 * Get the first element(Customer) in the FIFO-queue.
 	 */
 	public void getFirst(){
-		
 		if(!fifo.isEmpty()){
 			salongState.chairGotBusy();
 			eventStore.addEvent(new CustLeaves(eventStore.getTime(), fifo.getFirst(), eventStore, salongState, state, sv, fifo));
