@@ -1,26 +1,45 @@
 package simulator;
+/**
+ * Statistics keep all information necessary to calculate average time, keep track of total customers and so on
+ *  
+ * 
+ * @author Gustav Mattsson (ugaamo-6)
+ * 
+ * @param addQCust adds the customers that have been added to the queue
+ * @param custAddTime adds the customers waiting time, this helps ut calculate the average queue time.
+ * @param custCountAdd adds +1 the total amount of customers that have been cut in 1 day
+ * @param addLeave adds +1 to the total amount of customers who entered the store but didn't get cut
+ * @param qTime adds the queue time for a customer that have been seated at a barber
+ * @param maxSize increases the largest queue => how many people have been queuing at the most at once
+ * @param addDiss adds +1 to the counter for unhappy customers
+ * @param lastCustTime the time that the last customer were cut
+ * @param goingTrue sets the going variable to true wich means that we have seen an idle chair
+ * @param goingFalse sets the going variable to false wich means that we have seen a non idle chair
+ * @param addIdleTime adds the cutting chairs idle time to a "total" variable
+ * 
+ * @param getMethods the get methods return the variables that might be useful to the statistics later.
+ * 
+ * 
+ * */
 public class Statistics {
 	
 	//all variables
-	static int totalCust = 0;
-	static int totalQcust = 0;
-	static double totalTime = 0;
-	static double averageTime = (totalTime)/(totalCust);
-	static int leave = 0;
-	static double totalQtime = 0;
-	static int max_queue = 0;
-	static int totalDiss = 0;
-	static double finalCustTime = 0;
-	static double temp1 = 0; //when it gets empty
-	static double temp2 = 0; //when it gets full
-	static double idleTime = 0;
-	static boolean going = false;
+	private static int totalCust = 0;
+	private static int totalQcust = 0;
+	private static double totalTime = 0;
+	private static double averageTime = (totalTime)/(totalCust);
+	private static int leave = 0;
+	private static double totalQtime = 0;
+	private static int max_queue = 0;
+	private static int totalDiss = 0;
+	private static double finalCustTime = 0;
+	private static double idleTime = 0;
+	private static boolean going = false;
 	
 	//addition methods
 	public void addQcust(){
 		totalQcust++;
 	}
-	
 	public void custStatAddTime(double waitTime){
 		totalTime += waitTime;
 	}
@@ -42,21 +61,10 @@ public class Statistics {
 	public void lastCustTime(double time){
 		finalCustTime = time;
 	}
-	public void setTime1(double time){
-		temp1 = time;
-	}
-	public void setTime2(double time){
-		temp2 = time;
-	}
 	public void goingTrue(){
 		going = true;
 	}
 	public void goingFalse(){
-		going = false;
-	}
-	public void idleCalc(){
-		double timeDiff = temp1 - temp2;
-		idleTime += timeDiff;
 		going = false;
 	}
 	public void addIdletime(double diff){

@@ -51,11 +51,6 @@ public class CustLeaves extends Event{
 		checkIfSatisfied(C);
 		f.custFinished();
 		getFirst();	
-				
-		if(ss.getFreeChairs() != 0 && !stat.getGoing()){
-			stat.setTime1(eventStore.getTime());
-			stat.goingTrue();
-		}
 	}
 	
 	/**Kollar om kunden är nöjd

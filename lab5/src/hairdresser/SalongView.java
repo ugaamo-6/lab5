@@ -35,7 +35,7 @@ public class SalongView extends View implements Observer {
 		System.out.println("Risk dissatisfied returns: ...........: "+salongState.percentageReturn());
 		System.out.println("Seed used in pseudo random generator .: "+salongState.getSeed());
 		System.out.println("-------------------");
-		System.out.println("Time " + " Event " + "     ID "+"        Idle "+"     TWait " + "     InQ"+
+		System.out.println("Time " + " Event " + "     ID "+"        Idle "+"      TIdle"+"     TWait " + "     InQ"+
 		"     Cut"+"      Lost"+"     Ret");
 	}
 	

@@ -155,13 +155,9 @@ public class FIFO extends Observable {
 	
 	public void toString(String name,int ID)
 	{
-		String b = String.format("%-5.2f %-10s %-10d %-10d %-10.2f %-7d %-7d  %-7d %-10d %-10f",
-					es.getTime(),name,ID,ss.getFreeChairs(),stat.getQtime(),queueSize(),(int)stat.getCust(),             
-					stat.getLeave(),                 
-					stat.getDiss(),
-					stat.getIdle()
-					
-				);
+		String b = String.format("%-5.2f %-10s %-10d %-10d %-10f %-10.2f %-7d %-7d %-7d %-10d ",
+					es.getTime(),name,ID,ss.getFreeChairs(),stat.getIdle(),stat.getQtime(),queueSize(),(int)stat.getCust(),             
+					stat.getLeave(), stat.getDiss());
 		message = b;
 		setChanged();
 		notifyObservers();
