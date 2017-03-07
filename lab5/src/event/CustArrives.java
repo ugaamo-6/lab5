@@ -62,6 +62,7 @@ public class CustArrives extends Event {
 			fifo.setLET(eventStore.getTime());
 		} else if(salongState.getFreeChairs() != 0 && fifo.isEmpty() && salongState.getFreeChairs() != 0){
 			salongState.chairGotBusy();	
+			System.out.println("---- heluuuuuuuu");
 			eventStore.addEvent(new CustLeaves(eventStore.getTime() , C, eventStore, salongState, state, sv, fifo));
 			fifo.setLET(eventStore.getTime());
 		} else {
@@ -78,6 +79,7 @@ public class CustArrives extends Event {
 	public void getFirst(){
 		if(!fifo.isEmpty()){
 			salongState.chairGotBusy();
+			System.out.println("--- NIgga=?");
 			eventStore.addEvent(new CustLeaves(eventStore.getTime(), fifo.getFirst(), eventStore, salongState, state, sv, fifo));
 			fifo.removeFirst();
 		} 

@@ -16,7 +16,7 @@ public class CustLeaves extends Event{
 	private Customer C;
 	private double time;
 	
-
+	
 	static ArrayList<Integer> oldCustomers = new ArrayList<Integer>();
 	
 	private String namn = "Leaves";
@@ -44,11 +44,6 @@ public class CustLeaves extends Event{
 		checkIfSatisfied(C);
 		f.custFinished();
 		getFirst();	
-		f.setLET(eventStore.getTime());
-		if(ss.getFreeChairs() != 0 && !stat.getGoing()){
-			stat.setTime1(eventStore.getTime());
-			stat.goingTrue();
-		}
 	}
 	
 	/**Kollar om kunden är nöjd

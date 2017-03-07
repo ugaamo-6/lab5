@@ -6,18 +6,10 @@ import hairdresser.SalongView;
 import simulator.*;
 import state.*;
 
-
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 public class CustReturns extends Event {
-<<<<<<< HEAD
-=======
 
 	
 	Statistics stat = new Statistics();	
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	private EventStore es;
 	private SalongState ss;
 	private State s;
