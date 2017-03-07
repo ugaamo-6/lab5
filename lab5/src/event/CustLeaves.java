@@ -60,7 +60,7 @@ public class CustLeaves extends Event{
 		
 		if(ss.randReturn()<=ss.percentageReturn()){
 			double returnTime = eventStore.getTime()+ss.randReturnTime();
-			eventStore.addEvent(new CustReturns(returnTime, C, eventStore, ss, s, sv, f));	
+			eventStore.addEvent(new CustReturns());	
 			C.happy = false;
 			if(!dissatisfied.contains(C.getID())){
 				stat.addDiss(); //if customer not happy, add 1 to counter in stat.

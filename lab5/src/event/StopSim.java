@@ -25,7 +25,6 @@ public class StopSim extends Event {
 	public StopSim(State s){
 		this.state=s;
 	}
-	
 	public int getCustomerID(){
 		return C;
 	}
@@ -43,7 +42,6 @@ public class StopSim extends Event {
 				 + "\n" + "Largest queue (max NumWaiting) : "+ stat.getMax()
 				 + "\n" +	"Customers not cut (NumLost) ...: "+stat.getLeave()	 + "\n" +	"Dissatisfied customers: .......: " + stat.getDiss()
 				 + "\n" +	"Time chairs were idle: ........: "+stat.getIdle() + "\n" + "-------------------------");
-
 
 		state.stop();
 		

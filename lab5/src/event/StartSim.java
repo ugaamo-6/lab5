@@ -32,12 +32,10 @@ public class StartSim extends Event {
 	/**
 	 * Executes the event.
 	 */
-	public void execute() {		
+	public void execute() {	
 		eventStore.setTime(0.0);
-
 		ss.tempTime = eventStore.getTime();
 		stat.goingTrue();
-		
 		s.start();
 
 		

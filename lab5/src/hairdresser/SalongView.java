@@ -1,7 +1,5 @@
 package hairdresser;
 
-import simulator.Event;
-import simulator.EventStore;
 import simulator.View;
 import state.FIFO;
 import state.SalongState;
