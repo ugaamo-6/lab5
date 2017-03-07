@@ -6,11 +6,17 @@ import random.*;
 
 public class SalongState {
 		
+<<<<<<< HEAD
 	private Statistics stat = new Statistics();
 	private EventStore es;
 	
 	private double closeTime = 10.0;
 	
+=======
+	private Statistics s = new Statistics();
+	private double closeTime = 7.0;
+	
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	private double haircutMinTime = 1.0;
 	private double haircutMaxTime = 2.0;
 	private double returnMinTime = 1.0;

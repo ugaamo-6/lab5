@@ -6,21 +6,48 @@ import simulator.Statistics;
 import simulator.EventStore;
 
 public class StopSim extends Event {
+//	
+//	private EventStore es;
+//	private EventPrint ep;
 	
+<<<<<<< HEAD
 	
 	EventPrint ep;
 	State s;
+=======
+	private State state;
+	
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	Statistics stat = new Statistics();
 	EventStore es = new EventStore(s);
 	
 	private int C;
-	private String namn = "Stop Simulation";
-	public String getName(){
-		return namn;
+	private String toString;// = "Stop Simulation";FIXME
+	
+	
+	public StopSim(State s){
+		
+		this.state=s;
+	}
+	
+	public void execute() {
+		state.stop();
+	}
+	
+	//Måste implementeras
+	public String toString(){//används
+		toString = "999,0 STOP----" + "\n" +"---- Some Statistics ----"
+				 + "\n" +"Number of customers cut: ......: "+(int)stat.getCust() +"\n" +
+				 "Average cutting time...........: "+(stat.getTime()/stat.getCust()) + "\n" +	"Average queueing time: ........: "+(stat.getQtime()/stat.getCust())
+				 + "\n" + "Largest queue (max NumWaiting) : "+ stat.getMax()
+				 + "\n" +	"Customers not cut (NumLost) ...: "+stat.getLeave()	 + "\n" +	"Dissatisfied customers: .......: " + stat.getDiss()
+				 + "\n" +	"Time chairs were idle: ........: "+stat.getIdle() + "\n" + "-------------------------";
+		return toString;
 	}
 	public int getCustomerID(){
 		return C;
 	}
+<<<<<<< HEAD
 	
 	public StopSim(State s){
 		
@@ -46,14 +73,9 @@ public class StopSim extends Event {
 		
 	}
 	@Override
+=======
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	public double getTime() {
 		return time;
 	}
-
-	
-//	public String toString() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-
 }

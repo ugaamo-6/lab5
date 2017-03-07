@@ -15,36 +15,31 @@ public class Closing extends Event implements Observer{
 	
 	
 	static Statistics stat = new Statistics();
-	State s;
-	EventStore es;
-	SalongState ss;
-	SalongView sv;
-	FIFO f;
-	EventPrint ep;
+	private State state;
+	private EventStore es;
+	private SalongState ss;
+//	private SalongView sv;
+//	private FIFO f;
+//	private EventPrint ep;
 	
 	private int C;
 	private String namn = "CustArrives";
-	public String getName(){
-		return namn;
-	}
-	public int getCustomerID(){
-		return C;
-	}
+	
 	
 	public Closing(double time, EventStore es, SalongState ss, State s, SalongView sv, FIFO f) {
 		this.time=time;
 		this.es=es;
 		this.ss=ss;
-		this.s=s;
-		this.sv=sv;
-		this.f=f;
+		this.state=s;
+//		this.sv=sv;
+//		this.f=f;
 		f.addObserver(this);
 	}
 
 	public void execute() {
-		s.closing();
-		s.closing();
-		System.out.println(es.getTime()+"   CLOSING-------");
+		state.closing();
+		state.closing();//duplicate?
+//		System.out.println(es.getTime()+"   CLOSING-------");
 		//f.messageString("----------The store is closing.---------");
 	}
 	
@@ -52,8 +47,18 @@ public class Closing extends Event implements Observer{
 		return time;
 	}
 
+	public String toString(){
+		String toString = es.getTime() +"   CLOSING-------"; 
+		return toString;
+	}
+	public int getCustomerID(){
+		return C;
+	}
+	
+	
+	
 	public void update(Observable arg0, Object arg) {
-		if (ss.totalChairs() == ss.getFreeChairs() && !s.opened()) {
+		if (ss.totalChairs() == ss.getFreeChairs() && !state.opened()) {
 			/*if (f.isEmpty()){
 				es.allEventDone(true);
 			}*/

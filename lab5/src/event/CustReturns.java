@@ -7,27 +7,17 @@ import state.*;
 
 public class CustReturns extends Event {
 	
-	EventPrint ep;
-	EventStore es;
-	SalongState ss;
-	State s;
-	SalongView sv;
-	FIFO f;
+	private EventPrint ep; //Fortfarande vart?
+	private EventStore es;
+	private SalongState ss;
+	private State s;
+	private SalongView sv;
+	private FIFO f;
 	
 	private Customer C;
-	double time;
+	private double time;
 	
 	private String namn = "Returns";
-	public String getName(){
-		return namn;
-	}
-	public int getCustomerID(){
-		return C.getID();
-	}
-	
-	
-	
-	
 	
 	
 	public CustReturns(double time, Customer C, EventStore es, SalongState ss, State s, SalongView sv, FIFO f){
@@ -62,23 +52,31 @@ public class CustReturns extends Event {
 			//f.messageString("Returning customer: Customer stands in queue.");		
 		}else if(f.isFull()){
 
-			//Kontrollerar ifall hela kön är återkommande. 
+			//Kontrollerar ifall hela kï¿½n ï¿½r ï¿½terkommande. 
 			if (f.returningCustInQueue() == ss.maxWaitInQueue()) {
 				double returnTime = es.getTime()+ss.returnTime();
 				es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv, f));	
+<<<<<<< HEAD
 				//f.messageString("Queue full with dissatisfied customers, gets a walk and come back later.");
+=======
+//				f.messageString("Queue full with dissatisfied customers, gets a walk and come back later.");
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 
 			} else {
 				f.removeLast();
 				f.addReturnToQueue(C);
+<<<<<<< HEAD
 				//f.messageString("Returning customer: Stands in queue. Last customer in queue left.");		
+=======
+//				f.messageString("Returning customer: Stands in queue. Last customer in queue left.");		
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 //				stat.addDiss();
 			}
 		}
 	}
 	
 	public void getFirst(){
-		FIFO f = C.getFIFO(); // Kan detta lösas på annat sätt?
+		FIFO f = C.getFIFO(); // Kan detta lï¿½sas pï¿½ annat sï¿½tt?
 		if(!f.isEmpty()){
 			
 			ss.chairGotBusy();
@@ -94,9 +92,13 @@ public class CustReturns extends Event {
 	}
 
 	@Override
-	public String toString() {
+	public String toString() {//ANVÃ„NDS EJ Ã„NNU
 		// TODO Auto-generated method stub
-		return null;
+		return namn;
+	}
+	
+	public int getCustomerID(){
+		return C.getID();
 	}
 
 }

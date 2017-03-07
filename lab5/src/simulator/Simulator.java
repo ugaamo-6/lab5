@@ -1,8 +1,8 @@
-//Kika på 6.8, har vi gjort rätt?
-//Kika på 6.9, har vi gjort rätt?
-//Använd private!!
-//Kika på 6.10, har vi gjort rätt?
-//Kika på 6.15, har vi gjort rätt?
+//Kika pï¿½ 6.8, har vi gjort rï¿½tt?
+//Kika pï¿½ 6.9, har vi gjort rï¿½tt?
+//Anvï¿½nd private!!
+//Kika pï¿½ 6.10, har vi gjort rï¿½tt?
+//Kika pï¿½ 6.15, har vi gjort rï¿½tt?
 
 
 package simulator;
@@ -12,32 +12,32 @@ import hairdresser.SalongView;
 import state.*;
 
 public class Simulator {
-	private EventStore es;
-	private State s;
-	private SalongView sv;
-	private SalongState ss;
+	private EventStore eventStore;
+	private State state;
+	private SalongView salonView;
+	private SalongState salonState;
 	private FIFO f;
 
+	//Ha en main utanfÃ¶r. ALLTSÃ… SKAPA EN MAIN klass som har en main metod som kÃ¶r denna.
 	
-	
-	public Simulator(EventStore es, State s, SalongView sv, SalongState ss, FIFO f){
-		this.es = es;
-		this.s = s;
-		this.sv = sv;
-		this.ss = ss;
+	public Simulator(EventStore es, State s, SalongState ss, FIFO f){
+		this.eventStore = es;
+		this.state = s;
+		this.salonState = ss;
 		this.f=f;
 	}
-	
+	/**KÃ¶r ett program.*/
 	public void Run() {
-		s.start();
-		es.addEvent(new StartSim(es, ss, s, sv, f));
-		es.addEvent(new Closing(ss.getCloseTime() , es,ss,s,sv,f));
-		sv.runningInfoPrint();
-		while (s.running()) {
-			Event currentEvent = es.nextEvent();
+		state.start();
+		eventStore.addEvent(new StartSim(eventStore, salonState, state, salonView, f));
+		eventStore.addEvent(new Closing(salonState.getCloseTime() , eventStore,salonState,state,salonView,f));
+		
+		salonView = new SalongView(f,salonState,eventStore); //Printar ut viktig information direkt
+		while (state.running()) {		//Printar ut information hela tiden under kÃ¶rningen
+			Event currentEvent = eventStore.nextEvent();
 			currentEvent.execute();
 		}
-		sv.endInfoPrint();
+		salonView.endInfoPrint();
 			
 	}
 
@@ -48,8 +48,7 @@ public class Simulator {
 		EventStore es = new EventStore(s);
 		SalongState ss = new SalongState(es);
 		FIFO f = new FIFO(es, ss, s);
-		SalongView sv = new SalongView(f,ss);
-		Simulator sim = new Simulator(es, s, sv, ss, f);
+		Simulator sim = new Simulator(es, s, ss, f);
 		sim.Run();
 	}
 

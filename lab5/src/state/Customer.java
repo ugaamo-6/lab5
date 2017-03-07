@@ -14,11 +14,11 @@ import simulator.State;
  * */
 public class Customer {
 	
-	EventStore es;
-	SalongState ss;
-	State s;
-	SalongView sv;
-	FIFO f;
+//	private EventStore es;
+//	private SalongState ss;
+//	private State s;
+//	private SalongView sv;
+	private FIFO fifon;
 		
 	static int id_counter = 0;
 	
@@ -28,25 +28,27 @@ public class Customer {
 	public boolean happy;
 	
 	public Customer(EventStore es, SalongState ss, State s, SalongView sv, FIFO f){
-		this.es=es;
-		this.ss=ss;
-		this.s=s;
-		this.sv=sv;
-		this.f=f;
-		id = id_counter + 1;
+//		this.es=es;
+//		this.ss=ss;
+//		this.s=s;
+//		this.sv=sv;
+		
+		this.fifon=f;
+		id = id_counter + 1; //Det finns inte ett id nummer som är 0 om detta gäller.
 		happy = true;
 		id_counter++;
 		
 	}
 
+	//nedan get metoder
 	public int getID(){
 		return id;
 	}
 	public boolean get_happy(){
 		return happy;
 	}
-	
+	/**Hämtar kön från en kund*/
 	public FIFO getFIFO(){
-		return f;
+		return fifon;
 	}
 }

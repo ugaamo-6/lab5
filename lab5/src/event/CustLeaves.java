@@ -8,50 +8,39 @@ import state.*;
 
 public class CustLeaves extends Event{
 	
-	EventPrint ep;
+	private EventPrint ep;
 	Statistics stat = new Statistics();
-	EventStore es;
-	SalongState ss;
-	State s;
-	SalongView sv;
-	FIFO f;
-	Customer C;
-	double time;
+	private EventStore eventStore;
+	private SalongState ss;
+	private State s;
+	private SalongView sv;
+	private FIFO f;
+	private Customer C;
+	private double time;
 	
 	static ArrayList<Integer> dissatisfied = new ArrayList<Integer>();
 	static ArrayList<Integer> oldCustomers = new ArrayList<Integer>();
 	
 	private String namn = "Leaves";
-	public String getName(){
-		return namn;
-	}
-	public int getCustomerID(){
-		return C.getID();
-	}
 	
 	public CustLeaves(double time, Customer C, EventStore es, SalongState ss, State s, SalongView sv, FIFO f){
 		this.time = time + ss.haircutTime();
 		this.C = C;
-		this.es=es;
+		this.eventStore=es;
 		this.ss=ss;
 		this.s=s;
 		this.sv=sv;
 		this.f=f;
 	}
 	
-	public double getTime() {
-		return this.time;
-	}
+
 	
 	public void execute() {
-		
 		
 		if(!oldCustomers.contains(C.getID())){
 			stat.custCountAdd();
 			oldCustomers.add(C.getID());
 		}
-		
-		
 		
 		FIFO f = C.getFIFO();
 		
@@ -59,28 +48,18 @@ public class CustLeaves extends Event{
 		f.custFinished();
 		getFirst();	
 		
-		ep = new EventPrint(namn, C.getID(), es,ss,f);
+		ep = new EventPrint(namn, C.getID(), eventStore,ss,f);
 	}
 	
-	public void getFirst(){
-		FIFO f = C.getFIFO(); // Kan detta lösas på annat sätt?
-		if(!f.isEmpty()){
-			ss.chairGotBusy();
-			es.addEvent(new CustLeaves(es.getTime(), f.getFirst(), es, ss, s, sv, f));
-			f.removeFirst();
-			//f.messageString("Customer gets a haircut.");
-		} 
-	}
-		
+	/**Kollar om kunden Ã¤r nÃ¶jd
+	 * @return true om nÃ¶jd och false om missnÃ¶jd*/
 	public void checkIfSatisfied(Customer C){
-		FIFO f = C.getFIFO(); // Kan detta lösas på annat sätt?
-		
-		
+		FIFO f = C.getFIFO(); // Kan detta lï¿½sas pï¿½ annat sï¿½tt?
 		
 		if(ss.randReturn()<=ss.percentageReturn()){
 			//f.messageString("Customer is not happy.");
-			double returnTime = es.getTime()+ss.returnTime();
-			es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv, f));	
+			double returnTime = eventStore.getTime()+ss.returnTime();
+			eventStore.addEvent(new CustReturns(returnTime, C, eventStore, ss, s, sv, f));	
 			C.happy = false;
 			if(!dissatisfied.contains(C.getID())){
 				//System.out.println("--- Dissatisfied contains: "+C.getID());
@@ -90,11 +69,32 @@ public class CustLeaves extends Event{
 				//System.out.println("--- Added: "+C.getID());
 			}
 			
-			
-		} else { C.happy = true; }
+		} else {
+			C.happy = true; 
+		}
 		
 }
 	
 	
-
+	
+	public String toString(){
+		return namn;
+	}
+	public int getCustomerID(){
+		return C.getID();
+	}
+	
+	public void getFirst(){
+		FIFO f = C.getFIFO(); // Kan detta lï¿½sas pï¿½ annat sï¿½tt?
+		if(!f.isEmpty()){
+			ss.chairGotBusy();
+			eventStore.addEvent(new CustLeaves(eventStore.getTime(), f.getFirst(), eventStore, ss, s, sv, f));
+			f.removeFirst();
+			//f.messageString("Customer gets a haircut.");
+		} 
+	}
+	
+	public double getTime() {
+		return this.time;
+	}
 }
