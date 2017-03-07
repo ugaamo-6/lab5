@@ -15,6 +15,7 @@ public class StartSim extends Event {
 	private State s;
 	private SalongView sv;
 	private FIFO f;
+	private Statistics stat = new Statistics();
 	
 	private int C;
 	private String toString = "Start Simulation";
@@ -31,7 +32,8 @@ public class StartSim extends Event {
 	
 	public void execute() {		
 		eventStore.setTime(0.0);
-
+		ss.tempTime = eventStore.getTime();
+		stat.goingTrue();
 		s.start();
 
 		

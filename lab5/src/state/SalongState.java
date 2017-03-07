@@ -7,7 +7,7 @@ import random.*;
 public class SalongState {
 		
 	private Statistics stat = new Statistics();
-	private EventStore es;
+	EventStore es;
 	
 	private double closeTime = 7.0;
 	private double haircutMinTime = 1.0;
@@ -21,7 +21,7 @@ public class SalongState {
 	private double lambda = 1.2;
 	private long seed = 1116; //System.currentTimeMillis();
 	
-	
+	public double tempTime = 0;
 	
 	private UniformRandomStream returntimeUniRand = new UniformRandomStream(returnMinTime, returnMaxTime, seed);
 	private UniformRandomStream pRand = new UniformRandomStream(0,1, seed);
@@ -47,8 +47,9 @@ public class SalongState {
 	 */
 	public void chairGotFree() {
 		freeChairs++;
-		if((freeChairs != 0) && !stat.getGoing()){
-			stat.setTime2(es.getTime());
+		if((freeChairs > 0) && !stat.getGoing()){
+			System.out.println("--- FREE");
+			tempTime = es.getTime();
 			stat.goingTrue();
 		}
 	}
@@ -58,9 +59,9 @@ public class SalongState {
 	 */
 	public void chairGotBusy() {
 		freeChairs--;
+		System.out.println("--- BUSY");
 		if((freeChairs == 0) && stat.getGoing()){
-			stat.setTime1(es.getTime());
-			stat.idleCalc();
+			timeDiffCalcu();
 			stat.goingFalse();
 		}
 	}
@@ -179,6 +180,11 @@ public class SalongState {
 	 */
 	public double getCloseTime() {
 		return closeTime;
+	}
+	
+	public void timeDiffCalcu(){
+		double diff = es.getTime() - tempTime;
+		stat.addIdletime(diff);
 	}
 
 	

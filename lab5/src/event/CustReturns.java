@@ -7,6 +7,7 @@ import state.*;
 
 public class CustReturns extends Event {
 	
+	private Statistics stat = new Statistics();
 	private EventPrint ep; //Fortfarande vart?
 	private EventStore es;
 	private SalongState ss;

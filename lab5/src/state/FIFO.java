@@ -38,7 +38,7 @@ public class FIFO extends Observable {
 	private CustLeaves cl;
 	
 	private int NumWaiting = 0; //max customers in queue at once 
-	public double lastEventTime = 0;
+	public static double lastEventTime = 0;
 	public void setLET(double time){
 		lastEventTime = time;
 	}
@@ -155,6 +155,7 @@ public class FIFO extends Observable {
 		stat.qTime(diff);}
 		
 	}
+
 
 }
 

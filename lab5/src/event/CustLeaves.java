@@ -49,7 +49,7 @@ public class CustLeaves extends Event{
 		getFirst();	
 		f.setLET(eventStore.getTime());
 		if(ss.getFreeChairs() != 0 && !stat.getGoing()){
-			stat.setTime1(eventStore.getTime());
+			ss.tempTime = eventStore.getTime();
 			stat.goingTrue();
 		}
 	}

@@ -58,6 +58,9 @@ public class Statistics {
 		idleTime += timeDiff;
 		going = false;
 	}
+	public void addIdletime(double diff){
+		idleTime += diff;
+	}
 	
 	public int gQcust(){
 		return totalQcust;

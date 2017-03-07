@@ -4,6 +4,8 @@ import simulator.Event;
 import simulator.State;
 import simulator.Statistics;
 import simulator.EventStore;
+import state.SalongState;
+import state.FIFO;
 
 public class StopSim extends Event {
 //	
@@ -16,10 +18,13 @@ public class StopSim extends Event {
 	State s;
 	private State state;
 	
+	
+	
 
 	Statistics stat = new Statistics();
 	EventStore es ;
-	
+	SalongState ss = new SalongState(es);
+	FIFO f = new FIFO(es,ss,s);
 	private int C;
 	private String toString;// = "Stop Simulation";FIXME
 	
@@ -32,6 +37,9 @@ public class StopSim extends Event {
 	
 	//Måste implementeras
 	public String toString(){//används
+		
+		
+		
 		toString = "999,0 STOP----" + "\n" +"---- Some Statistics ----"
 				 + "\n" +"Number of customers cut: ......: "+(int)stat.getCust() +"\n" +
 				 "Average cutting time...........: "+(stat.getTime()/stat.getCust()) + "\n" +	"Average queueing time: ........: "+(stat.getQtime()/stat.getCust())
@@ -45,10 +53,7 @@ public class StopSim extends Event {
 	}
 	
 	public void execute() {
-		if(stat.getGoing()){
-			stat.setTime2(getTime());
-			stat.idleCalc();
-		}
+
 //		System.out.println("999,0 STOP----");
 //		System.out.println("---- Some Statistics ----");
 //		System.out.println("Number of customers cut: ......: "+(int)stat.getCust());
@@ -60,6 +65,7 @@ public class StopSim extends Event {
 //		System.out.println("Time chairs were idle: ........: "+stat.getIdle());
 //		System.out.println("-------------------------");
 //		
+		
 		state.stop();
 		
 	}
