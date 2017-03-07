@@ -27,7 +27,7 @@ public class EventPrint extends Observable{
 		//System.out.format(format, args)
 		//"%20a%20b%20c%20d%20e%20f%20g%20h%20i", 
 		
-		System.out.format("%-5.3f %-10s %-10d %-10d %-10.3f %-7d %-7d  %-7d %-10d\n",
+		System.out.format("%-5.2f %-10s %-10d %-10d %-10.2f %-7d %-7d  %-7d %-10d\n",
 				es.getTime(),                //eventStore tid
 				name,                        //name
 				ID,                          //customer ID
