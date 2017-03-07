@@ -29,7 +29,7 @@ public class SalongView extends View implements Observer {
 		System.out.println("Risk dissatisfied returns: ...........: "+ss.percentageReturn());
 		System.out.println("Seed used in pseudo random generator .: "+ss.getSeed());
 		System.out.println("-------------------");
-		System.out.println("Time " + " Name " + "      ID "+"        Idle "+"     TWait " + "     InQ"+
+		System.out.println("Time " + " Event " + "     ID "+"        Idle "+"     TWait " + "     InQ"+
 		"     Cut"+"      Lost"+"     Ret");
 	}
 

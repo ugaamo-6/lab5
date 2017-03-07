@@ -13,7 +13,7 @@ public class EventStore {
 	ArrayList<Event> queue = new ArrayList<Event>();
 	private double currentTime;
 	private State s; 
-	private SalongState ss = new SalongState();
+	private SalongState ss = new SalongState(this);
 	private FIFO f;
 	private Statistics stat;
 

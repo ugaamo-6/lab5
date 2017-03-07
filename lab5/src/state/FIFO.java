@@ -61,11 +61,6 @@ public class FIFO extends Observable {
 		if(isFull()){
 			stat.addLeave();
 		}
-		if(isFull() && stat.getGoing()){
-			stat.setTime1(es.getTime());
-			stat.idleCalc();
-			stat.goingFalse();
-		}
 	
 }
 	public void messageString(String s){
@@ -103,30 +98,19 @@ public class FIFO extends Observable {
 	public void addReturnToQueue(Customer C){
 		queue.add(returningCustInQueue(), C);
 		C.queueTime = es.getTime();
-		if(isFull() && stat.getGoing()){
-			stat.setTime1(es.getTime());
-			stat.idleCalc();
-			stat.goingFalse();
-		}
+		stat.addQcust();
+		
 		
 	}
 
 	public void removeLast(){
 		queue.remove(queue.size()-1);
-		if(!isFull() && !stat.getGoing()){
-			stat.goingTrue();
-			stat.setTime2(es.getTime());
-		}
 	}
 	
 	public void removeFirst() {
 		stat.qTime(qTimeCalc(getFirst()));
 		stat.lastCustTime(es.getTime());
 		queue.remove(0);
-		if(!isFull() && !stat.getGoing()){
-			stat.goingTrue();
-			stat.setTime2(es.getTime());
-		}
 	}
 	
 	public Customer getFirst() {

@@ -3,6 +3,7 @@ public class Statistics {
 	
 	//all variables
 	static int totalCust = 0;
+	static int totalQcust = 0;
 	static double totalTime = 0;
 	static double averageTime = (totalTime)/(totalCust);
 	static int leave = 0;
@@ -16,6 +17,9 @@ public class Statistics {
 	static boolean going = false;
 	
 	//addition methods
+	public void addQcust(){
+		totalQcust++;
+	}
 	public void custStatAddTime(double waitTime){
 		totalTime += waitTime;
 	}
@@ -58,6 +62,9 @@ public class Statistics {
 	}
 	
 	//get... methods
+	public int gQcust(){
+		return totalQcust;
+	}
 	public double getCust(){
 		return totalCust;
 	}

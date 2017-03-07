@@ -66,12 +66,12 @@ public class CustReturns extends Event {
 			if (f.returningCustInQueue() == ss.maxWaitInQueue()) {
 				double returnTime = es.getTime()+ss.returnTime();
 				es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv, f));	
-				f.messageString("Queue full with dissatisfied customers, gets a walk and come back later.");
+				//f.messageString("Queue full with dissatisfied customers, gets a walk and come back later.");
 
 			} else {
 				f.removeLast();
 				f.addReturnToQueue(C);
-				f.messageString("Returning customer: Stands in queue. Last customer in queue left.");		
+				//f.messageString("Returning customer: Stands in queue. Last customer in queue left.");		
 //				stat.addDiss();
 			}
 		}

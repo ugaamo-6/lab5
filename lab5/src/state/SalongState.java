@@ -1,11 +1,13 @@
 package state;
 
 import simulator.Statistics;
+import simulator.EventStore;
 import random.*;
 
 public class SalongState {
 		
-	private Statistics s = new Statistics();
+	private Statistics stat = new Statistics();
+	private EventStore es;
 	
 	private double closeTime = 10.0;
 	
@@ -26,7 +28,8 @@ public class SalongState {
 	private ExponentialRandomStream expRand;
 
 	
-	public SalongState(/*double percentageReturn*/){
+	public SalongState(/*double percentageReturn*/EventStore es){
+		this.es = es;
 		/*this.percentageReturn=percentageReturn;*/
 	}
 	
@@ -36,10 +39,20 @@ public class SalongState {
 	
 	public void chairGotFree() {
 		freeChairs++;
+		if((freeChairs != 0) && !stat.getGoing()){
+			stat.goingTrue();
+			stat.setTime2(es.getTime());
+		}
 	}
+	
 	
 	public void chairGotBusy() {
 		freeChairs--;
+		if((freeChairs == 0) && stat.getGoing()){
+			stat.setTime1(es.getTime());
+			stat.idleCalc();
+			stat.goingFalse();
+		}
 	}
 	
 	public int getFreeChairs() {
@@ -75,7 +88,7 @@ public class SalongState {
 		uniRand = new UniformRandomStream(haircutMinTime, haircutMaxTime, seed);
 		double rand = uniRand.next();
 //		System.out.println("----- "+rand);
-		s.custStatAddTime(rand);
+		stat.custStatAddTime(rand);
 		return rand;
 	}
 	
