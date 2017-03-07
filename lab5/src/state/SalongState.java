@@ -3,11 +3,13 @@ package state;
 import simulator.Statistics;
 import simulator.EventStore;
 import random.*;
+import state.FIFO;
 
 public class SalongState {
 		
 	private Statistics stat = new Statistics();
 	EventStore es;
+	FIFO f;
 	
 	private double closeTime = 7.0;
 	private double haircutMinTime = 1.0;
@@ -51,6 +53,11 @@ public class SalongState {
 			System.out.println("--- FREE");
 			tempTime = es.getTime();
 			stat.goingTrue();
+		}else if((freeChairs > 0) && stat.getGoing()){
+			double temp = es.getTime() - tempTime;
+			for(int i = 0; i<=getFreeChairs(); i++){
+				stat.addIdletime(temp);}
+			tempTime = es.getTime();
 		}
 	}
 	/**
@@ -59,9 +66,12 @@ public class SalongState {
 	 */
 	public void chairGotBusy() {
 		freeChairs--;
-		System.out.println("--- BUSY");
+		//System.out.println("--- BUSY");
 		if((freeChairs == 0) && stat.getGoing()){
-			timeDiffCalcu();
+			double temp = es.getTime() - tempTime;
+			for(int i = 0; i<=getFreeChairs();i++){
+				stat.addIdletime(temp);
+			}
 			stat.goingFalse();
 		}
 	}
@@ -182,10 +192,10 @@ public class SalongState {
 		return closeTime;
 	}
 	
-	public void timeDiffCalcu(){
-		double diff = es.getTime() - tempTime;
-		stat.addIdletime(diff);
-	}
+//	public void timeDiffCalcu(){
+//		double diff = es.getTime() - tempTime;
+//		stat.addIdletime(diff);
+//	}
 
 	
 

@@ -103,11 +103,9 @@ public class FIFO extends Observable {
 	}
 
 	public void addReturnToQueue(Customer C){
-//		if(ss.getFreeChairs() == 0){
-		//timeDiffCalc(queueSize());
-			queue.add(returningCustInQueue(), C);	
-
+			queue.add(returningCustInQueue(), C);		
 		}
+
 	/**Tar bort sista kunden*/
 	public void removeLast(){
 		queue.remove(queue.size()-1);
@@ -166,6 +164,5 @@ public class FIFO extends Observable {
 	public String getMessageString(){
 		return message;
 	}
-	
 }
 

@@ -8,8 +8,9 @@ import state.*;
 
 
 public class CustReturns extends Event {
+
 	
-	Statistics stat = new Statistics();
+	Statistics stat = new Statistics();	
 	private EventStore es;
 	private SalongState ss;
 	private State s;

@@ -25,7 +25,6 @@ public class StopSim extends Event {
 	public StopSim(State s){
 		this.state=s;
 	}
-
 	public int getCustomerID(){
 		return C;
 	}
