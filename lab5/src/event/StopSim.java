@@ -8,13 +8,7 @@ import state.SalongState;
 import state.FIFO;
 
 public class StopSim extends Event {
-//	
-//	private EventStore es;
-//	private EventPrint ep;
-	
 
-	
-	EventPrint ep;
 	State s;
 	private State state;
 	
@@ -26,14 +20,13 @@ public class StopSim extends Event {
 	SalongState ss = new SalongState(es);
 	FIFO f = new FIFO(es,ss,s);
 	private int C;
-	private String toString;// = "Stop Simulation";FIXME
 	
 	
 	public StopSim(State s){
-		
 		this.state=s;
 	}
 
+<<<<<<< HEAD
 	
 	//Måste implementeras
 	public String toString(){//används
@@ -48,11 +41,14 @@ public class StopSim extends Event {
 				 + "\n" +	"Time chairs were idle: ........: "+stat.getIdle() + "\n" + "-------------------------";
 		return toString;
 	}
+=======
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	public int getCustomerID(){
 		return C;
 	}
 	
 	public void execute() {
+<<<<<<< HEAD
 
 //		System.out.println("999,0 STOP----");
 //		System.out.println("---- Some Statistics ----");
@@ -66,6 +62,21 @@ public class StopSim extends Event {
 //		System.out.println("-------------------------");
 //		
 		
+=======
+		if(stat.getGoing()){
+			stat.setTime1(getTime());
+			stat.idleCalc();
+		}
+		
+		//Byt plats?
+		System.out.println("999,0 STOP----" + "\n" +"---- Some Statistics ----"
+				 + "\n" +"Number of customers cut: ......: "+(int)stat.getCust() +"\n" +
+				 "Average cutting time...........: "+(stat.getTime()/stat.getCust()) + "\n" +	"Average queueing time: ........: "+(stat.getQtime()/stat.getCust())
+				 + "\n" + "Largest queue (max NumWaiting) : "+ stat.getMax()
+				 + "\n" +	"Customers not cut (NumLost) ...: "+stat.getLeave()	 + "\n" +	"Dissatisfied customers: .......: " + stat.getDiss()
+				 + "\n" +	"Time chairs were idle: ........: "+stat.getIdle() + "\n" + "-------------------------");
+
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 		state.stop();
 		
 	}

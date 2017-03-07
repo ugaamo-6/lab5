@@ -16,25 +16,14 @@ public class SalongView extends View implements Observer {
 	
 	private SalongState salongState;
 	private FIFO fifo;
-	private EventStore eventStore;
 	
-	public SalongView(FIFO f, SalongState ss, EventStore es){
+	public SalongView(FIFO f, SalongState ss){
 		this.fifo=f;
 		this.salongState=ss;
-		this.eventStore = es;
-//		f.addObserver(this);
-		eventStore.addObserver(this);
+		f.addObserver(this);
 		
 		runningInfoPrint();
 	}
-	
-
-	
-	
-	
-
-	
-	
 	
 	private void runningInfoPrint() {
 		System.out.println("Opened.");
@@ -55,7 +44,7 @@ public class SalongView extends View implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg) 
 	{
-//		System.out.println(fifo.getMessageString());
-		System.out.println(arg);
+		
+		System.out.println(fifo.getMessageString());
 	}
 }

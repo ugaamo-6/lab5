@@ -7,8 +7,11 @@ import state.*;
 
 public class CustReturns extends Event {
 	
+<<<<<<< HEAD
 	private Statistics stat = new Statistics();
 	private EventPrint ep; //Fortfarande vart?
+=======
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 	private EventStore es;
 	private SalongState ss;
 	private State s;
@@ -32,10 +35,12 @@ public class CustReturns extends Event {
 	}
 	
 	
-	
+	/**
+	 * 
+	 */
 	public void execute() {
 		f = (FIFO) C.getFIFO();
-		ep = new EventPrint(namn, C.getID(), es,ss,f);
+		f.toString(namn, C.getID());
 		addReturnCust(C);
 	}
 	
@@ -66,7 +71,9 @@ public class CustReturns extends Event {
 			}
 		}
 	
-	
+	/**
+	 * Get the first element(Customer) in the FIFO-queue.
+	 */
 	public void getFirst(){
 		FIFO f = C.getFIFO(); // Kan detta l�sas p� annat s�tt?
 		if(!f.isEmpty()){
@@ -77,19 +84,13 @@ public class CustReturns extends Event {
 		} 
 	}
 	
+	/**
+	 * Returns the time when the event is executed, with other words the the customer returns.
+	 * @return Time when executed.
+	 */
 	public double getTime() {
 		return time;
 	}
-
-	@Override
-	public String toString() {//ANVÄNDS EJ ÄNNU
-		// TODO Auto-generated method stub
-		return namn;
-	}
 	
-	public int getCustomerID(){
-		return C.getID();
-	}
-
 }
 

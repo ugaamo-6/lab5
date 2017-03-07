@@ -44,7 +44,7 @@ public class Simulator {
 		
 		SalongState ss = new SalongState(es);
 		FIFO f = new FIFO(es, ss, s);
-		SalongView sv = new SalongView(f, ss, es);
+		SalongView sv = new SalongView(f, ss);
 		
 
 		

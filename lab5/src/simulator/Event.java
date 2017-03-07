@@ -8,8 +8,6 @@ abstract public class Event{
 	
 	public abstract double getTime();
 	
-	public abstract String toString();
-	
-	public abstract int getCustomerID(); 
+//	public abstract String toString();
 		
 }

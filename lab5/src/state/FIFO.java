@@ -76,19 +76,19 @@ public class FIFO extends Observable {
 }
 	
 	
-	/**Ändrar message strängen till något*/
-	private void messageString(String s){
-		message = s;
-		setChanged();
-		notifyObservers();
-	}
-	/**Hämtar message strängen*/
-	public String getMessageString(){
-		return message;
-	}
+//	/**Ändrar message strängen till något*/
+//	private void messageString(String s){
+//		message = s;
+//
+//	}
+//	/**Hämtar message strängen*/
+
 	
 	
-	
+	/**
+	 * Check if the FIFO queue is full.
+	 * @return True in full, false if not. 
+	 */
 	public boolean isFull(){
 		if(queueSize() >= ss.maxWaitInQueue()){
 			return true;
@@ -140,11 +140,18 @@ public class FIFO extends Observable {
 	public int queueSize(){
 		return queue.size();
 	}
-	/**Hämtar totala vistelse kunder*/
+	/**
+	 * H�mtar totala vistelse kunder
+	 * @return totalVisitor
+	 */
 	public int getTotalVisitors(){
 		return totalVisitors;
 	}
-	/**Hämtar eventStore tid subtraherat med en kund kö tid.*/
+	/**
+	 * H�mtar eventStore tid subtraherat med en kund k� tid.
+	 * @param C, Customer
+	 * @return ????????????????????????????
+	 */
 	private double qTimeCalc(Customer C){
 		return es.getTime()-C.queueTime;
 	}
@@ -155,7 +162,26 @@ public class FIFO extends Observable {
 		stat.qTime(diff);}
 		
 	}
+<<<<<<< HEAD
 
 
+=======
+	
+	public void toString(String name,int ID)
+	{
+		String b = String.format("%-5.1f %-10s %-10d %-10d %-10.1f %-7d %-7d  %-7d %-10d",
+					es.getTime(),name,ID,ss.getFreeChairs(),stat.getQtime(),queueSize(),(int)stat.getCust(),             
+					stat.getLeave(),                 
+					stat.getDiss());
+		message = b;
+		setChanged();
+		notifyObservers();
+	}
+	
+	public String getMessageString(){
+		return message;
+	}
+	
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 }
 

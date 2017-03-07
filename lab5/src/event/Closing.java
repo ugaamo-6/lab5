@@ -18,9 +18,6 @@ public class Closing extends Event implements Observer{
 	private State state;
 	private EventStore es;
 	private SalongState ss;
-//	private SalongView sv;
-//	private FIFO f;
-//	private EventPrint ep;
 	
 	private int C;
 	private String namn = "CustArrives";
@@ -38,9 +35,7 @@ public class Closing extends Event implements Observer{
 
 	public void execute() {
 		state.closing();
-		state.closing();//duplicate?
-//		System.out.println(es.getTime()+"   CLOSING-------");
-		//f.messageString("----------The store is closing.---------");
+		System.out.println(es.getTime()+"   CLOSING-------");
 	}
 	
 	public double getTime() {

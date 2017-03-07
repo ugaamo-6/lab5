@@ -8,7 +8,6 @@ import state.*;
 
 public class CustArrives extends Event {
 	
-	private EventPrint ep; //?? Typen vartifrån?
 	private EventStore eventStore;
 	private SalongState salongState;
 	private State state;
@@ -30,10 +29,14 @@ public class CustArrives extends Event {
 		
 	}
 	
+	/**
+	 * Executes the event.
+	 */
 	public void execute() {
+		
 		if (state.opened()) {
-			Customer C = new Customer(eventStore, salongState, state, sv, fifo);
-			ep = new EventPrint(namn, C.getID(), eventStore,salongState,fifo);
+			Customer C = new Customer(fifo);
+			fifo.toString(namn, C.getID());
 			addToFIFO(C);
 			double nextCustTime = eventStore.getTime() + salongState.nextCustTime();
 			CustArrives nextCust = new CustArrives(nextCustTime, eventStore, salongState, state, sv, fifo);
@@ -41,11 +44,14 @@ public class CustArrives extends Event {
 		}
 	}
 	
+	/**
+	 * Add the customer that arrived to the FIFO queue.
+	 * @param C is the arriving customer.
+	 */
 	private void addToFIFO(Customer C) {
 		if(fifo.isFull()){	
 			fifo.timeDiffCalc(fifo.queueSize());
 			stat.addLeave();
-			//f.messageString("The queue is full, customer leaves");
 			
 			fifo.setLET(eventStore.getTime());
 		}
@@ -65,7 +71,10 @@ public class CustArrives extends Event {
 		}
 		
 	}
-		
+	
+	/**
+	 * Get the first element(Customer) in the FIFO-queue.
+	 */
 	public void getFirst(){
 		
 		if(!fifo.isEmpty()){
@@ -78,21 +87,13 @@ public class CustArrives extends Event {
 	
 	//Get metoder nedan.
 	
+	/**
+	 * Returns the time when the event is executed, with other words the the customer arrives.
+	 * @return Time when executed.
+	 */
 	public double getTime() {
 		return time;
 	}
-	
-	public double getArrivalTime(){
-		return time;
-	}
 
-	public int getCustomerID(){
-		return C;
-	}
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return namn;
-	}
 }
+

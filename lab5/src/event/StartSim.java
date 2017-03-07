@@ -9,7 +9,6 @@ import state.*;
 
 public class StartSim extends Event {
 	
-	private EventPrint ep;
 	private EventStore eventStore;
 	private SalongState ss;
 	private State s;
@@ -30,10 +29,16 @@ public class StartSim extends Event {
 		time = 0.0;
 	}
 	
+	/**
+	 * Executes the event.
+	 */
 	public void execute() {		
 		eventStore.setTime(0.0);
+<<<<<<< HEAD
 		ss.tempTime = eventStore.getTime();
 		stat.goingTrue();
+=======
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 		s.start();
 
 		
@@ -44,24 +49,23 @@ public class StartSim extends Event {
 		
 		System.out.println(eventStore.getTime()+"   START----");
 	}
-	
-	//Måste ha pga extend
+
+	/**
+	 * Returns the time when the event is executed.
+	 * @return Time when executed.
+	 */
 	public double getTime() {
 		return time;
 	}
 	
 
-	
-	//Används ej
-	public int getCustomerID(){
-		return C;
-	}
-
-//	@Override
+	/**Returns a string that describes the event.
+	 * @return String describing event. 
+	 */
 	public String toString() {
 		return toString;
 	}
-	
+
 	
 
 
