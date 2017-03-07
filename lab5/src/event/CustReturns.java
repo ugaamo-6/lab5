@@ -34,8 +34,8 @@ public class CustReturns extends Event {
 	
 	public void execute() {
 		f = (FIFO) C.getFIFO();
-		addReturnCust(C);
 		ep = new EventPrint(namn, C.getID(), es,ss,f);
+		addReturnCust(C);
 	}
 	
 	public void addReturnCust(Customer C){

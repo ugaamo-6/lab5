@@ -46,7 +46,7 @@ public class StopSim extends Event {
 	
 	public void execute() {
 		if(stat.getGoing()){
-			stat.setTime1(getTime());
+			stat.setTime2(getTime());
 			stat.idleCalc();
 		}
 //		System.out.println("999,0 STOP----");

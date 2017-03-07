@@ -33,11 +33,11 @@ public class CustArrives extends Event {
 	public void execute() {
 		if (state.opened()) {
 			Customer C = new Customer(eventStore, salongState, state, sv, fifo);
+			ep = new EventPrint(namn, C.getID(), eventStore,salongState,fifo);
 			addToFIFO(C);
 			double nextCustTime = eventStore.getTime() + salongState.nextCustTime();
 			CustArrives nextCust = new CustArrives(nextCustTime, eventStore, salongState, state, sv, fifo);
 			eventStore.addEvent(nextCust);
-			ep = new EventPrint(namn, C.getID(), eventStore,salongState,fifo);
 		}
 	}
 	

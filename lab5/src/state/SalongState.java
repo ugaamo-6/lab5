@@ -48,8 +48,8 @@ public class SalongState {
 	public void chairGotFree() {
 		freeChairs++;
 		if((freeChairs != 0) && !stat.getGoing()){
-			stat.goingTrue();
 			stat.setTime2(es.getTime());
+			stat.goingTrue();
 		}
 	}
 	/**

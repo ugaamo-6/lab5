@@ -36,7 +36,7 @@ public class CustLeaves extends Event{
 
 	
 	public void execute() {
-		
+		ep = new EventPrint(namn, C.getID(), eventStore,ss,f);
 		if(!oldCustomers.contains(C.getID())){
 			stat.custCountAdd();
 			oldCustomers.add(C.getID());
@@ -48,9 +48,10 @@ public class CustLeaves extends Event{
 		f.custFinished();
 		getFirst();	
 		f.setLET(eventStore.getTime());
-		
-		
-		ep = new EventPrint(namn, C.getID(), eventStore,ss,f);
+		if(ss.getFreeChairs() != 0 && !stat.getGoing()){
+			stat.setTime1(eventStore.getTime());
+			stat.goingTrue();
+		}
 	}
 	
 	/**Kollar om kunden är nöjd

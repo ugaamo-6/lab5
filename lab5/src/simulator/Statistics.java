@@ -11,8 +11,8 @@ public class Statistics {
 	static int max_queue = 0;
 	static int totalDiss = 0;
 	static double finalCustTime = 0;
-	static double temp1 = 0; //when it gets full
-	static double temp2 = 0; //when it gets empty
+	static double temp1 = 0; //when it gets empty
+	static double temp2 = 0; //when it gets full
 	static double idleTime = 0;
 	static boolean going = false;
 	
@@ -54,7 +54,7 @@ public class Statistics {
 		going = false;
 	}
 	public void idleCalc(){
-		double timeDiff = temp2 - temp1;
+		double timeDiff = temp1 - temp2;
 		idleTime += timeDiff;
 		going = false;
 	}
