@@ -52,13 +52,10 @@ public class CustArrives extends Event {
 			salongState.chairGotBusy();	
 			eventStore.addEvent(new CustLeaves(eventStore.getTime() , C, eventStore, salongState, state, sv, fifo));
 		} else {
-<<<<<<< HEAD
-			f.addNewCustomerToFIFO((Customer) C);
+			fifo.addNewCustomerToFIFO((Customer) C);
 			//C.queueTime = es.getTime();
-=======
 			fifo.addNewCustomerToFIFO((Customer) C);
 			C.queueTime = eventStore.getTime();
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 			//f.messageString("Customer wait.");
 		}
 		

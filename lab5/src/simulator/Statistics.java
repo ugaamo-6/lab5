@@ -55,7 +55,7 @@ public class Statistics {
 		going = false;
 	}
 	public void idleCalc(){
-		double timeDiff = temp1 - temp2;
+		double timeDiff = temp2 - temp1;
 		idleTime += timeDiff;
 		going = false;
 //		System.out.println("----- "+timeDiff);

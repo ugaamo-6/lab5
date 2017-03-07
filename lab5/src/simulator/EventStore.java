@@ -12,21 +12,18 @@ import simulator.Statistics;
 public class EventStore extends Observable{
 	
 	//This array-list keep track of the queue of Events
-<<<<<<< HEAD
 	ArrayList<Event> queue = new ArrayList<Event>();
 	private double currentTime;
 	private State s; 
 	private SalongState ss = new SalongState(this);
 	private FIFO f;
 	private Statistics stat;
-=======
+
 	ArrayList<Event> eventQueue = new ArrayList<Event>();
-	private double currentTime; //Nuvarande tid
 	private State state; 
 //	private SalongState ss = new SalongState();
 //	private FIFO f;
 //	private Statistics stat;
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 
 	
 	public EventStore(State s) {
