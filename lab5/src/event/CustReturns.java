@@ -46,26 +46,26 @@ public class CustReturns extends Event {
 		if (ss.getFreeChairs() == ss.totalChairs()) {
 			f.addReturnToQueue(C);
 			getFirst();
-			//f.messageString("Returning customer: Customer get haircut.");
 		} else if(!f.isFull()){
+			f.timeDiffCalc(f.queueSize());
 			f.addReturnToQueue(C);
-			//f.messageString("Returning customer: Customer stands in queue.");		
+			f.lastEventTime = es.getTime();
+
+			
 		}else if(f.isFull()){
 
 			//Kontrollerar ifall hela k�n �r �terkommande. 
 			if (f.returningCustInQueue() == ss.maxWaitInQueue()) {
 				double returnTime = es.getTime()+ss.returnTime();
+				f.timeDiffCalc(f.queueSize());
 				es.addEvent(new CustReturns(returnTime, C, es, ss, s, sv, f));	
-				//f.messageString("Queue full with dissatisfied customers, gets a walk and come back later.");
-
-//				f.messageString("Queue full with dissatisfied customers, gets a walk and come back later.");
-
-			} else {
+				f.lastEventTime = es.getTime();
+				} else {
+				f.timeDiffCalc(f.queueSize());
 				f.removeLast();
 				f.addReturnToQueue(C);
-				//f.messageString("Returning customer: Stands in queue. Last customer in queue left.");		
-//				f.messageString("Returning customer: Stands in queue. Last customer in queue left.");		
-//				stat.addDiss();
+				f.lastEventTime = es.getTime();
+
 			}
 		}
 	}

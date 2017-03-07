@@ -38,6 +38,10 @@ public class FIFO extends Observable {
 	private CustLeaves cl;
 	
 	private int NumWaiting = 0; //max customers in queue at once 
+	public double lastEventTime = 0;
+	public void setLET(double time){
+		lastEventTime = time;
+	}
 	
 	
 	public FIFO(EventStore es, SalongState ss, State s){
@@ -53,22 +57,19 @@ public class FIFO extends Observable {
 	private static String message;
 
 	public void addNewCustomerToFIFO(Customer C) {
-<<<<<<< HEAD
+
 		if(ss.getFreeChairs() == 0){
+			timeDiffCalc(queueSize());
 			queue.add(C);
-			stat.qTime(qTimeCalc(getFirst()));
-			stat.lastCustTime(es.getTime());
+			lastEventTime = es.getTime();
+			
+//			stat.qTime(qTimeCalc(getFirst()));
+//			stat.lastCustTime(es.getTime());
 		}else{
 			queue.add(C);
 		}
-		
 		C.queueTime = es.getTime();
 		if(NumWaiting < queueSize()){
-=======
-		queue.add(C);
-		C.queueTime = es.getTime();
-		if(NumWaiting < queueSize()){
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 			stat.maxSize(queueSize());
 			NumWaiting = queueSize();
 		}
@@ -110,30 +111,20 @@ public class FIFO extends Observable {
 
 	public void custFinished(){
 		ss.chairGotFree();
-<<<<<<< HEAD
 		//messageString("Customer is finished, pays and leaves the salon.");
 	}
-	
+
 	public void addReturnToQueue(Customer C){
 		if(ss.getFreeChairs() == 0){
+//			timeDiffCalc(queueSize());
 			queue.add(returningCustInQueue(), C);
-			timeDiffCalc();
+			
 		}else{
 			queue.add(returningCustInQueue(), C);
 		}
-		
-=======
 		//messageString("Customer is finished, pays and leaves the salon.");
 	}
 	
-	public void addReturnToQueue(Customer C){
-		queue.add(returningCustInQueue(), C);
->>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
-		C.queueTime = es.getTime();
-		stat.addQcust();
-		
-		
-	}
 	/**Tar bort sista kunden*/
 	public void removeLast(){
 		queue.remove(queue.size()-1);
@@ -165,9 +156,10 @@ public class FIFO extends Observable {
 		return es.getTime()-C.queueTime;
 	}
 	
-	public void timeDiffCalc(){
-		double temp = es.getTime() - stat.getQtime();
-		stat.qTime(temp);
+	public void timeDiffCalc(int i){
+		double diff = es.getTime() - lastEventTime;
+		for(int j = 1; j<=i; j++){
+		stat.qTime(diff);}
 		
 	}
 

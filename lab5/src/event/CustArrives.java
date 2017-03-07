@@ -42,23 +42,29 @@ public class CustArrives extends Event {
 	}
 	
 	private void addToFIFO(Customer C) {
-		if(fifo.isFull()){
+		if(fifo.isFull()){	
+			fifo.timeDiffCalc(fifo.queueSize());
 			stat.addLeave();
-			fifo.timeDiffCalc();
 			//f.messageString("The queue is full, customer leaves");
+			
+			fifo.setLET(eventStore.getTime());
 		}
 		else if(salongState.getFreeChairs() != 0 && fifo.isEmpty()){
+			
 			fifo.addNewCustomerToFIFO((Customer) C);
 			getFirst();
+			fifo.setLET(eventStore.getTime());
 		} else if(salongState.getFreeChairs() != 0 && fifo.isEmpty() && salongState.getFreeChairs() != 0){
 			//f.messageString("Customer gets a haircut!");
 			salongState.chairGotBusy();	
 			eventStore.addEvent(new CustLeaves(eventStore.getTime() , C, eventStore, salongState, state, sv, fifo));
+			fifo.setLET(eventStore.getTime());
 		} else {
 			fifo.addNewCustomerToFIFO((Customer) C);
 			//C.queueTime = es.getTime();
 			C.queueTime = eventStore.getTime();
 			//f.messageString("Customer wait.");
+			fifo.setLET(eventStore.getTime());
 		}
 		
 	}

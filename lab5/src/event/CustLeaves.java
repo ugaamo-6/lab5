@@ -41,13 +41,14 @@ public class CustLeaves extends Event{
 			stat.custCountAdd();
 			oldCustomers.add(C.getID());
 		}
-		
+		f.timeDiffCalc(f.queueSize());
 		FIFO f = C.getFIFO();
 		
 		checkIfSatisfied(C);
 		f.custFinished();
 		getFirst();	
-		f.timeDiffCalc();
+		f.setLET(eventStore.getTime());
+		
 		
 		ep = new EventPrint(namn, C.getID(), eventStore,ss,f);
 	}
