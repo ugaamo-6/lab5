@@ -14,30 +14,24 @@ import state.*;
 public class Simulator {
 	private EventStore eventStore;
 	private State state;
-	private SalongView salonView;
-	private SalongState salonState;
-	private FIFO f;
+	private View v;
 
 	//Ha en main utanför. ALLTSÅ SKAPA EN MAIN klass som har en main metod som kör denna.
 	
-	public Simulator(EventStore es, State s, SalongState ss, FIFO f){
+	public Simulator(EventStore es, State s, View v){
 		this.eventStore = es;
 		this.state = s;
-		this.salonState = ss;
-		this.f=f;
+		this.v=v;
 	}
 	/**Kör ett program.*/
 	public void Run() {
 		state.start();
-		eventStore.addEvent(new StartSim(eventStore, salonState, state, salonView, f));
-		eventStore.addEvent(new Closing(salonState.getCloseTime() , eventStore,salonState,state,salonView,f));
-		
-		salonView = new SalongView(f,salonState,eventStore); //Printar ut viktig information direkt
+		v.beginInfoPrint();
 		while (state.running()) {		//Printar ut information hela tiden under körningen
 			Event currentEvent = eventStore.nextEvent();
 			currentEvent.execute();
 		}
-		salonView.endInfoPrint();
+		v.endInfoPrint();
 			
 	}
 
@@ -46,10 +40,22 @@ public class Simulator {
 		
 		State s = new State();
 		EventStore es = new EventStore(s);
+		
+		
 		SalongState ss = new SalongState(es);
 		FIFO f = new FIFO(es, ss, s);
-		Simulator sim = new Simulator(es, s, ss, f);
+		SalongView sv = new SalongView(f, ss, es);
+		
+		View v = new View();
+		
+		es.addEvent(new StartSim(es, ss, s, sv, f));
+		es.addEvent(new Closing(ss.getCloseTime(),es,ss,s,sv,f));
+		
+		Simulator sim = new Simulator(es, s, v);
 		sim.Run();
+	
+		
+		
 	}
 
 }

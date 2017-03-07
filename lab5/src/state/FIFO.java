@@ -53,6 +53,7 @@ public class FIFO extends Observable {
 	private static String message;
 
 	public void addNewCustomerToFIFO(Customer C) {
+<<<<<<< HEAD
 		if(ss.getFreeChairs() == 0){
 			queue.add(C);
 			stat.qTime(qTimeCalc(getFirst()));
@@ -63,6 +64,11 @@ public class FIFO extends Observable {
 		
 		C.queueTime = es.getTime();
 		if(NumWaiting < queueSize()){
+=======
+		queue.add(C);
+		C.queueTime = es.getTime();
+		if(NumWaiting < queueSize()){
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 			stat.maxSize(queueSize());
 			NumWaiting = queueSize();
 		}
@@ -104,6 +110,7 @@ public class FIFO extends Observable {
 
 	public void custFinished(){
 		ss.chairGotFree();
+<<<<<<< HEAD
 		//messageString("Customer is finished, pays and leaves the salon.");
 	}
 	
@@ -115,6 +122,13 @@ public class FIFO extends Observable {
 			queue.add(returningCustInQueue(), C);
 		}
 		
+=======
+		//messageString("Customer is finished, pays and leaves the salon.");
+	}
+	
+	public void addReturnToQueue(Customer C){
+		queue.add(returningCustInQueue(), C);
+>>>>>>> branch 'master' of https://github.com/ugaamo-6/lab5.git
 		C.queueTime = es.getTime();
 		stat.addQcust();
 		
