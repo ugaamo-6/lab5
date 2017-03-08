@@ -12,15 +12,17 @@ import state.SalongState;
  * A queue that represents the waiting room for a hairdresser
  * 
  * @author Gustav Mattsson (ugaamo-6)
+ * @author Johan Bråtendal
+ * @author Jonas Jarnhäll Sjöman
  * 
- * @param add the add method adds to the queue unless the queue is full or empty
- * @param checkFull checks if the queue is full or not
- * @param returnCust a returning customer takes first place in queue and the last customer has to leave
- * @param removeLast removes the last customer in queue
- * @param isEmpty checks if waiting queue is empty
- * @param size returns the size of the queue
- * @param getFirst picks the first customer in the queue
- * @param totalVisitors counts the total customers who have gotten a haircut
+// * @param add the add method adds to the queue unless the queue is full or empty
+// * @param checkFull checks if the queue is full or not
+// * @param returnCust a returning customer takes first place in queue and the last customer has to leave
+// * @param removeLast removes the last customer in queue
+// * @param isEmpty checks if waiting queue is empty
+// * @param size returns the size of the queue
+// * @param getFirst picks the first customer in the queue
+// * @param totalVisitors counts the total customers who have gotten a haircut
  * 
  * 
  * */
@@ -32,14 +34,18 @@ public class FIFO extends Observable {
 
 	
 	private int NumWaiting = 0; //customer in the queue 
-	public static double lastEventTime = 0;
+	private static double lastEventTime = 0;
 	
 	private Statistics stat = new Statistics();
 	private ArrayList<Object> queue =  new ArrayList<Object>();	 
 	private int totalVisitors = 0; 
 	private static String message;
 	
-	
+	/**
+	 * This is the constructor.
+	 * @param es, Event Store.
+	 * @param ss, Salong State.
+	 */
 	public FIFO(EventStore es, SalongState ss){
 		this.es=es;
 		this.ss=ss;
@@ -48,6 +54,7 @@ public class FIFO extends Observable {
 
 	/**
 	 * Adds a new customer to the queue.
+	 * @param C, customer we want to add.
 	 * */
 	public void addNewCustomerToFIFO(Customer C) {
 
@@ -67,10 +74,12 @@ public class FIFO extends Observable {
 	
 	/**
 	 * Changes last event time to the parameter time.
+	 * @param time, the time of last event.
 	 */
 	public void setLET(double time){
 		lastEventTime = time;
 	}
+	
 	/**Checks if queue is full
 	 * @return true if full, false if not*/
 	public boolean isFull(){
@@ -110,7 +119,11 @@ public class FIFO extends Observable {
 	 * Removes the last customer from the queue
 	 *Tar bort sista kunden*/
 	public void removeLast(){
+		double lastCustomerQueueTime = es.getTime()-((Customer) queue.get(queue.size()-1)).getQueueTime() ;
+		stat.qTimeRemove(lastCustomerQueueTime);//Remove the time the leaving customer has been in the queue
 		queue.remove(queue.size()-1);
+		stat.addLeave();
+	
 	}
 	/**
 	 * Removes customer who is first in queue 
@@ -120,18 +133,23 @@ public class FIFO extends Observable {
 	}
 	/**
 	 * Retrieves the first customer from the queue
+	 * @return First customer in queue.
 	 * */
 	public Customer getFirst() {
 		return (Customer) queue.get(0);
 	}
-	/**Checks if 
-	 * @return */
+	/**Checks if the queue is empty or not.
+	 * @return true if empty, false if not.
+	 * */
 	public boolean isEmpty(){
 		if(queueSize() == 0){
 			return true;
 		}return false;
 	}
-	/**HÃ¤mtan kÃ¶ storleken.*/
+	
+	/**HÃ¤mtan kÃ¶ storleken.
+	 * @return Size of the queue
+	 * */
 	public int queueSize(){
 		return queue.size();
 	}
@@ -145,15 +163,19 @@ public class FIFO extends Observable {
 	}
 
 	/**
-	 * Subtracts current time with lastEventTime and records */
-	public void timeDiffCalc(int i){
+	 * Subtracts current time with lastEventTime and records 
+	 * @param Length, number of customers in queue.
+	 * */
+	public void timeDiffCalc(int length){
 		double diff = es.getTime() - lastEventTime;
-		for(int j = 1; j<=i; j++){
+		for(int j = 1; j<=length; j++){
 			stat.qTime(diff);}	
 	}	
 	
 	/**
 	 * Creates a message string describing an event with cocurrent and relevant statistic.
+	 * @param Name of the event.
+	 * @param ID of customer
 	 * */
 	public void toString(String name,int ID)
 	{
@@ -165,7 +187,8 @@ public class FIFO extends Observable {
 		notifyObservers();
 	}
 	
-	/**Retrieves a string with information*/
+	/**Retrieves a string with information
+	 * @return The current message we want to print.*/
 	public String getMessageString(){
 		return message;
 	}

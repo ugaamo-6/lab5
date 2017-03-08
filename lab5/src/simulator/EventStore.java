@@ -14,14 +14,16 @@ import event.StopSim;
  */
 public class EventStore extends Observable{
 	
-	//This array-list keep track of the queue of Events
-	ArrayList<Event> queue = new ArrayList<Event>();
 	private double currentTime = 0.00;
 
 
-	ArrayList<Event> eventQueue = new ArrayList<Event>();
+	private ArrayList<Event> eventQueue = new ArrayList<Event>();
 	private State state; 
 
+	/**
+	 * This is the constructor
+	 * @param s, State.
+	 */
 	public EventStore(State s) {
 		this.state=s;
 	}

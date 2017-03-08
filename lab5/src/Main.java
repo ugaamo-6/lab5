@@ -19,21 +19,25 @@ import state.SalongView;
  * 
  * @author Johan Bråtendal
  * @author Gustav Mattsson
- * @author
+ * @author Jonas Jarnhäll Sjöman
  *
  */
 public class Main {
 
 	/**
+	 * this is the main method.
 	 * @param args
 	 * 
 	 */
 	public static void main(String[] args) {
+		
+//		double percentageReturn = 0.25;
+		
 		State s = new State();
 		EventStore es = new EventStore(s);
 		View v = new View();		
 		
-		SalongState ss = new SalongState(es);
+		SalongState ss = new SalongState(es/*, percentageReturn*/);
 		FIFO f = new FIFO(es, ss);
 		SalongView sv = new SalongView(f, ss, es);
 		

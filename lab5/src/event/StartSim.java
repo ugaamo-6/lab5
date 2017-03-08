@@ -21,7 +21,14 @@ public class StartSim extends Event {
 	
 	private String toString = "Start Simulation";
 
-	
+	/**
+	 * This is the constructor.
+	 * @param es, Event Store.
+	 * @param ss, Salong State.
+	 * @param s, State.
+	 * @param sv, Salong View.
+	 * @param f, FIFO.
+	 */
 	public StartSim(EventStore es, SalongState ss, State s, SalongView sv, FIFO f){
 		this.eventStore=es;
 		this.ss=ss;
@@ -37,7 +44,6 @@ public class StartSim extends Event {
 	public void execute() {	
 		sv.variableInfoPrint();		
 		eventStore.setTime(0.0);
-		ss.tempTime = eventStore.getTime();
 		stat.goingTrue();
 		s.start();
 

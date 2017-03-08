@@ -17,16 +17,18 @@ import state.FIFO;
  */
 public class StopSim extends Event {
 
-	State s;
 	private State state;
 	
 	//To be able to create a SalongView object.
-	Statistics stat = new Statistics();
-	EventStore es ;
-	SalongState ss = new SalongState(es);
-	FIFO f = new FIFO(es, ss);
-	SalongView sv = new SalongView(f, ss, es);
+	private EventStore es ;
+	private SalongState ss = new SalongState(es/*, 0.0*/);
+	private FIFO f = new FIFO(es, ss);
+	private SalongView sv = new SalongView(f, ss, es);
 	
+	/**
+	 * This is the constructor
+	 * @param s, Sate.
+	 */
 	public StopSim(State s){
 		this.state=s;
 	}

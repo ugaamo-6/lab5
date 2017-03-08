@@ -21,7 +21,15 @@ public class CustArrives extends Event {
 	private Statistics stat = new Statistics();
 	private String namn = "Arrives";
 	
-	
+	/**
+	 * this is the constructor.
+	 * @param arrivalTime, the time the event will occur.
+	 * @param es, Event Store.
+	 * @param ss, Salong State.
+	 * @param s, State.
+	 * @param sv, Salong View.
+	 * @param f, FIFO.
+	 */
 	public CustArrives(double arrivalTime, EventStore es, SalongState ss, State s, SalongView sv, FIFO f){
 		this.time = arrivalTime;
 		this.eventStore=es;
@@ -55,10 +63,7 @@ public class CustArrives extends Event {
 		}
 	}
 	
-	/**
-	 * Add the customer that arrived to the FIFO queue.
-	 * @param C is the arriving customer.
-	 */
+
 	private void addToFIFO(Customer C) {
 		if(fifo.isFull()){	
 			stat.addLeave();
@@ -77,10 +82,7 @@ public class CustArrives extends Event {
 		
 	}
 	
-	/**
-	 * Get the first element(Customer) in the FIFO-queue.
-	 */
-	public void getFirst(){
+	private void getFirst(){
 		if(!fifo.isEmpty()){
 			salongState.chairGotBusy();
 			eventStore.addEvent(new CustLeaves(eventStore.getTime(), fifo.getFirst(), eventStore, salongState, state, sv, fifo));

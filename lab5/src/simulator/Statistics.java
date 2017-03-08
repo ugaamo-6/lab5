@@ -51,6 +51,12 @@ public class Statistics {
 	public void qTime(double waitTime){
 		totalQtime += waitTime;
 	}
+	/**
+	 * qTimeRemove removes time from the total queue time.
+	 * */
+	public void qTimeRemove(double waitTime){
+		totalQtime -= waitTime;
+	}
 	/** 
 	 * @param maxSize increases the largest queue => how many people have been queuing at the most at once
 	 */
@@ -87,10 +93,6 @@ public class Statistics {
 	public void addIdletime(double diff){
 		idleTime += diff;
 	}
-	
-//	public int gQcust(){
-//		return totalQcust;
-//	}
 	/**
 	 * @param getCust returns the value of totalCust which counts the total amount of cut customers.
 	 * */
