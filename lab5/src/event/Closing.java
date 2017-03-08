@@ -14,7 +14,12 @@ public class Closing extends Event {
 	
 	private State state;
 	private SalongView sv;
-		
+		/**
+		 * This is the construcor.
+		 * @param time, the time the event will occur.
+		 * @param s, State
+		 * @param sv, Salong View.
+		 */
 	public Closing(double time, State s, SalongView sv) {
 		this.time=time;
 		this.state=s;

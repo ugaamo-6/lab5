@@ -14,7 +14,7 @@ import state.*;
  */
 public class CustLeaves extends Event{
 	
-	Statistics stat = new Statistics();
+	private Statistics stat = new Statistics();
 	private EventStore eventStore;
 	private SalongState ss;
 	private State s;
@@ -24,10 +24,20 @@ public class CustLeaves extends Event{
 	private double time;
 	
 	
-	static ArrayList<Integer> oldCustomers = new ArrayList<Integer>();
+	private static ArrayList<Integer> oldCustomers = new ArrayList<Integer>();
 	
 	private String namn = "Leaves";
 	
+	/**
+	 * this is te constructor.
+	 * @param time, the time the event will occur.
+	 * @param C, customer that will leave.
+	 * @param es, Event Store.
+	 * @param ss, Salong State.
+	 * @param s, State.
+	 * @param sv, Salong View.
+	 * @param f, FIFO queue.
+	 */
 	public CustLeaves(double time, Customer C, EventStore es, SalongState ss, State s, SalongView sv, FIFO f){
 		this.time = time + ss.haircutTime();
 		this.C = C;
@@ -61,9 +71,7 @@ public class CustLeaves extends Event{
 		getFirst();	
 	}
 	
-	/**Kollar om kunden är nöjd
-	 * @return true om nöjd och false om missnöjd*/
-	public void checkIfSatisfied(Customer C){
+	private void checkIfSatisfied(Customer C){
 		FIFO f = C.getFIFO(); // Kan detta l�sas p� annat s�tt?
 		
 		if(ss.randReturn()<=ss.percentageReturn()){
@@ -75,10 +83,8 @@ public class CustLeaves extends Event{
 			C.happy = true; 
 		}	
 }
-	/**
-	 * Seats the first customer in FIFO-queue in hairdress-chair.
-	 */
-	public void getFirst(){
+	
+	private void getFirst(){
 		FIFO f = C.getFIFO(); // Kan detta l�sas p� annat s�tt?
 		if(!f.isEmpty()){
 			ss.chairGotBusy();

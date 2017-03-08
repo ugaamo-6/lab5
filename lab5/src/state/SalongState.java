@@ -44,8 +44,9 @@ public class SalongState {
 	 * The constructor of this class.
 	 * @param es, Event Store.
 	 */
-	public SalongState(EventStore es){
+	public SalongState(EventStore es/* double percentageReturn*/){
 		this.es = es;
+//		this.percentageReturn=percentageReturn;
 	}
 	
 	/** 

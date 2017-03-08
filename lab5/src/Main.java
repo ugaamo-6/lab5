@@ -30,11 +30,14 @@ public class Main {
 	 * 
 	 */
 	public static void main(String[] args) {
+		
+//		double percentageReturn = 0.25;
+		
 		State s = new State();
 		EventStore es = new EventStore(s);
 		View v = new View();		
 		
-		SalongState ss = new SalongState(es);
+		SalongState ss = new SalongState(es/*, percentageReturn*/);
 		FIFO f = new FIFO(es, ss);
 		SalongView sv = new SalongView(f, ss, es);
 		

@@ -38,6 +38,7 @@ public class Statistics {
 	
 	//addition methods
 	
+	
 	public void addQcust(){
 		totalQcust++;
 	}
@@ -83,9 +84,6 @@ public class Statistics {
 		idleTime += diff;
 	}
 	
-//	public int gQcust(){
-//		return totalQcust;
-//	}
 	public double getCust(){
 		return totalCust;
 	}

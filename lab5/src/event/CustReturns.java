@@ -14,20 +14,28 @@ import state.*;
  */
 public class CustReturns extends Event {	
 
-	Statistics stat = new Statistics();	
+	private Statistics stat = new Statistics();	
 	private EventStore es;
 	private SalongState ss;
 	private State s;
 	private SalongView sv;
 	private FIFO f;
-	
 	private Customer C;
 	private double time;
-	
 	private String namn = "Returns";
 	
-	static ArrayList<Integer> dissatisfied = new ArrayList<Integer>();
+	private static ArrayList<Integer> dissatisfied = new ArrayList<Integer>();
 	
+	/**
+	 * this is the construcor
+	 * @param time, the time the event will occur.
+	 * @param C, Customer that returns.
+	 * @param es, Event Store.
+	 * @param ss, Salong State.
+	 * @param s, State.
+	 * @param sv, Salong View.
+	 * @param f, FIFO queue.
+	 */
 	public CustReturns(double time, Customer C, EventStore es, SalongState ss, State s, SalongView sv, FIFO f){
 		this.time = time;
 		this.C=C;
@@ -57,11 +65,7 @@ public class CustReturns extends Event {
 		}
 	}
 	
-	/**
-	 * Add a returning customer to FIFO-queue.
-	 * @param C, is the customer added to the queue.
-	 */
-	public void addReturnCust(Customer C){
+	private void addReturnCust(Customer C){
 		f = (FIFO) C.getFIFO();
 	
 		if (ss.getFreeChairs() == ss.totalChairs()) {

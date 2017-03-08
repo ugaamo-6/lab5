@@ -22,6 +22,10 @@ public class EventStore extends Observable{
 	ArrayList<Event> eventQueue = new ArrayList<Event>();
 	private State state; 
 
+	/**
+	 * This is the constructor
+	 * @param s, State.
+	 */
 	public EventStore(State s) {
 		this.state=s;
 	}

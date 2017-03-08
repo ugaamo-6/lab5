@@ -13,6 +13,12 @@ public class Simulator {
 	private State state;
 	private View v;
 
+	/**
+	 * This is the constructor
+	 * @param es, event store.
+	 * @param s, state.
+	 * @param v, view.
+	 */
 	public Simulator(EventStore es, State s, View v){
 		this.eventStore = es;
 		this.state = s;
