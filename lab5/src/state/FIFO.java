@@ -57,7 +57,7 @@ public class FIFO extends Observable {
 		}else{
 			queue.add(C);
 		}
-		C.queueTime = es.getTime();
+		C.setQtime(es.getTime());
 		if(NumWaiting < queueSize()){
 				stat.maxSize(queueSize());
 				NumWaiting = queueSize();

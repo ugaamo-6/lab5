@@ -23,33 +23,60 @@ import simulator.State;
 public class Customer {
 	
 	private FIFO fifo;
-		
-	static int id_counter = 0;
 	
-	public double queueTime = 0;
+	private static int id_counter = 0;
+	
+	private double queueTime = 0;
 	
 	private int id;
-	public boolean happy;
+	private boolean happy;
 	
+	/**
+	 * @param Customer This is the constructor that sets the values when you create a new customer.
+	 * */
 	public Customer(FIFO f){
-
-		
 		this.fifo=f;
 		id = id_counter; //Det finns inte ett id nummer som är 0 om detta gäller.
 		happy = true;
 		id_counter++;
 		
 	}
-
+	
+	/**
+	 * setQtime decides when the customer where set in queue.
+	 * */
+	public void setQtime(double time){
+		queueTime = time;
+	}
+	/**
+	 * happyTrue sets happy to true.
+	 * */
+	public void happyTrue(){
+		happy = true;
+	}
+	/**
+	 * happyFalse sets happy to false.
+	 * */
+	public void happyFalse(){
+		happy = false;
+	}
+	
 	//nedan get metoder
+	/**
+	 * getID returns the ID for te customer
+	 * */
 	public int getID(){
 		return id;
 	}
-
+	/**
+	 * get_happy returns if the customer where happy with his/her last haircut.
+	 * */
 	public boolean get_happy(){
 		return happy;
 	}
-	/**Hämtar kön från en kund*/
+	/**
+	 * getFIFO returns the queue from a customer.
+	 * */
 	public FIFO getFIFO(){
 		return fifo;
 	}

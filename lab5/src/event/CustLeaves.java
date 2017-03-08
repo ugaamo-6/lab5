@@ -69,10 +69,10 @@ public class CustLeaves extends Event{
 		if(ss.randReturn()<=ss.percentageReturn()){
 			double returnTime = eventStore.getTime()+ss.randReturnTime();
 			eventStore.addEvent(new CustReturns(returnTime, C, eventStore, ss, s, sv, f));	
-			C.happy = false;
+			C.happyFalse();;
 			
 		} else {
-			C.happy = true; 
+			C.happyTrue(); 
 		}	
 }
 	/**
