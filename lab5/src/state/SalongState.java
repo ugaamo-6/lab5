@@ -5,11 +5,21 @@ import simulator.EventStore;
 import random.*;
 import state.FIFO;
 
+/**
+ * This class keeps track of the data for the salon.
+ * 
+ * @author Gustav Mattsson (ugaamo-6)
+ * @author Johan Bråtendal
+ * @author Jonas Jarnhäll Sjöman
+ * 
+ * 
+ * 
+ * */
+
 public class SalongState {
 		
 	private Statistics stat = new Statistics();
-	EventStore es;
-	FIFO f;
+	private EventStore es;
 	
 	private double closeTime = 8.0;
 	private double haircutMinTime = 0.8;
@@ -23,14 +33,17 @@ public class SalongState {
 	private double lambda = 3.0;
 	private long seed = 1116; //System.currentTimeMillis();
 	
-	public double tempTime = 0;
+	private static double oldChairTime = 0;
 	
 	private UniformRandomStream returntimeUniRand = new UniformRandomStream(returnMinTime, returnMaxTime, seed);
 	private UniformRandomStream pRand = new UniformRandomStream(0,1, seed);
 	private ExponentialRandomStream expRand = new ExponentialRandomStream(lambda, seed);
 	private UniformRandomStream haircuttimeUniRand = new UniformRandomStream(haircutMinTime, haircutMaxTime, seed);
 
-	
+	/**
+	 * The constructor of this class.
+	 * @param es, Event Store.
+	 */
 	public SalongState(EventStore es){
 		this.es = es;
 	}
@@ -43,13 +56,13 @@ public class SalongState {
 	public int maxWaitInQueue() {
 		return maxWaitInQueue;
 	}
+	
 	/**
 	 * 
 	 * A customer left hairdress chair.
 	 */
 	public void chairGotFree() {
 		freeChairs++;
-		//System.out.println("--- PLUS");
 	}
 	/**
 	 * 
@@ -60,7 +73,9 @@ public class SalongState {
 	
 	}
 	
-	static double oldChairTime = 0;
+	/**
+	 * Calculate how long the idle-time has been.
+	 */
 	public void idleCounter(){
 		double diff = es.getTime() - oldChairTime;
 		for(int i = 1; i <= getFreeChairs(); i++){
@@ -184,13 +199,5 @@ public class SalongState {
 	public double getCloseTime() {
 		return closeTime;
 	}
-	
-//	public void timeDiffCalcu(){
-//		double diff = es.getTime() - tempTime;
-//		stat.addIdletime(diff);
-//	}
-
-	
-
 
 }

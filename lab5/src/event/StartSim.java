@@ -37,7 +37,6 @@ public class StartSim extends Event {
 	public void execute() {	
 		sv.variableInfoPrint();		
 		eventStore.setTime(0.0);
-		ss.tempTime = eventStore.getTime();
 		stat.goingTrue();
 		s.start();
 

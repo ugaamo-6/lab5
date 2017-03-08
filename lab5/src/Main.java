@@ -19,12 +19,13 @@ import state.SalongView;
  * 
  * @author Johan Bråtendal
  * @author Gustav Mattsson
- * @author
+ * @author Jonas Jarnhäll Sjöman
  *
  */
 public class Main {
 
 	/**
+	 * this is the main method.
 	 * @param args
 	 * 
 	 */

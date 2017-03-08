@@ -7,12 +7,28 @@ import simulator.View;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * This class contains the view and the output from the program.
+ * 
+ * @author Gustav Mattsson (ugaamo-6)
+ * @author Johan Bråtendal
+ * @author Jonas Jarnhäll Sjöman
+ * 
+ * 
+ * 
+ * */
 public class SalongView extends View implements Observer {
 	
 	private SalongState salongState;
 	private FIFO fifo;
 	private EventStore eventStore;
 	
+	/**
+	 * Constructor of the class
+	 * @param f, FIFO  queue
+	 * @param ss, Salong State
+	 * @param es, Event Store
+	 */
 	public SalongView(FIFO f, SalongState ss, EventStore es){
 		this.fifo=f;
 		this.salongState=ss;
@@ -20,21 +36,21 @@ public class SalongView extends View implements Observer {
 		f.addObserver(this);
 	}
 	/**
-	 * @param Text printed when simulator starts
+	 * Text printed when simulator starts
 	 */
 	public void startInfoPrint(){
 		System.out.println(eventStore.getTime() + "   START------");
 	}
 	
 	/**
-	 * @param Text printing when the simlutator i closing.
+	 * Text printing when the simlutator i closing.
 	 */
 	public void closingInfoPrint(){
 		System.out.println(eventStore.getTime() + "   CLOSING------");
 	}
 	
 	/**
-	 * @param Pints variable-information about the simulation
+	 *  Pints variable-information about the simulation
 	 */
 	public void variableInfoPrint() {
 		System.out.println("Opened.");
@@ -53,7 +69,7 @@ public class SalongView extends View implements Observer {
 	}
 	
 	/**
-	 * @param Print a summary of the statistics.
+	 * Print a summary of the statistics.
 	 */
 	public void summaryInfoPrint() {
 		Statistics stat = new Statistics();
@@ -65,8 +81,13 @@ public class SalongView extends View implements Observer {
 				 + "\n" +	"Time chairs were idle: ........: "+stat.getIdle() + "\n" + "-------------------------");
 	}
 	
-	//Kommentera?
-	@Override
+	/**
+	 * When this method is called the content is executed. In this case, print the input.
+	 * 
+	 * @param Observable
+	 * @param null
+	 * 
+	 */
 	public void update(Observable arg0, Object arg) 
 	{
 		System.out.println(fifo.getMessageString());

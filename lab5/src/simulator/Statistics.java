@@ -45,6 +45,11 @@ public class Statistics {
 	public void custStatAddTime(double waitTime){
 		totalTime += waitTime;
 	}
+	
+	public void custStatRemoveTime(double waitTime){
+		totalTime -= waitTime;
+	}
+	
 	public void custCountAdd(){
 		totalCust++;
 	}
@@ -54,6 +59,10 @@ public class Statistics {
 	/**Increases the total wait time with additional wait time.*/
 	public void qTime(double waitTime){
 		totalQtime += waitTime;
+	}
+	
+	public void qTimeRemove(double waitTime){
+		totalQtime -= waitTime;
 	}
 	public void maxSize(int maximus){
 		max_queue = maximus;
